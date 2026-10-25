@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bedwars-arena"
+dynamic = ["version"]
+description = "A 2D BedWars simulation platform for external agents and reproducible experiments."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{name = "setsuna-1106"}]
+keywords = ["bedwars", "multi-agent", "simulation", "reproducibility"]
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["build>=1.2"]
+
+[project.scripts]
+bedwars-arena = "bedwars_arena.cli:main"
+
+[project.urls]
+Repository = "https://github.com/setsuna-1106/bedwars-arena"
+Issues = "https://github.com/setsuna-1106/bedwars-arena/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "bedwars_arena.__version__"}

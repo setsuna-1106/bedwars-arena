@@ -1,0 +1,1068 @@
+{
+  "survey_date_local": "2026-10-25",
+  "survey_started_local_date": "2026-10-24",
+  "timezone": "Asia/Shanghai",
+  "scope": "16 repositories from the input index, 2 additional 2D-named BedWars candidates, and the MicroRTS dependency actually configured by MicroRTS-Py.",
+  "method": {
+    "runtime_tests_performed": false,
+    "benchmarks_performed": false,
+    "dependencies_installed": false,
+    "source_review": "Metadata, root files and READMEs; selected code paths reviewed. Retrieval does not imply full code audit.",
+    "commit_dates_timezone": "UTC"
+  },
+  "repositories": [
+    {
+      "repository": "tilakpatell/Minecraft-Bedwars-AI",
+      "repository_url": "https://github.com/tilakpatell/Minecraft-Bedwars-AI",
+      "metadata_source": "https://api.github.com/repos/tilakpatell/Minecraft-Bedwars-AI",
+      "default_branch": "master",
+      "archived": false,
+      "head_sha": "cae52f597cdbc7e69b8e817c554116c1b8b4e64d",
+      "head_committer_date_utc": "2025-04-22T23:23:15Z",
+      "head_url": "https://github.com/tilakpatell/Minecraft-Bedwars-AI/commit/cae52f597cdbc7e69b8e817c554116c1b8b4e64d",
+      "repository_pushed_at_utc": "2025-04-22T23:23:17Z",
+      "license_spdx_from_github": null,
+      "github_release_first_item": null,
+      "files_retrieved": [
+        {
+          "path": "BedwarsAI/GameEngine.cs",
+          "success": true,
+          "url": "https://github.com/tilakpatell/Minecraft-Bedwars-AI/blob/cae52f597cdbc7e69b8e817c554116c1b8b4e64d/BedwarsAI/GameEngine.cs",
+          "blob_sha": "b83bee611c0829445ad60d5074d624725fe2b1ad",
+          "characters_returned": 1907,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "BedwarsAI/GameState.cs",
+          "success": true,
+          "url": "https://github.com/tilakpatell/Minecraft-Bedwars-AI/blob/cae52f597cdbc7e69b8e817c554116c1b8b4e64d/BedwarsAI/GameState.cs",
+          "blob_sha": "b714fdc2e5345e478a85fc7e5fb45ac379edf29e",
+          "characters_returned": 4851,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "BedwarsAI/Connection.cs",
+          "success": true,
+          "url": "https://github.com/tilakpatell/Minecraft-Bedwars-AI/blob/cae52f597cdbc7e69b8e817c554116c1b8b4e64d/BedwarsAI/Connection.cs",
+          "blob_sha": "49867001af61a0c6e00a1828be4e209daf395a00",
+          "characters_returned": 413,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "BedwarsAI/Program.cs",
+          "success": true,
+          "url": "https://github.com/tilakpatell/Minecraft-Bedwars-AI/blob/cae52f597cdbc7e69b8e817c554116c1b8b4e64d/BedwarsAI/Program.cs",
+          "blob_sha": "0ece40eb71b267a763898b3649932273b336b9d7",
+          "characters_returned": 23024,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "BedwarsAI/BedwarsAI.csproj",
+          "success": true,
+          "url": "https://github.com/tilakpatell/Minecraft-Bedwars-AI/blob/cae52f597cdbc7e69b8e817c554116c1b8b4e64d/BedwarsAI/BedwarsAI.csproj",
+          "blob_sha": "85b49591f61b9368cbdc71fc54757d476c41f1d5",
+          "characters_returned": 260,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "BedwarsAI/Commands/Move.cs",
+          "success": true,
+          "url": "https://github.com/tilakpatell/Minecraft-Bedwars-AI/blob/cae52f597cdbc7e69b8e817c554116c1b8b4e64d/BedwarsAI/Commands/Move.cs",
+          "blob_sha": "3f531085529cf627de7fff87ab8f25a2b1eb6bff",
+          "characters_returned": 776,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "BedwarsAI/BedwarsAIAgent.cs",
+          "success": true,
+          "url": "https://github.com/tilakpatell/Minecraft-Bedwars-AI/blob/cae52f597cdbc7e69b8e817c554116c1b8b4e64d/BedwarsAI/BedwarsAIAgent.cs",
+          "blob_sha": "008e53a506b79ab0203c56076ddedb9136d7bca2",
+          "characters_returned": 50312,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/tilakpatell/Minecraft-Bedwars-AI/blob/cae52f597cdbc7e69b8e817c554116c1b8b4e64d/README.md",
+          "blob_sha": "42d54030268b1b291f9fb1a51b0b27ca967d86cf",
+          "characters_returned": 3126,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "Potrock/blockyard",
+      "repository_url": "https://github.com/Potrock/blockyard",
+      "metadata_source": "https://api.github.com/repos/Potrock/blockyard",
+      "default_branch": "main",
+      "archived": false,
+      "head_sha": "7daddbec178997236d664bc29975d49801574332",
+      "head_committer_date_utc": "2026-10-23T00:08:10Z",
+      "head_url": "https://github.com/Potrock/blockyard/commit/7daddbec178997236d664bc29975d49801574332",
+      "repository_pushed_at_utc": "2026-10-23T03:48:02Z",
+      "license_spdx_from_github": "MIT",
+      "github_release_first_item": null,
+      "files_retrieved": [
+        {
+          "path": "docs/PLATFORM.md",
+          "success": true,
+          "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/docs/PLATFORM.md",
+          "blob_sha": "3c6ab73d8c96a11a1eaf4d3a174bb5e04893b5a8",
+          "characters_returned": 214304,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "src/platform/sim/sim.ts",
+          "success": true,
+          "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/src/platform/sim/sim.ts",
+          "blob_sha": "a67c05c1e2c1fd91756efb3817069759d8f7e1bf",
+          "characters_returned": 55788,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "src/platform/net/protocol.ts",
+          "success": true,
+          "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/src/platform/net/protocol.ts",
+          "blob_sha": "bfc6754594aa8def10f3c2edd09e9cfddff75e36",
+          "characters_returned": 16475,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "src/games/bedwars/server.ts",
+          "success": true,
+          "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/src/games/bedwars/server.ts",
+          "blob_sha": "4942ea70afa71b2993e1c06d39e940f6665ea35c",
+          "characters_returned": 32853,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "src/games/bedwars/bots.ts",
+          "success": true,
+          "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/src/games/bedwars/bots.ts",
+          "blob_sha": "03ce397852668b1a8540b4b7c981e3c85c08dade",
+          "characters_returned": 26454,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "tests/headless/bedwars.ts",
+          "success": true,
+          "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/tests/headless/bedwars.ts",
+          "blob_sha": "1732c6d44d203b29a86506fb8c9bd733895ec40c",
+          "characters_returned": 1505,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "package.json",
+          "success": true,
+          "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/package.json",
+          "blob_sha": "f9f67a33bd69776f1c40d1cc3a301c516d6e2907",
+          "characters_returned": 1781,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": ".github/workflows/ci.yml",
+          "success": true,
+          "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/.github/workflows/ci.yml",
+          "blob_sha": "0800500587e0778039c517ae3ac8a5f1284045a7",
+          "characters_returned": 4084,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "src/games/bedwars/fireballs.ts",
+          "success": true,
+          "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/src/games/bedwars/fireballs.ts",
+          "blob_sha": "e6686e98a84f5ebb0620261ead4632fb24341a4a",
+          "characters_returned": 4325,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "src/games/bedwars/shared.ts",
+          "success": true,
+          "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/src/games/bedwars/shared.ts",
+          "blob_sha": "0bc97b3edcc291883f3527e0ae8588253e7bd766",
+          "characters_returned": 1240,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/README.md",
+          "blob_sha": "725afe1bd10984a322c7499a13af8b1c70640654",
+          "characters_returned": 24588,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/LICENSE",
+          "blob_sha": "fd6e96f251ebf2f90b63608b2f9ea8f22fb0ae79",
+          "characters_returned": 1070,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "andrei1058/BedWars1058",
+      "repository_url": "https://github.com/andrei1058/BedWars1058",
+      "metadata_source": "https://api.github.com/repos/andrei1058/BedWars1058",
+      "default_branch": "master",
+      "archived": false,
+      "head_sha": "669872626ec4160b6896755ba1d79bbed96787fb",
+      "head_committer_date_utc": "2026-06-22T14:58:48Z",
+      "head_url": "https://github.com/andrei1058/BedWars1058/commit/669872626ec4160b6896755ba1d79bbed96787fb",
+      "repository_pushed_at_utc": "2026-10-06T08:46:21Z",
+      "license_spdx_from_github": "GPL-3.0",
+      "github_release_first_item": {
+        "tag": "25.9",
+        "published_at": "2025-09-13T08:56:15Z",
+        "prerelease": false,
+        "url": "https://github.com/andrei1058/BedWars1058/releases/tag/25.9"
+      },
+      "files_retrieved": [
+        {
+          "path": "bedwars-api/src/main/java/com/andrei1058/bedwars/api/arena/IArena.java",
+          "success": true,
+          "url": "https://github.com/andrei1058/BedWars1058/blob/669872626ec4160b6896755ba1d79bbed96787fb/bedwars-api/src/main/java/com/andrei1058/bedwars/api/arena/IArena.java",
+          "blob_sha": "1e454d3add78307f04107f9073aae812e0d2db1d",
+          "characters_returned": 13354,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/andrei1058/BedWars1058/blob/669872626ec4160b6896755ba1d79bbed96787fb/README.md",
+          "blob_sha": "469e7a0a42886a730619f2a709a0e47a7782525c",
+          "characters_returned": 9640,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/andrei1058/BedWars1058/blob/669872626ec4160b6896755ba1d79bbed96787fb/LICENSE",
+          "blob_sha": "e72bfddabc15be5718a7cc061ac10e47741d8219",
+          "characters_returned": 35148,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "ScreamingSandals/BedWars",
+      "repository_url": "https://github.com/ScreamingSandals/BedWars",
+      "metadata_source": "https://api.github.com/repos/ScreamingSandals/BedWars",
+      "default_branch": "master",
+      "archived": false,
+      "head_sha": "168d8e24c76e2f8ad7bafcc4071b529bb69cd554",
+      "head_committer_date_utc": "2026-09-26T19:54:45Z",
+      "head_url": "https://github.com/ScreamingSandals/BedWars/commit/168d8e24c76e2f8ad7bafcc4071b529bb69cd554",
+      "repository_pushed_at_utc": "2026-10-05T20:03:15Z",
+      "license_spdx_from_github": "LGPL-3.0",
+      "github_release_first_item": null,
+      "files_retrieved": [
+        {
+          "path": "api/src/main/java/org/screamingsandals/bedwars/api/game/Game.java",
+          "success": true,
+          "url": "https://github.com/ScreamingSandals/BedWars/blob/168d8e24c76e2f8ad7bafcc4071b529bb69cd554/api/src/main/java/org/screamingsandals/bedwars/api/game/Game.java",
+          "blob_sha": "b222b09dc6a8e2f5f43c52037bd0000905c47d62",
+          "characters_returned": 2424,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/ScreamingSandals/BedWars/blob/168d8e24c76e2f8ad7bafcc4071b529bb69cd554/README.md",
+          "blob_sha": "758488394b47cc26d13787a7ca97e82aba236c92",
+          "characters_returned": 3110,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/ScreamingSandals/BedWars/blob/168d8e24c76e2f8ad7bafcc4071b529bb69cd554/LICENSE",
+          "blob_sha": "0a041280bd00a9d068f503b8ee7ce35214bd24a1",
+          "characters_returned": 7652,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "Lux-AI-Challenge/Lux-Design-S2",
+      "repository_url": "https://github.com/Lux-AI-Challenge/Lux-Design-S2",
+      "metadata_source": "https://api.github.com/repos/Lux-AI-Challenge/Lux-Design-S2",
+      "default_branch": "main",
+      "archived": false,
+      "head_sha": "5bcb3c775d536cecda32a3c041a9814279b79c5b",
+      "head_committer_date_utc": "2023-09-22T18:22:58Z",
+      "head_url": "https://github.com/Lux-AI-Challenge/Lux-Design-S2/commit/5bcb3c775d536cecda32a3c041a9814279b79c5b",
+      "repository_pushed_at_utc": "2024-01-25T15:24:06Z",
+      "license_spdx_from_github": "Apache-2.0",
+      "github_release_first_item": {
+        "tag": "v3.0.1",
+        "published_at": "2023-09-20T06:21:28Z",
+        "prerelease": false,
+        "url": "https://github.com/Lux-AI-Challenge/Lux-Design-S2/releases/tag/v3.0.1"
+      },
+      "files_retrieved": [
+        {
+          "path": "luxai_s2/luxai_runner/README.md",
+          "success": true,
+          "url": "https://github.com/Lux-AI-Challenge/Lux-Design-S2/blob/5bcb3c775d536cecda32a3c041a9814279b79c5b/luxai_s2/luxai_runner/README.md",
+          "blob_sha": "fcb88593ca65ca6669d1bf7805c474448df4f8e5",
+          "characters_returned": 2080,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "luxai_s2/luxai_runner/episode.py",
+          "success": true,
+          "url": "https://github.com/Lux-AI-Challenge/Lux-Design-S2/blob/5bcb3c775d536cecda32a3c041a9814279b79c5b/luxai_s2/luxai_runner/episode.py",
+          "blob_sha": "f7fc8bddab847d5e36638930ce7c2f68a1c0828d",
+          "characters_returned": 6930,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "luxai_s2/luxai_runner/process.py",
+          "success": true,
+          "url": "https://github.com/Lux-AI-Challenge/Lux-Design-S2/blob/5bcb3c775d536cecda32a3c041a9814279b79c5b/luxai_s2/luxai_runner/process.py",
+          "blob_sha": "be7d303eac80b4ac01f50695b5b29f7f18464e5c",
+          "characters_returned": 4950,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "luxai_s2/luxai_s2/env.py",
+          "success": true,
+          "url": "https://github.com/Lux-AI-Challenge/Lux-Design-S2/blob/5bcb3c775d536cecda32a3c041a9814279b79c5b/luxai_s2/luxai_s2/env.py",
+          "blob_sha": "2e089947cf79b2d7e1f7fba49e16a1c86130668b",
+          "characters_returned": 51683,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "luxai_s2/setup.py",
+          "success": true,
+          "url": "https://github.com/Lux-AI-Challenge/Lux-Design-S2/blob/5bcb3c775d536cecda32a3c041a9814279b79c5b/luxai_s2/setup.py",
+          "blob_sha": "95d2e340173fdcd073ae782f81bf6fb86d5729e2",
+          "characters_returned": 1118,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/Lux-AI-Challenge/Lux-Design-S2/blob/5bcb3c775d536cecda32a3c041a9814279b79c5b/README.md",
+          "blob_sha": "f6b34b15f6f68223e415eb2edad3d77299a1ff99",
+          "characters_returned": 8550,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/Lux-AI-Challenge/Lux-Design-S2/blob/5bcb3c775d536cecda32a3c041a9814279b79c5b/LICENSE",
+          "blob_sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+          "characters_returned": 11357,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "google-deepmind/lab2d",
+      "repository_url": "https://github.com/google-deepmind/lab2d",
+      "metadata_source": "https://api.github.com/repos/google-deepmind/lab2d",
+      "default_branch": "main",
+      "archived": false,
+      "head_sha": "f6de2d6e40e476093b6413cd496137ad8fd8d3d5",
+      "head_committer_date_utc": "2026-10-05T23:12:50Z",
+      "head_url": "https://github.com/google-deepmind/lab2d/commit/f6de2d6e40e476093b6413cd496137ad8fd8d3d5",
+      "repository_pushed_at_utc": "2026-10-06T18:34:51Z",
+      "license_spdx_from_github": "Apache-2.0",
+      "github_release_first_item": {
+        "tag": "release_v1.0.2-ubuntu22",
+        "published_at": "2026-09-28T16:20:13Z",
+        "prerelease": false,
+        "url": "https://github.com/google-deepmind/lab2d/releases/tag/release_v1.0.2-ubuntu22"
+      },
+      "files_retrieved": [
+        {
+          "path": "docs/lua_levels_api.md",
+          "success": true,
+          "url": "https://github.com/google-deepmind/lab2d/blob/f6de2d6e40e476093b6413cd496137ad8fd8d3d5/docs/lua_levels_api.md",
+          "blob_sha": "dba36a5e4aa296eb17eda754cc5aa3477ae00177",
+          "characters_returned": 9805,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "dmlab2d/random_agent.py",
+          "success": true,
+          "url": "https://github.com/google-deepmind/lab2d/blob/f6de2d6e40e476093b6413cd496137ad8fd8d3d5/dmlab2d/random_agent.py",
+          "blob_sha": "123220df37e0808414ed2913c0bf8b65b7d004a4",
+          "characters_returned": 5840,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": ".github/workflows/make_wheel.yml",
+          "success": true,
+          "url": "https://github.com/google-deepmind/lab2d/blob/f6de2d6e40e476093b6413cd496137ad8fd8d3d5/.github/workflows/make_wheel.yml",
+          "blob_sha": "f25b69ed68e2d3051b3cb743b88458aaea07b239",
+          "characters_returned": 3362,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/google-deepmind/lab2d/blob/f6de2d6e40e476093b6413cd496137ad8fd8d3d5/README.md",
+          "blob_sha": "2212c81dadf9c2bb50579b2d81cd1378ecea9ee7",
+          "characters_returned": 3151,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/google-deepmind/lab2d/blob/f6de2d6e40e476093b6413cd496137ad8fd8d3d5/LICENSE",
+          "blob_sha": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+          "characters_returned": 11358,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "Farama-Foundation/MAgent2",
+      "repository_url": "https://github.com/Farama-Foundation/MAgent2",
+      "metadata_source": "https://api.github.com/repos/Farama-Foundation/MAgent2",
+      "default_branch": "main",
+      "archived": false,
+      "head_sha": "f3fca5a78504615986dfba37d85137c9e15d1db6",
+      "head_committer_date_utc": "2026-10-09T09:48:27Z",
+      "head_url": "https://github.com/Farama-Foundation/MAgent2/commit/f3fca5a78504615986dfba37d85137c9e15d1db6",
+      "repository_pushed_at_utc": "2026-10-17T21:12:37Z",
+      "license_spdx_from_github": "MIT",
+      "github_release_first_item": {
+        "tag": "0.3.4",
+        "published_at": "2026-05-23T22:18:03Z",
+        "prerelease": false,
+        "url": "https://github.com/Farama-Foundation/MAgent2/releases/tag/0.3.4"
+      },
+      "files_retrieved": [
+        {
+          "path": "magent2/gridworld.py",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/MAgent2/blob/f3fca5a78504615986dfba37d85137c9e15d1db6/magent2/gridworld.py",
+          "blob_sha": "5e19dcd6258004f4a1a90653fa10d9c609f81279",
+          "characters_returned": 31421,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "magent2/environments/magent_env.py",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/MAgent2/blob/f3fca5a78504615986dfba37d85137c9e15d1db6/magent2/environments/magent_env.py",
+          "blob_sha": "a90b4fad7c084867fa87e37b0baf41a2ec876e4e",
+          "characters_returned": 10619,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "magent2/environments/battle/battle.py",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/MAgent2/blob/f3fca5a78504615986dfba37d85137c9e15d1db6/magent2/environments/battle/battle.py",
+          "blob_sha": "d4a1313e6345c72c8db703e1cb20d19e65f2784f",
+          "characters_returned": 9705,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "pyproject.toml",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/MAgent2/blob/f3fca5a78504615986dfba37d85137c9e15d1db6/pyproject.toml",
+          "blob_sha": "9d28cf966d31a5a8d4c56403ec044b0a2aa0a8ce",
+          "characters_returned": 2862,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": ".github/workflows/build-test-publish.yml",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/MAgent2/blob/f3fca5a78504615986dfba37d85137c9e15d1db6/.github/workflows/build-test-publish.yml",
+          "blob_sha": "9b3f5cb644c30c4b04ae1ffcac417ab8239c892a",
+          "characters_returned": 6158,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "magent2/builtin/config/battle.py",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/MAgent2/blob/f3fca5a78504615986dfba37d85137c9e15d1db6/magent2/builtin/config/battle.py",
+          "blob_sha": "5fed4bcce36fa4c72a9034cc68c0d1ac942ecbc5",
+          "characters_returned": 1066,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/MAgent2/blob/f3fca5a78504615986dfba37d85137c9e15d1db6/README.md",
+          "blob_sha": "cce429602bae4cfba8387ba0eb25525f66cb56f3",
+          "characters_returned": 2586,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/MAgent2/blob/f3fca5a78504615986dfba37d85137c9e15d1db6/LICENSE",
+          "blob_sha": "8e450fd8579ec7eb6809ddb30ae716025aa4d5d1",
+          "characters_returned": 1114,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "Farama-Foundation/MicroRTS-Py",
+      "repository_url": "https://github.com/Farama-Foundation/MicroRTS-Py",
+      "metadata_source": "https://api.github.com/repos/Farama-Foundation/MicroRTS-Py",
+      "default_branch": "master",
+      "archived": false,
+      "head_sha": "91ae6f54c92d5f97abb34bcaff3013adc51cb687",
+      "head_committer_date_utc": "2025-08-11T20:18:48Z",
+      "head_url": "https://github.com/Farama-Foundation/MicroRTS-Py/commit/91ae6f54c92d5f97abb34bcaff3013adc51cb687",
+      "repository_pushed_at_utc": "2025-08-11T20:18:49Z",
+      "license_spdx_from_github": "MIT",
+      "github_release_first_item": {
+        "tag": "v0.6.1",
+        "published_at": "2023-12-12T11:44:45Z",
+        "prerelease": false,
+        "url": "https://github.com/Farama-Foundation/MicroRTS-Py/releases/tag/v0.6.1"
+      },
+      "files_retrieved": [
+        {
+          "path": ".gitmodules",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/MicroRTS-Py/blob/91ae6f54c92d5f97abb34bcaff3013adc51cb687/.gitmodules",
+          "blob_sha": "d1783a9d8a1e7ef570239a181781ab531567bb98",
+          "characters_returned": 126,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/MicroRTS-Py/blob/91ae6f54c92d5f97abb34bcaff3013adc51cb687/README.md",
+          "blob_sha": "89bcb0a9c5571ae34b21d0467ac175c163bd1e74",
+          "characters_returned": 14368,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/MicroRTS-Py/blob/91ae6f54c92d5f97abb34bcaff3013adc51cb687/LICENSE",
+          "blob_sha": "751f13ebd2f2bd03fced45447a70300671b43b3e",
+          "characters_returned": 1117,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "vwxyzjn/microrts",
+      "repository_url": "https://github.com/vwxyzjn/microrts",
+      "metadata_source": "https://api.github.com/repos/vwxyzjn/microrts",
+      "default_branch": "master",
+      "archived": false,
+      "head_sha": "67664cb0f19d9bd1177d09dbea064dfd9b878ce7",
+      "head_committer_date_utc": "2022-11-16T22:55:42Z",
+      "head_url": "https://github.com/vwxyzjn/microrts/commit/67664cb0f19d9bd1177d09dbea064dfd9b878ce7",
+      "repository_pushed_at_utc": "2023-05-31T15:06:49Z",
+      "license_spdx_from_github": "GPL-3.0",
+      "github_release_first_item": null,
+      "files_retrieved": [
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/vwxyzjn/microrts/blob/67664cb0f19d9bd1177d09dbea064dfd9b878ce7/README.md",
+          "blob_sha": "89e350830d9f20ef7042baaa9120a536a5b3079f",
+          "characters_returned": 2859,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/vwxyzjn/microrts/blob/67664cb0f19d9bd1177d09dbea064dfd9b878ce7/LICENSE",
+          "blob_sha": "94a9ed024d3859793618152ea559a168bbcbb5e2",
+          "characters_returned": 35147,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "grid-universe/grid-universe",
+      "repository_url": "https://github.com/grid-universe/grid-universe",
+      "metadata_source": "https://api.github.com/repos/grid-universe/grid-universe",
+      "default_branch": "main",
+      "archived": false,
+      "head_sha": "28615fa1b570b7ccdd5f56d86ca200baffa06d2c",
+      "head_committer_date_utc": "2026-08-23T07:58:24Z",
+      "head_url": "https://github.com/grid-universe/grid-universe/commit/28615fa1b570b7ccdd5f56d86ca200baffa06d2c",
+      "repository_pushed_at_utc": "2026-08-23T07:58:29Z",
+      "license_spdx_from_github": "MIT",
+      "github_release_first_item": null,
+      "files_retrieved": [
+        {
+          "path": "grid_universe/env.py",
+          "success": true,
+          "url": "https://github.com/grid-universe/grid-universe/blob/28615fa1b570b7ccdd5f56d86ca200baffa06d2c/grid_universe/env.py",
+          "blob_sha": "b642fc32aca35affebfc78d4a11c164913155edb",
+          "characters_returned": 21237,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "grid_universe/step.py",
+          "success": true,
+          "url": "https://github.com/grid-universe/grid-universe/blob/28615fa1b570b7ccdd5f56d86ca200baffa06d2c/grid_universe/step.py",
+          "blob_sha": "4578e3a30e9645995699c55a85e1be4a31795e40",
+          "characters_returned": 7123,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "grid_universe/state.py",
+          "success": true,
+          "url": "https://github.com/grid-universe/grid-universe/blob/28615fa1b570b7ccdd5f56d86ca200baffa06d2c/grid_universe/state.py",
+          "blob_sha": "b96b7688b1ae4a2e304838e51702318cf524a707",
+          "characters_returned": 7109,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "pyproject.toml",
+          "success": true,
+          "url": "https://github.com/grid-universe/grid-universe/blob/28615fa1b570b7ccdd5f56d86ca200baffa06d2c/pyproject.toml",
+          "blob_sha": "670e12e677a4899011d461a114f6ce56fd2bd666",
+          "characters_returned": 1351,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/grid-universe/grid-universe/blob/28615fa1b570b7ccdd5f56d86ca200baffa06d2c/README.md",
+          "blob_sha": "e43a610bcdf4a50c182d3b355e38163a54d65204",
+          "characters_returned": 5237,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/grid-universe/grid-universe/blob/28615fa1b570b7ccdd5f56d86ca200baffa06d2c/LICENSE",
+          "blob_sha": "eaa1409539e591ad8b873af1869fbec9932b8074",
+          "characters_returned": 1079,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "markusfisch/bots",
+      "repository_url": "https://github.com/markusfisch/bots",
+      "metadata_source": "https://api.github.com/repos/markusfisch/bots",
+      "default_branch": "master",
+      "archived": false,
+      "head_sha": "3ce66349ee2e239dd0ac79d1d7ec455e682c5c64",
+      "head_committer_date_utc": "2025-11-27T18:35:29Z",
+      "head_url": "https://github.com/markusfisch/bots/commit/3ce66349ee2e239dd0ac79d1d7ec455e682c5c64",
+      "repository_pushed_at_utc": "2025-12-01T12:36:21Z",
+      "license_spdx_from_github": "Unlicense",
+      "github_release_first_item": null,
+      "files_retrieved": [
+        {
+          "path": "server/main.c",
+          "success": true,
+          "url": "https://github.com/markusfisch/bots/blob/3ce66349ee2e239dd0ac79d1d7ec455e682c5c64/server/main.c",
+          "blob_sha": "a9de66dc0de23cfc31138cc38c7413cef69a3347",
+          "characters_returned": 16705,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "server/game.c",
+          "success": true,
+          "url": "https://github.com/markusfisch/bots/blob/3ce66349ee2e239dd0ac79d1d7ec455e682c5c64/server/game.c",
+          "blob_sha": "1a4605f1fcbec8ac0e7a960fb75f87e1b1c44905",
+          "characters_returned": 21597,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "tournament/README.md",
+          "success": true,
+          "url": "https://github.com/markusfisch/bots/blob/3ce66349ee2e239dd0ac79d1d7ec455e682c5c64/tournament/README.md",
+          "blob_sha": "f68e4daeb1707e109f9b6991803af570b47b0af4",
+          "characters_returned": 3472,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/markusfisch/bots/blob/3ce66349ee2e239dd0ac79d1d7ec455e682c5c64/README.md",
+          "blob_sha": "fce4683be4b852a6dff2beeca9807fb2d1150e0a",
+          "characters_returned": 12357,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "UNLICENSE",
+          "success": true,
+          "url": "https://github.com/markusfisch/bots/blob/3ce66349ee2e239dd0ac79d1d7ec455e682c5c64/UNLICENSE",
+          "blob_sha": "68a49daad8ff7e35068f2b7a97d643aab440eaec",
+          "characters_returned": 1211,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "Farama-Foundation/PettingZoo",
+      "repository_url": "https://github.com/Farama-Foundation/PettingZoo",
+      "metadata_source": "https://api.github.com/repos/Farama-Foundation/PettingZoo",
+      "default_branch": "main",
+      "archived": false,
+      "head_sha": "b0fe02166d2106f8fcb6a6e0ca8125765699bdba",
+      "head_committer_date_utc": "2026-10-09T09:11:33Z",
+      "head_url": "https://github.com/Farama-Foundation/PettingZoo/commit/b0fe02166d2106f8fcb6a6e0ca8125765699bdba",
+      "repository_pushed_at_utc": "2026-10-09T12:57:04Z",
+      "license_spdx_from_github": "MIT",
+      "github_release_first_item": {
+        "tag": "1.27.0",
+        "published_at": "2026-08-13T18:02:04Z",
+        "prerelease": false,
+        "url": "https://github.com/Farama-Foundation/PettingZoo/releases/tag/1.27.0"
+      },
+      "files_retrieved": [
+        {
+          "path": "pettingzoo/test/parallel_test.py",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/PettingZoo/blob/b0fe02166d2106f8fcb6a6e0ca8125765699bdba/pettingzoo/test/parallel_test.py",
+          "blob_sha": "afbbc37733ece498b5617952b939732b012e7733",
+          "characters_returned": 5244,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "tutorials/CustomEnvironment/tutorial3_action_masking.py",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/PettingZoo/blob/b0fe02166d2106f8fcb6a6e0ca8125765699bdba/tutorials/CustomEnvironment/tutorial3_action_masking.py",
+          "blob_sha": "c2295482cdcf767102bb4e08a32c531219879785",
+          "characters_returned": 7677,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/PettingZoo/blob/b0fe02166d2106f8fcb6a6e0ca8125765699bdba/README.md",
+          "blob_sha": "7c0e2aef40d6ccb532e68d6f4b59251188370ffc",
+          "characters_returned": 5763,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/PettingZoo/blob/b0fe02166d2106f8fcb6a6e0ca8125765699bdba/LICENSE",
+          "blob_sha": "ab161e2957698a097cc09ad06054321856ef04ed",
+          "characters_returned": 1073,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "openenv/OpenEnv",
+      "repository_url": "https://github.com/openenv/OpenEnv",
+      "metadata_source": "https://api.github.com/repos/openenv/OpenEnv",
+      "default_branch": "main",
+      "archived": false,
+      "head_sha": "6e5c73c0231dae82878c1a94c43e155527e26105",
+      "head_committer_date_utc": "2026-10-22T15:39:38Z",
+      "head_url": "https://github.com/openenv/OpenEnv/commit/6e5c73c0231dae82878c1a94c43e155527e26105",
+      "repository_pushed_at_utc": "2026-10-24T01:13:52Z",
+      "license_spdx_from_github": "BSD-3-Clause",
+      "github_release_first_item": {
+        "tag": "v0.10.0",
+        "published_at": "2026-10-22T06:11:33Z",
+        "prerelease": false,
+        "url": "https://github.com/openenv/OpenEnv/releases/tag/v0.10.0"
+      },
+      "files_retrieved": [
+        {
+          "path": "docs/source/guides/concepts.md",
+          "success": true,
+          "url": "https://github.com/openenv/OpenEnv/blob/6e5c73c0231dae82878c1a94c43e155527e26105/docs/source/guides/concepts.md",
+          "blob_sha": "cff3b21a47d2a712cec0d1cd4d8814fc6eca5748",
+          "characters_returned": 4298,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "src/openenv/core/env_server/interfaces.py",
+          "success": true,
+          "url": "https://github.com/openenv/OpenEnv/blob/6e5c73c0231dae82878c1a94c43e155527e26105/src/openenv/core/env_server/interfaces.py",
+          "blob_sha": "707547697748e694990f52568eeef3261a0b6cf8",
+          "characters_returned": 14969,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "src/openenv/core/env_server/types.py",
+          "success": true,
+          "url": "https://github.com/openenv/OpenEnv/blob/6e5c73c0231dae82878c1a94c43e155527e26105/src/openenv/core/env_server/types.py",
+          "blob_sha": "3ccc69bcb59ea814bc934bcadb8b9399fe009f33",
+          "characters_returned": 13326,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "envs/openspiel_env/server/openspiel_environment.py",
+          "success": true,
+          "url": "https://github.com/openenv/OpenEnv/blob/6e5c73c0231dae82878c1a94c43e155527e26105/envs/openspiel_env/server/openspiel_environment.py",
+          "blob_sha": "8bdff962d3811323419212d10f8ba61d676d2e93",
+          "characters_returned": 19552,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/openenv/OpenEnv/blob/6e5c73c0231dae82878c1a94c43e155527e26105/README.md",
+          "blob_sha": "04d5e12466d0aabbf173736f0b57c5ad772994bb",
+          "characters_returned": 10945,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/openenv/OpenEnv/blob/6e5c73c0231dae82878c1a94c43e155527e26105/LICENSE",
+          "blob_sha": "46ae58d8e015b7c18ecf78291ad472170b1a958b",
+          "characters_returned": 1505,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "fastapi/fastapi",
+      "repository_url": "https://github.com/fastapi/fastapi",
+      "metadata_source": "https://api.github.com/repos/fastapi/fastapi",
+      "default_branch": "master",
+      "archived": false,
+      "head_sha": "7a0a3f0b286c6c865cf4398ea0e957a87b8bffa4",
+      "head_committer_date_utc": "2026-10-23T18:45:33Z",
+      "head_url": "https://github.com/fastapi/fastapi/commit/7a0a3f0b286c6c865cf4398ea0e957a87b8bffa4",
+      "repository_pushed_at_utc": "2026-10-23T23:46:14Z",
+      "license_spdx_from_github": "MIT",
+      "github_release_first_item": {
+        "tag": "0.162.0",
+        "published_at": "2026-10-23T18:47:17Z",
+        "prerelease": false,
+        "url": "https://github.com/fastapi/fastapi/releases/tag/0.162.0"
+      },
+      "files_retrieved": [
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/fastapi/fastapi/blob/7a0a3f0b286c6c865cf4398ea0e957a87b8bffa4/README.md",
+          "blob_sha": "71b3d092463d648a0e941c105fc1b776db109e45",
+          "characters_returned": 22016,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/fastapi/fastapi/blob/7a0a3f0b286c6c865cf4398ea0e957a87b8bffa4/LICENSE",
+          "blob_sha": "3e92463e6bd522a2a21e5f0a80d8089d6c4be20d",
+          "characters_returned": 1084,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "Farama-Foundation/Gymnasium",
+      "repository_url": "https://github.com/Farama-Foundation/Gymnasium",
+      "metadata_source": "https://api.github.com/repos/Farama-Foundation/Gymnasium",
+      "default_branch": "main",
+      "archived": false,
+      "head_sha": "5b6c5280e1e23a6f41b3cdfb297a26e349f6ef73",
+      "head_committer_date_utc": "2026-10-23T21:41:36Z",
+      "head_url": "https://github.com/Farama-Foundation/Gymnasium/commit/5b6c5280e1e23a6f41b3cdfb297a26e349f6ef73",
+      "repository_pushed_at_utc": "2026-10-23T21:44:35Z",
+      "license_spdx_from_github": "MIT",
+      "github_release_first_item": {
+        "tag": "v1.4.0",
+        "published_at": "2026-10-05T11:01:32Z",
+        "prerelease": false,
+        "url": "https://github.com/Farama-Foundation/Gymnasium/releases/tag/v1.4.0"
+      },
+      "files_retrieved": [
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/Gymnasium/blob/5b6c5280e1e23a6f41b3cdfb297a26e349f6ef73/README.md",
+          "blob_sha": "bd408058e8bf3ea72c102be72d3e8ff40ee65c9a",
+          "characters_returned": 6540,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/Gymnasium/blob/5b6c5280e1e23a6f41b3cdfb297a26e349f6ef73/LICENSE",
+          "blob_sha": "ac10bf443756cdc02724943ac09021092ce9e737",
+          "characters_returned": 1104,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "pixijs/pixijs",
+      "repository_url": "https://github.com/pixijs/pixijs",
+      "metadata_source": "https://api.github.com/repos/pixijs/pixijs",
+      "default_branch": "dev",
+      "archived": false,
+      "head_sha": "b78ff35152f9b28fdf0289b54bc2deacd62956b6",
+      "head_committer_date_utc": "2026-10-22T14:51:49Z",
+      "head_url": "https://github.com/pixijs/pixijs/commit/b78ff35152f9b28fdf0289b54bc2deacd62956b6",
+      "repository_pushed_at_utc": "2026-10-22T15:05:59Z",
+      "license_spdx_from_github": "MIT",
+      "github_release_first_item": {
+        "tag": "v8.22.0",
+        "published_at": "2026-10-01T21:48:36Z",
+        "prerelease": false,
+        "url": "https://github.com/pixijs/pixijs/releases/tag/v8.22.0"
+      },
+      "files_retrieved": [
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/pixijs/pixijs/blob/b78ff35152f9b28fdf0289b54bc2deacd62956b6/README.md",
+          "blob_sha": "5cc2ce3eeb5ee52c366c633afedf25b7f22e9fee",
+          "characters_returned": 4974,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/pixijs/pixijs/blob/b78ff35152f9b28fdf0289b54bc2deacd62956b6/LICENSE",
+          "blob_sha": "13f706e9d211dabcd69c80951b0f834f9c70f6c6",
+          "characters_returned": 1092,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "BaicaiBear/2DBedWars",
+      "repository_url": "https://github.com/BaicaiBear/2DBedWars",
+      "metadata_source": "https://api.github.com/repos/BaicaiBear/2DBedWars",
+      "default_branch": "main",
+      "archived": false,
+      "head_sha": "b37f6f2212db25fc409226a01417cdc6caf4326d",
+      "head_committer_date_utc": "2026-01-02T14:56:04Z",
+      "head_url": "https://github.com/BaicaiBear/2DBedWars/commit/b37f6f2212db25fc409226a01417cdc6caf4326d",
+      "repository_pushed_at_utc": "2026-01-02T14:56:05Z",
+      "license_spdx_from_github": "GPL-3.0",
+      "github_release_first_item": null,
+      "files_retrieved": [
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/BaicaiBear/2DBedWars/blob/b37f6f2212db25fc409226a01417cdc6caf4326d/README.md",
+          "blob_sha": "ccbbe1287c42c31bd7b0d65d2b8771aba593e308",
+          "characters_returned": 12254,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/BaicaiBear/2DBedWars/blob/b37f6f2212db25fc409226a01417cdc6caf4326d/LICENSE",
+          "blob_sha": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+          "characters_returned": 285,
+          "range": {
+            "first_line": 1,
+            "last_line": 6
+          }
+        }
+      ]
+    },
+    {
+      "repository": "azuleamarelo91-cmyk/bedwars-2d",
+      "repository_url": "https://github.com/azuleamarelo91-cmyk/bedwars-2d",
+      "metadata_source": "https://api.github.com/repos/azuleamarelo91-cmyk/bedwars-2d",
+      "default_branch": "main",
+      "archived": false,
+      "head_sha": "e97e4c187e17ae23fc9841f4cb3b33bc99b1398c",
+      "head_committer_date_utc": "2026-08-14T19:19:27Z",
+      "head_url": "https://github.com/azuleamarelo91-cmyk/bedwars-2d/commit/e97e4c187e17ae23fc9841f4cb3b33bc99b1398c",
+      "repository_pushed_at_utc": "2026-08-14T19:19:27Z",
+      "license_spdx_from_github": null,
+      "github_release_first_item": null,
+      "files_retrieved": [
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/azuleamarelo91-cmyk/bedwars-2d/blob/e97e4c187e17ae23fc9841f4cb3b33bc99b1398c/README.md",
+          "blob_sha": "4852f17e793e719a7c210b190b2519cebddc184e",
+          "characters_returned": 12,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "index.html",
+          "success": true,
+          "url": "https://github.com/azuleamarelo91-cmyk/bedwars-2d/blob/e97e4c187e17ae23fc9841f4cb3b33bc99b1398c/index.html",
+          "blob_sha": "95adabbcaa923f9487940e9d098cb16b0b231f04",
+          "characters_returned": 27464,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "bedwars 2d.html",
+          "success": true,
+          "url": "https://github.com/azuleamarelo91-cmyk/bedwars-2d/blob/e97e4c187e17ae23fc9841f4cb3b33bc99b1398c/bedwars%202d.html",
+          "blob_sha": "186ad18cbe322825a0e41ca44f807a21990d2c06",
+          "characters_returned": 28361,
+          "range": "full_file_retrieved"
+        }
+      ]
+    },
+    {
+      "repository": "Farama-Foundation/MicroRTS",
+      "repository_url": "https://github.com/Farama-Foundation/MicroRTS",
+      "metadata_source": "https://api.github.com/repos/Farama-Foundation/MicroRTS",
+      "default_branch": "master",
+      "archived": false,
+      "head_sha": "72f2fd94039adf3323f4591947e98661a572f927",
+      "head_committer_date_utc": "2025-08-11T20:18:57Z",
+      "head_url": "https://github.com/Farama-Foundation/MicroRTS/commit/72f2fd94039adf3323f4591947e98661a572f927",
+      "repository_pushed_at_utc": "2025-08-11T20:18:57Z",
+      "license_spdx_from_github": "GPL-3.0",
+      "github_release_first_item": null,
+      "files_retrieved": [
+        {
+          "path": "README.md",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/MicroRTS/blob/72f2fd94039adf3323f4591947e98661a572f927/README.md",
+          "blob_sha": "abf61c06505418cf6307a43181c617c1910c33cd",
+          "characters_returned": 5308,
+          "range": "full_file_retrieved"
+        },
+        {
+          "path": "LICENSE",
+          "success": true,
+          "url": "https://github.com/Farama-Foundation/MicroRTS/blob/72f2fd94039adf3323f4591947e98661a572f927/LICENSE",
+          "blob_sha": "94a045322262546cfb9d72561e1d587b5c2ffb1e",
+          "characters_returned": 284,
+          "range": {
+            "first_line": 1,
+            "last_line": 6
+          }
+        }
+      ]
+    }
+  ],
+  "official_web_sources": [
+    "https://pettingzoo.farama.org/api/parallel/",
+    "https://fastapi.tiangolo.com/advanced/websockets/",
+    "https://gymnasium.farama.org/api/env/",
+    "https://pixijs.com/8.x/guides/getting-started/quick-start",
+    "https://hypixel.net/bed-wars/",
+    "https://api.hypixel.net/"
+  ],
+  "supplementary_discovery_queries": [
+    "Bedwars 2D",
+    "Bedwars simulator",
+    "Bedwars simulation",
+    "Bedwars reinforcement learning environment gym GitHub"
+  ],
+  "known_inconsistencies": [
+    {
+      "repository": "Lux-AI-Challenge/Lux-Design-S2",
+      "detail": "Root LICENSE is Apache-2.0; luxai_s2/setup.py metadata says MIT."
+    },
+    {
+      "repository": "Farama-Foundation/MAgent2",
+      "detail": "README says Python 3.8+; pyproject.toml on inspected default branch requires >=3.11."
+    },
+    {
+      "repository": "Farama-Foundation/MicroRTS-Py",
+      "detail": "GitHub archived=false, but README explicitly declares deprecation and no further planned support since 2025-08-11."
+    },
+    {
+      "repository": "Farama-Foundation/MicroRTS",
+      "detail": "GitHub archived=false, but README carries the same 2025-08-11 deprecation statement."
+    }
+  ]
+}

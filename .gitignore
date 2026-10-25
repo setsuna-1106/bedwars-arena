@@ -1,0 +1,36 @@
+# macOS and editors
+.DS_Store
+._*
+.idea/
+.vscode/
+*.swp
+
+# Python environments and build artifacts
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Generated experiments and replays
+artifacts/*
+!artifacts/README.md
+
+# Future viewer dependencies and builds
+node_modules/
+web/dist/
+web/.cache/
