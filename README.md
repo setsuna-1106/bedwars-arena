@@ -6,7 +6,7 @@
 
 现实规则参照已确定为 **Hypixel 的 Minecraft Bed Wars**。后续设计与实现查阅[Hypixel 规则参考](docs/rules/hypixel-bedwars.md)，证据与检索过程见[规则调研](reports/2026-10-25-hypixel-bedwars-rules.md)。L1 已选择自制二维 2v2 实验范围；L4 的目标模式、地图与规则版本仍待确定；第三方 BedWars 项目用于工程参考，其玩法不能直接作为本项目规则标准。
 
-**当前阶段：L1 P0 已完成（0.1.0.dev0）。** 已提供可校验的 L1 规则、固定地图、初始场景与协议规格，此外保留 TeamState 类型/JSON 编码、团队交易与状态转换、参考规则档案和确定性事件排序。完整世界引擎、玩家物理/效果应用、Agent 对局、远程 API 和回放界面尚未实现，不能启动完整对局。
+**当前阶段：L1 P1 已完成（0.1.0.dev0）。** 已提供规则/地图/场景校验，以及标准世界构造、原子提交、事务式调度和基础快照。资源、战斗、结果和对局运行尚未实现；未实现任务到期会明确报故障，不能启动完整对局。
 
 ## 快速开始
 
@@ -44,7 +44,7 @@ artifacts/          本地实验与回放输出（默认忽略）
 ```
 
 - [开发指南](CONTRIBUTING.md)：安装、检查与构建。
-- [L1 P0 定义与校验](docs/l1/p0-definitions.md)、[协议规格](docs/l1/protocol-v1.md)和[分阶段验收场景](docs/l1/acceptance-scenarios.md)：静态定义已实现，世界推进和协议处理仍待后续阶段。
+- [L1 P0 定义与校验](docs/l1/p0-definitions.md)、[P1 世界基础](docs/l1/p1-world-foundation.md)、[协议规格](docs/l1/protocol-v1.md)和[分阶段验收场景](docs/l1/acceptance-scenarios.md)：内部世界骨架已实现，完整玩法及策略协议仍待后续阶段。
 - [架构说明](docs/architecture.md)、[接口草案](docs/contracts.md)、[开发阶段](docs/roadmap.md)、[决策记录](docs/decisions/README.md)。
 - [世界引擎与训练衔接决策](docs/decisions/0015-world-schedule-replay-failures-and-training.md)：赛程、终局、快照/重放和训练方向已采用；仍待实现与规则核验。
 - [Hypixel 规则参考](docs/rules/hypixel-bedwars.md)：带规则编号的玩法、候选参数与待核对案例，供后续设计和测试引用。
@@ -109,4 +109,4 @@ API 接收行动指令
 - [项目调研与适配性评估（2026-10-25）](reports/2026-10-25-project-survey.md)：19 个相关仓库的核查结果、关键源码问题和候选路线比较；附[固定版本与来源清单](reports/2026-10-25-source-manifest.json)。本次为文档与源码调研，尚未试运行或测试性能。
 - [调研结果的轻量验证（2026-10-25）](reports/2026-10-25-reference-validation.md)：5 组隔离运行探针、Blockyard 规则复核及值得优先参考的模块；未验证完整 BedWars 对局或性能。
 - [Hypixel Bed Wars 规则调研（2026-10-25）](reports/2026-10-25-hypixel-bedwars-rules.md)：本项目现实参照的模式、生命周期、经济、商店、隐身与阶段规则；区分官方证据、社区候选和二维适配建议。
-- 当前已有 L1 静态定义加载和校验，尚无模拟引擎或动作 API 实现；资料索引中的推荐方案尚未作为本项目技术选型。
+- 当前已有 L1 世界状态/调度基础，玩法处理器和动作 API 尚未完整实现；资料索引中的推荐方案尚未作为本项目技术选型。

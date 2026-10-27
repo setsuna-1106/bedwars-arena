@@ -1,6 +1,6 @@
 # 文档索引
 
-- [L1 完整实现规划](l1-implementation-plan.md)：实际代码基线、P0–P9 工作包、依赖/阶段映射及验收；P0 已完成，P1–P9 未实施。
+- [L1 完整实现规划](l1-implementation-plan.md)：实际代码基线、P0–P9 工作包、依赖/阶段映射及验收；P0–P1 已完成，P2–P9 未实施。
 
 - [四层平台与 L1 范围](decisions/0016-four-level-platform-and-l1.md)：已采用的二维 2v2 最小闭环、工具拆除返还与继承边界；未实现完整 L1。
 - [L1 实验参数表 v0.1](rules/l1-experiment-parameters-v0.1.md)：地图坐标、经济、物品/工具、拆建返还、物理战斗、保护、赛程、观测与验收参数已采用；P0 已提供静态定义，玩法处理器未实现。

@@ -29,7 +29,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         metadata = {
             "name": "BedWars Arena",
             "version": __version__,
-            "stage": "l1_p0",
+            "stage": "l1_p1",
             "team_state_available": True,
             "l1_definitions_available": True,
             "simulation_available": False,
@@ -38,7 +38,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(json.dumps(metadata, ensure_ascii=False, indent=2))
         else:
             print(f"BedWars Arena {__version__}")
-            print("阶段：L1 P0 定义与校验；完整对局引擎尚未实现。")
+            print("阶段：L1 P1 世界状态、调度及快照基础；完整对局尚未实现。")
         return 0
 
     if args.command == "validate-l1":
