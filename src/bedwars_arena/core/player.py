@@ -103,7 +103,14 @@ def validate_player(player: dict, profile: dict, *, tick: int) -> None:
         identifier(action['kind'], 'action kind')
         if not isinstance(action['params'], dict):
             raise ValueError('Action params must be an object')
+        if name == 'movement':
+            if action['kind'] != 'move' or action['target'] is not None or set(action['params']) != {'x','z'}:
+                raise ValueError('Invalid L1 movement action')
+            _number(action['params']['x'], 'movement x')
+            _number(action['params']['z'], 'movement z')
         integer(action['started_at'], 'started_at')
+        if action['started_at'] > tick:
+            raise ValueError('Action start time is in the future')
         _number(action['progress'], 'progress', minimum=0)
         identifier(action['phase'], 'action phase')
     attacker = life['last_attacker']

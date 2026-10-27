@@ -36,7 +36,8 @@ def definition_ref(definitions: L1Definitions) -> dict:
 
 def runtime_info() -> dict:
     return {'package_version': __version__, 'implementation': sys.implementation.name,
-            'python': '.'.join(map(str, sys.version_info[:3])), 'rng_derivation': 'sha256-v1'}
+            'python': '.'.join(map(str, sys.version_info[:3])), 'rng_derivation': 'sha256-v1',
+            'world_engine_revision': 'l1-p2-1'}
 
 
 def _seed_states(seed: int) -> dict:
@@ -176,12 +177,11 @@ def create_state(definitions: L1Definitions, *, seed: int, match_id: str | None 
         task = _new_task(execution, kind=kind, due=when, phase=stage, order=0, payload={}, budget=budget)
         schedule(state, task, budget)
     execution['log_cursor'] = len(initial_facts)
-    validate_state(state, definitions, boundary=True, check_positions=True)
+    validate_state(state, definitions, boundary=True)
     return state, tuple(initial_facts)
 
 
-def validate_state(state: dict, definitions: L1Definitions, *, boundary: bool = False,
-                   check_positions: bool = False) -> None:
+def validate_state(state: dict, definitions: L1Definitions, *, boundary: bool = False) -> None:
     _require_fields(state, ('match_id','definition_ref','tick','players','teams','terrain','generators',
                             'containers','entities','execution','result','preset_source'), 'WorldState')
     _json(state)  # recursively reject non-JSON, unsafe integers and nonfinite floats
@@ -247,6 +247,8 @@ def validate_state(state: dict, definitions: L1Definitions, *, boundary: bool = 
         if not isinstance(key,str) or not re.fullmatch(r'-?(0|[1-9][0-9]*),-?(0|[1-9][0-9]*),-?(0|[1-9][0-9]*)',key):
             raise ValueError('Invalid terrain coordinate')
         x,y,z = (int(n) for n in key.split(','))
+        if key != _terrain_key(x,y,z):
+            raise ValueError('Terrain coordinate must use canonical integer encoding')
         bounds = map_data['bounds']
         if not (bounds['min_x'] <= x < bounds['max_x'] and bounds['min_z'] <= z < bounds['max_z'] and y in (-1,0)):
             raise ValueError('Terrain outside L1 map/layers')
@@ -349,8 +351,48 @@ def validate_state(state: dict, definitions: L1Definitions, *, boundary: bool = 
     for intent in intents:
         if intent.created_at != cursor['tick'] or intent.target_phase < cursor['phase'] or execution['seen_messages'].get(intent.intent_id) != _json(intent.to_dict()):
             raise ValueError('Invalid intent or ledger')
+        raw = intent.to_dict()
+        if intent.kind == 'void_death_candidate':
+            payload = raw['payload']
+            if set(payload) != {'player_id','life_index','position'} or intent.target_phase != 60:
+                raise ValueError('Invalid void intent payload')
+            player = state['players'].get(payload['player_id'])
+            if player is None or player['life']['kind'] != 'alive' or player['life_index'] != payload['life_index']:
+                raise ValueError('Void intent references an inactive life')
+            spatial = player['life']['spatial']
+            if payload['position'] != {'x':spatial['x'],'z':spatial['z']}:
+                raise ValueError('Void intent position mismatch')
     if len(set(execution['cancelled'])) != len(execution['cancelled']) or any(i not in execution['seen_messages'] or json.loads(execution['seen_messages'][i])['category'] != 'task' for i in execution['cancelled']):
         raise ValueError('Invalid cancellations')
+    death_keys = set()
+    for candidate in execution['pending_deaths']:
+        _require_fields(candidate, ('intent_id','player_id','life_index','tick','reason','position'), 'death candidate')
+        identifier(candidate['intent_id'], 'intent_id')
+        pid = candidate['player_id']
+        player = state['players'].get(pid)
+        if player is None or player['life']['kind'] != 'alive' or candidate['life_index'] != player['life_index']:
+            raise ValueError('Death candidate references an inactive life')
+        integer(candidate['tick'], 'candidate tick', 1)
+        if candidate['tick'] > now or candidate['reason'] != 'void':
+            raise ValueError('Invalid death candidate')
+        _require_fields(candidate['position'], ('x','z'), 'candidate position')
+        for value in candidate['position'].values():
+            if type(value) not in (int,float) or not math.isfinite(value):
+                raise ValueError('Invalid candidate position')
+        spatial = player['life']['spatial']
+        if candidate['position'] != {'x':spatial['x'],'z':spatial['z']}:
+            raise ValueError('Death candidate position mismatch')
+        key = (pid,candidate['life_index'])
+        if key in death_keys:
+            raise ValueError('Duplicate death candidate for a life')
+        death_keys.add(key)
+        fingerprint = execution['seen_messages'].get(candidate['intent_id'])
+        raw = json.loads(fingerprint) if fingerprint is not None else None
+        if (not isinstance(raw,dict) or raw.get('category') != 'intent' or
+                raw.get('kind') != 'void_death_candidate' or raw.get('target_phase') != 60 or
+                raw.get('created_at') != candidate['tick'] or raw.get('payload') !=
+                {'player_id':pid,'life_index':candidate['life_index'],'position':candidate['position']}):
+            raise ValueError('Death candidate intent mismatch')
     if not isinstance(execution['attributed_beds'],dict) or set(execution['attributed_beds']) != set(state['teams']):
         raise ValueError('Invalid bed attribution counters')
     for count in execution['attributed_beds'].values():
@@ -368,19 +410,25 @@ def validate_state(state: dict, definitions: L1Definitions, *, boundary: bool = 
             raise ValueError('Invalid RNG state') from error
     if state['result'] is not None:
         raise ValueError('Result settlement is not implemented')
-    if check_positions:
-        _validate_initial_positions(state, profile, map_data)
+    # An internal plan must not introduce penetration or unrecorded loss of support.
+    _validate_initial_positions(state, profile, map_data)
 
 
 def _validate_initial_positions(state, profile, map_data):
     half_x, half_z = profile['physics']['player_width']/2, profile['physics']['player_depth']/2
     b = map_data['bounds']
+    pending = {(item['player_id'],item['life_index']) for item in state['execution']['pending_deaths']}
+    pending.update((intent['payload']['player_id'],intent['payload']['life_index'])
+                   for intent in state['execution']['pending_intents']
+                   if intent['kind'] == 'void_death_candidate'
+                   and set(intent['payload']) == {'player_id','life_index','position'})
     for player in state['players'].values():
         if player['life']['kind'] != 'alive':
             continue
         pos = player['life']['spatial']
         x,z = pos['x'],pos['z']
-        if not (b['min_x'] <= x < b['max_x'] and b['min_z'] <= z < b['max_z']):
+        awaiting_death = (player['player_id'],player['life_index']) in pending
+        if not awaiting_death and not (b['min_x'] <= x < b['max_x'] and b['min_z'] <= z < b['max_z']):
             raise ValueError('Player outside map')
         supported = False
         for ix in range(math.floor(x-half_x), math.ceil(x+half_x)):
@@ -394,5 +442,5 @@ def _validate_initial_positions(state, profile, map_data):
                 bed = team['bed']
                 if max(x-half_x,bed['x']) < min(x+half_x,bed['x']+1) and max(z-half_z,bed['z']) < min(z+half_z,bed['z']+1):
                     raise ValueError('Player penetrates a bed')
-        if not supported:
+        if not supported and not awaiting_death:
             raise ValueError('Player has no positive-area support')

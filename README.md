@@ -6,7 +6,7 @@
 
 现实规则参照已确定为 **Hypixel 的 Minecraft Bed Wars**。后续设计与实现查阅[Hypixel 规则参考](docs/rules/hypixel-bedwars.md)，证据与检索过程见[规则调研](reports/2026-10-25-hypixel-bedwars-rules.md)。L1 已选择自制二维 2v2 实验范围；L4 的目标模式、地图与规则版本仍待确定；第三方 BedWars 项目用于工程参考，其玩法不能直接作为本项目规则标准。
 
-**当前阶段：L1 P1 已完成（0.1.0.dev0）。** 已提供规则/地图/场景校验，以及标准世界构造、原子提交、事务式调度和基础快照。资源、战斗、结果和对局运行尚未实现；未实现任务到期会明确报故障，不能启动完整对局。
+**当前阶段：L1 P2 已完成（0.1.0.dev0）。** 已提供规则/地图/场景校验、世界状态与事务式调度、基础快照，以及二维碰撞、承载和运动。资源、战斗、死亡结算、结果和对局运行尚未实现；未实现任务到期会明确报故障，不能启动完整对局。
 
 ## 快速开始
 
@@ -44,7 +44,7 @@ artifacts/          本地实验与回放输出（默认忽略）
 ```
 
 - [开发指南](CONTRIBUTING.md)：安装、检查与构建。
-- [L1 P0 定义与校验](docs/l1/p0-definitions.md)、[P1 世界基础](docs/l1/p1-world-foundation.md)、[协议规格](docs/l1/protocol-v1.md)和[分阶段验收场景](docs/l1/acceptance-scenarios.md)：内部世界骨架已实现，完整玩法及策略协议仍待后续阶段。
+- [L1 P0 定义与校验](docs/l1/p0-definitions.md)、[P1 世界基础](docs/l1/p1-world-foundation.md)、[P2 二维运动](docs/l1/p2-physics.md)、[协议规格](docs/l1/protocol-v1.md)和[分阶段验收场景](docs/l1/acceptance-scenarios.md)：内部世界骨架已实现，完整玩法及策略协议仍待后续阶段。
 - [架构说明](docs/architecture.md)、[接口草案](docs/contracts.md)、[开发阶段](docs/roadmap.md)、[决策记录](docs/decisions/README.md)。
 - [世界引擎与训练衔接决策](docs/decisions/0015-world-schedule-replay-failures-and-training.md)：赛程、终局、快照/重放和训练方向已采用；仍待实现与规则核验。
 - [Hypixel 规则参考](docs/rules/hypixel-bedwars.md)：带规则编号的玩法、候选参数与待核对案例，供后续设计和测试引用。

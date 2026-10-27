@@ -1,10 +1,10 @@
 # 文档索引
 
-- [L1 完整实现规划](l1-implementation-plan.md)：实际代码基线、P0–P9 工作包、依赖/阶段映射及验收；P0–P1 已完成，P2–P9 未实施。
+- [L1 完整实现规划](l1-implementation-plan.md)：实际代码基线、P0–P9 工作包、依赖/阶段映射及验收；P0–P2 已完成，P3–P9 未实施。
 
 - [四层平台与 L1 范围](decisions/0016-four-level-platform-and-l1.md)：已采用的二维 2v2 最小闭环、工具拆除返还与继承边界；未实现完整 L1。
-- [L1 实验参数表 v0.1](rules/l1-experiment-parameters-v0.1.md)：地图坐标、经济、物品/工具、拆建返还、物理战斗、保护、赛程、观测与验收参数已采用；P0 已提供静态定义，玩法处理器未实现。
-- [P0 定义](l1/p0-definitions.md)、[协议规格](l1/protocol-v1.md)与[验收场景](l1/acceptance-scenarios.md)：定义已加载校验，动作/反馈/观测实现和玩法场景仍待后续阶段。
+- [L1 实验参数表 v0.1](rules/l1-experiment-parameters-v0.1.md)：地图坐标、经济、物品/工具、拆建返还、物理战斗、保护、赛程、观测与验收参数已采用；P0–P2 已提供静态定义、世界基础和二维运动；经济/战斗等仍未实现。
+- [P0 定义](l1/p0-definitions.md)、[P1 世界基础](l1/p1-world-foundation.md)、[P2 二维运动](l1/p2-physics.md)、[协议规格](l1/protocol-v1.md)与[验收场景](l1/acceptance-scenarios.md)：定义已加载校验，动作/反馈/观测实现和玩法场景仍待后续阶段。
 
 - [core 设计断点](core-design-checkpoint.md)：精简上下文、已确认约束与当前世界引擎讨论续接入口。
 - [项目整体待确定事项](project-open-questions.md)：按范围、地图/玩法、接口训练、实现验收及 Hypixel 核验区分当前空缺，附建议讨论顺序。
@@ -19,11 +19,11 @@
 - [拾取与生成器分享定向核对](../reports/2026-10-27-pickup-sharing-review.md)：历史 splitting 讨论的边界、已采用的拾取实验规则及尚未确认的分享资格/产量。
 - [架构与目录职责](architecture.md)：当前工程选择、模块边界与依赖方向。
 - [接口与时序草案](contracts.md)：已确定的进程内接入边界与实现首个对局前待确定的契约。
-- [PlayerState 已确认设计总览](player-state.md)：玩家各层数据归属、生命周期、派生防具及剩余事项；逻辑设计已汇总，尚未实现。
+- [PlayerState 已确认设计总览](player-state.md)：玩家各层数据归属、生命周期、派生防具及剩余事项；逻辑设计已汇总，L1 玩家状态及二维运动部分已实现。
 - [TeamState 已确认设计总览](team-state.md)：五字段与主要行为已设计并实现纯转换，类型/编码与排序见 0012；完整世界集成和 Hypixel 核验仍待完成。
 - [TeamState 类型、参考参数与排序实现](decisions/0012-team-core-types-and-ordering.md)：v1 类型/Schema、参数证据、纯转换与事件排序；已实现部分 core，完整世界与 Q15 核验尚未完成。
 - [首版策略接入决策](decisions/0002-in-process-agent-interface.md)：Python 进程内调用及未来独立进程适配条件；已接受、待实现。
-- [空间表示决策](decisions/0003-grid-terrain-continuous-players.md)：三维方块网格、连续移动、轴对齐矩形及玩家可互相穿过；正式平面加高度 B，前期严格二维 A 实验限制单一行走层。方块单位、水平 `(x, z)` 中心与 `y` 脚底高度已接受；地图存储/格式、尺寸与碰撞细节待定，尚未实现。
+- [空间表示决策](decisions/0003-grid-terrain-continuous-players.md)：三维方块网格、连续移动、轴对齐矩形及玩家可互相穿过；正式平面加高度 B，前期严格二维 A 实验限制单一行走层。方块单位、水平 `(x, z)` 中心与 `y` 脚底高度已接受；L1 固定地图、二维尺寸与碰撞已实现；三维高度仍待实现。
 - [死亡资源与统计决策](decisions/0004-death-resources-and-statistics.md)：携带的铁/金/钻石/绿宝石结算、击杀归属与本局统计跨死亡保留；已接受、待实现，归因窗口与结算边界待定。
 - [携带物品与购买进度决策](decisions/0005-inventory-and-progression.md)：背包数量表、容量、手持规则、购买进度四字段、派生防具及死亡分类；已接受、待实现，具体类型、装备属性映射、容量数值及同刻时序等细则待定。
 - [生命状态决策](decisions/0006-vitality-and-absorption.md)：普通/吸收生命、伤害消耗次序与复活重置；已接受、待实现，数值和效果细则待定。

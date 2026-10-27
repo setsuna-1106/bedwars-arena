@@ -33,5 +33,5 @@ def restore_snapshot(snapshot: dict | str, definitions):
     if snapshot['definition_ref'] != definition_ref(definitions):
         raise ValueError('Snapshot definition hash/version mismatch')
     state = deepcopy(snapshot['state'])
-    validate_state(state, definitions, boundary=True, check_positions=True)
+    validate_state(state, definitions, boundary=True)
     return WorldEngine(definitions, state)

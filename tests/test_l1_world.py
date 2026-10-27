@@ -34,6 +34,8 @@ class WorldFoundationTests(unittest.TestCase):
             self.assertEqual(player['life']['inventory'], {'wooden_sword':1,'shears':1})
             self.assertEqual(player['life']['held_item'], 'wooden_sword')
             self.assertEqual(player['life']['effects'][0]['expires_at'], 40)
+        with self.assertRaises(AttributeError):
+            a.definitions = self.definitions
         self.assertEqual(len(a.initial_facts), 4)
         self.assertEqual(len({fact['commit_id'] for fact in a.initial_facts}), 1)
         state['players']['red_1']['life']['inventory'].clear()
@@ -85,10 +87,12 @@ class WorldFoundationTests(unittest.TestCase):
         mutations = []
         x=deepcopy(snap); x['definition_ref']['map']['sha256']='0'*64; mutations.append(x)
         x=deepcopy(snap); x['runtime']['python']='0.0.0'; mutations.append(x)
+        x=deepcopy(snap); del x['runtime']['world_engine_revision']; mutations.append(x)
         x=deepcopy(snap); x['schema_version']=True; mutations.append(x)
         x=deepcopy(snap); x['state']['execution']['cursor']['phase']=20; mutations.append(x)
         x=deepcopy(snap); x['state']['players']['red_1']['life']['spatial']['x']=float('inf'); mutations.append(x)
         x=deepcopy(snap); del x['state']['terrain']['-28,-1,-6']; mutations.append(x)
+        x=deepcopy(snap); x['state']['terrain']['-0,-1,0']=x['state']['terrain'].pop('0,-1,0'); mutations.append(x)
         x=deepcopy(snap); x['state']['execution']['pending_tasks'][0]['id']='other'; mutations.append(x)
         mutations.append({'schema_version':1,'pending':[],'seen':{},'cursor':None})
         for bad in mutations:
@@ -158,6 +162,35 @@ class WorldFoundationTests(unittest.TestCase):
         self.assertEqual(world.state['execution']['diagnostics'][-1]['reason'],'stale_life')
         self.assertEqual(restore_snapshot(world.snapshot(),self.definitions).state,world.state)
 
+    def test_replaced_effect_invalidates_old_task_without_expiring_new_effect(self):
+        class ReplaceEngine(WorldEngine):
+            def _phase_plan(self,tick,phase):
+                if tick == 1 and phase == 0:
+                    plan=ChangeSet.from_state(self._state)
+                    player=deepcopy(self._state['players']['red_1'])
+                    effect=deepcopy(player['life']['effects'][0])
+                    effect['effect_id']=plan.allocate()
+                    effect['expires_at']=2
+                    player['life']['effects']=[effect]
+                    plan.players['red_1']=player
+                    plan.add_tasks.append(ScheduledTask.create(task_id=plan.allocate(),
+                        kind='expire_protection',created_at=1,execute_at=2,phase=0,source_order=0,
+                        payload={'player_id':'red_1','life_index':1,'effect_id':effect['effect_id']}))
+                    return plan
+                return super()._phase_plan(tick,phase)
+        base=self.make(preset={'players':{'red_1':{'protection_ticks':1}}})
+        world=ReplaceEngine(self.definitions,base.state)
+        world.step()
+        self.assertEqual(world.last_facts,())
+        self.assertEqual(world.state['execution']['diagnostics'][-1]['reason'],'stale_instance')
+        self.assertEqual(world.state['players']['red_1']['life']['effects'][0]['expires_at'],2)
+        restored=restore_snapshot(world.snapshot(),self.definitions)
+        world.step()
+        restored.step()
+        self.assertEqual(world.state,restored.state)
+        self.assertEqual(world.last_facts[0]['kind'],'protection_expired')
+        self.assertEqual(world.state['players']['red_1']['life']['effects'],[])
+
     def test_cancelled_task_is_skipped_without_fact_and_survives_snapshot(self):
         class CancelEngine(WorldEngine):
             def _phase_plan(self,tick,phase):
@@ -198,6 +231,11 @@ class WorldFoundationTests(unittest.TestCase):
         self.assertEqual(world.snapshot(),before)
         self.assertEqual(world.last_facts,())
         self.assertEqual(world.state['tick'],0)
+        # Phase 20 was only attempted; its cursor and failed plan did not commit.
+        self.assertEqual(world._state['execution']['cursor'], {'tick':1,'phase':10})
+        self.assertEqual(world._state['players']['red_1'],before['state']['players']['red_1'])
+        self.assertEqual(world._state['execution']['next_id'],before['state']['execution']['next_id'])
+        self.assertEqual(world._state['execution']['pending_tasks'],before['state']['execution']['pending_tasks'])
         self.assertIsNotNone(world.fault)
         with self.assertRaises(WorldFault):
             world.step()
