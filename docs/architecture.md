@@ -1,5 +1,9 @@
 # 架构与目录职责
 
+L1 P0 已将 profile/map/scenario 的唯一数据源与格式 Schema 放入 Python 包，提供独立版本、哈希及加载校验；此入口不构造世界。协议仅为规格。见 [P0 定义](l1/p0-definitions.md)。
+
+范围更新（2026-10-27）：按 [0016](decisions/0016-four-level-platform-and-l1.md)建设四个层级，当前先做 L1 二维 2v2。已有通用引擎/物理规则继续适用；L1 显式关闭分享、陷阱、团队升级、容器等机制。L2–L4 细分与共享架构仍需落实；[L1 数值表](rules/l1-experiment-parameters-v0.1.md)已采用；[实现规划](l1-implementation-plan.md)已编制，不改变已实现状态。
+
 世界引擎补充（更新：2026-10-27）：[0013](decisions/0013-world-engine-and-state.md) 记录 W01–W09 已采用的世界状态、单 tick 推进、固定阶段及竞争/死亡规则；[0014](decisions/0014-w09-world-objects.md) 记录 W09 对象设计；[0015](decisions/0015-world-schedule-replay-failures-and-training.md) 已整组采用 W10–W12 赛程/终局、快照/重放、故障及训练衔接。训练状态与每局世界分离。完整世界引擎、处理器与外部策略 API 尚未实现，具体参数和证据继续核验。
 
 最新补充（2026-10-26）：[物理与药效 P/F/V 方案](physics-effects-confirmation.md)已由用户整组采用，含输入/求解/承载/击退、来源编码、效果应用与新增阶段设计；[具体数值](rules/physics-effects-parameters.md)已按证据分层补入目录，对应旧“待讨论”描述以这两份文件为准。物理/效果处理器尚未实现，R 未全核实；25/32/35/45/55 阶段仍是设计，运行调度代码未改。

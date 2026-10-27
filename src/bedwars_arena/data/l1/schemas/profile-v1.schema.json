@@ -1,0 +1,1068 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bedwars-arena.invalid/schemas/l1-profile-v1.schema.json",
+  "title": "BedWars Arena L1 profile format v1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "profile_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "classification": {
+      "type": "string",
+      "const": "platform_experiment"
+    },
+    "game": {
+      "type": "object",
+      "properties": {
+        "teams": {
+          "type": "integer",
+          "const": 2
+        },
+        "players_per_team": {
+          "type": "integer",
+          "const": 2
+        },
+        "ticks_per_second": {
+          "type": "integer",
+          "const": 20
+        },
+        "decision_interval_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "coordinate_unit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "horizontal_axes": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "feet_y": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "resource": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "player_order": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "teams",
+        "players_per_team",
+        "ticks_per_second",
+        "decision_interval_ticks",
+        "coordinate_unit",
+        "horizontal_axes",
+        "feet_y",
+        "resource",
+        "player_order"
+      ],
+      "additionalProperties": false
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "generator_sharing": {
+          "type": "boolean",
+          "const": false
+        },
+        "team_upgrades": {
+          "type": "boolean",
+          "const": false
+        },
+        "traps": {
+          "type": "boolean",
+          "const": false
+        },
+        "containers": {
+          "type": "boolean",
+          "const": false
+        },
+        "ranged": {
+          "type": "boolean",
+          "const": false
+        },
+        "explosions": {
+          "type": "boolean",
+          "const": false
+        },
+        "effects": {
+          "type": "boolean",
+          "const": false
+        },
+        "food": {
+          "type": "boolean",
+          "const": false
+        },
+        "absorption": {
+          "type": "boolean",
+          "const": false
+        },
+        "natural_regeneration": {
+          "type": "boolean",
+          "const": false
+        },
+        "dragons": {
+          "type": "boolean",
+          "const": false
+        },
+        "generator_upgrades": {
+          "type": "boolean",
+          "const": false
+        },
+        "jumping": {
+          "type": "boolean",
+          "const": false
+        },
+        "vertical_motion": {
+          "type": "boolean",
+          "const": false
+        },
+        "player_body_blocking": {
+          "type": "boolean",
+          "const": false
+        },
+        "ground_item_merging": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "required": [
+        "generator_sharing",
+        "team_upgrades",
+        "traps",
+        "containers",
+        "ranged",
+        "explosions",
+        "effects",
+        "food",
+        "absorption",
+        "natural_regeneration",
+        "dragons",
+        "generator_upgrades",
+        "jumping",
+        "vertical_motion",
+        "player_body_blocking",
+        "ground_item_merging"
+      ],
+      "additionalProperties": false
+    },
+    "physics": {
+      "type": "object",
+      "properties": {
+        "player_width": {
+          "type": "number"
+        },
+        "player_depth": {
+          "type": "number"
+        },
+        "player_height": {
+          "type": "number"
+        },
+        "speed_blocks_per_second": {
+          "type": "number"
+        },
+        "speed_blocks_per_tick": {
+          "type": "number"
+        },
+        "movement_input": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "knockback_per_hit": {
+          "type": "number"
+        },
+        "knockback_speed_cap": {
+          "type": "number"
+        },
+        "control_alpha": {
+          "type": "number"
+        },
+        "control_beta": {
+          "type": "number"
+        },
+        "knockback_decay": {
+          "type": "number"
+        },
+        "knockback_stop_below": {
+          "type": "number"
+        },
+        "contact_distance_tolerance": {
+          "type": "number"
+        },
+        "contact_time_tolerance": {
+          "type": "number"
+        },
+        "velocity_zero_tolerance": {
+          "type": "number"
+        },
+        "collision_iterations_per_tick": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "void_rule": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "player_width",
+        "player_depth",
+        "player_height",
+        "speed_blocks_per_second",
+        "speed_blocks_per_tick",
+        "movement_input",
+        "knockback_per_hit",
+        "knockback_speed_cap",
+        "control_alpha",
+        "control_beta",
+        "knockback_decay",
+        "knockback_stop_below",
+        "contact_distance_tolerance",
+        "contact_time_tolerance",
+        "velocity_zero_tolerance",
+        "collision_iterations_per_tick",
+        "void_rule"
+      ],
+      "additionalProperties": false
+    },
+    "inventory": {
+      "type": "object",
+      "properties": {
+        "stack_capacity": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "stack_limits": {
+          "type": "object",
+          "properties": {
+            "iron": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "wool": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "wooden_sword": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "iron_sword": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "shears": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "iron",
+            "wool",
+            "wooden_sword",
+            "iron_sword",
+            "shears"
+          ],
+          "additionalProperties": false
+        },
+        "initial_items": {
+          "type": "object",
+          "properties": {
+            "wooden_sword": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "shears": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "wooden_sword",
+            "shears"
+          ],
+          "additionalProperties": false
+        },
+        "initial_held_item": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "initial_armor_tier": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "armor_on_death": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "death_clear": {
+          "const": [
+            "iron",
+            "wool",
+            "wooden_sword",
+            "iron_sword",
+            "shears"
+          ]
+        },
+        "droppable_items": {
+          "const": [
+            "iron"
+          ]
+        }
+      },
+      "required": [
+        "stack_capacity",
+        "stack_limits",
+        "initial_items",
+        "initial_held_item",
+        "initial_armor_tier",
+        "armor_on_death",
+        "death_clear",
+        "droppable_items"
+      ],
+      "additionalProperties": false
+    },
+    "shop": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "range_blocks": {
+          "type": "number"
+        },
+        "requires_line_of_sight": {
+          "type": "boolean"
+        },
+        "requires_facing": {
+          "type": "boolean"
+        },
+        "products": {
+          "type": "object",
+          "properties": {
+            "wool": {
+              "type": "object",
+              "properties": {
+                "cost": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "quantity": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "item": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "kind": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                }
+              },
+              "required": [
+                "cost",
+                "quantity",
+                "item",
+                "kind"
+              ],
+              "additionalProperties": false
+            },
+            "iron_sword": {
+              "type": "object",
+              "properties": {
+                "cost": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "quantity": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "item": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "kind": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                }
+              },
+              "required": [
+                "cost",
+                "quantity",
+                "item",
+                "kind"
+              ],
+              "additionalProperties": false
+            },
+            "armor_1": {
+              "type": "object",
+              "properties": {
+                "cost": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "quantity": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "item": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "kind": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                }
+              },
+              "required": [
+                "cost",
+                "quantity",
+                "item",
+                "kind"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "wool",
+            "iron_sword",
+            "armor_1"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "currency",
+        "range_blocks",
+        "requires_line_of_sight",
+        "requires_facing",
+        "products"
+      ],
+      "additionalProperties": false
+    },
+    "building": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "recovery_tool": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "recovery_quantity": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "range_blocks": {
+          "type": "number"
+        },
+        "facing_half_angle_degrees": {
+          "type": "number"
+        },
+        "placement_duration_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "wool_break_duration_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "bed_break_duration_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "bridge_y": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "wall_y": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "recovery_destination": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "bridge_support": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "wall_support": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "bridge_under_wall": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "original_islands_breakable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "item",
+        "recovery_tool",
+        "recovery_quantity",
+        "range_blocks",
+        "facing_half_angle_degrees",
+        "placement_duration_ticks",
+        "wool_break_duration_ticks",
+        "bed_break_duration_ticks",
+        "bridge_y",
+        "wall_y",
+        "recovery_destination",
+        "bridge_support",
+        "wall_support",
+        "bridge_under_wall",
+        "original_islands_breakable"
+      ],
+      "additionalProperties": false
+    },
+    "generators": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "object",
+          "properties": {
+            "first_spawn_ticks": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "period_ticks": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "quantity": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "capacity": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "first_spawn_ticks",
+            "period_ticks",
+            "quantity",
+            "capacity"
+          ],
+          "additionalProperties": false
+        },
+        "central": {
+          "type": "object",
+          "properties": {
+            "first_spawn_ticks": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "period_ticks": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "quantity": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "capacity": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "first_spawn_ticks",
+            "period_ticks",
+            "quantity",
+            "capacity"
+          ],
+          "additionalProperties": false
+        },
+        "accumulation_half_width": {
+          "type": "number"
+        },
+        "accumulation_min_y": {
+          "type": "number"
+        },
+        "accumulation_max_y": {
+          "type": "number"
+        },
+        "full_behavior": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "resource": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "base",
+        "central",
+        "accumulation_half_width",
+        "accumulation_min_y",
+        "accumulation_max_y",
+        "full_behavior",
+        "resource"
+      ],
+      "additionalProperties": false
+    },
+    "ground_items": {
+      "type": "object",
+      "properties": {
+        "pickup_horizontal_expansion": {
+          "type": "number"
+        },
+        "pickup_vertical_expansion": {
+          "type": "number"
+        },
+        "generator_pickup_delay_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "drop_pickup_delay_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "death_pickup_delay_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "recovery_pickup_delay_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "lifetime_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "entity_limits": {
+          "type": "object",
+          "properties": {
+            "iron": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "wool": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "iron",
+            "wool"
+          ],
+          "additionalProperties": false
+        },
+        "width": {
+          "type": "number"
+        },
+        "depth": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "center_y": {
+          "type": "number"
+        },
+        "movement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "pickup_order": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "pickup_horizontal_expansion",
+        "pickup_vertical_expansion",
+        "generator_pickup_delay_ticks",
+        "drop_pickup_delay_ticks",
+        "death_pickup_delay_ticks",
+        "recovery_pickup_delay_ticks",
+        "lifetime_ticks",
+        "entity_limits",
+        "width",
+        "depth",
+        "height",
+        "center_y",
+        "movement",
+        "pickup_order"
+      ],
+      "additionalProperties": false
+    },
+    "combat": {
+      "type": "object",
+      "properties": {
+        "max_hp": {
+          "type": "number"
+        },
+        "wooden_sword_damage": {
+          "type": "number"
+        },
+        "iron_sword_damage": {
+          "type": "number"
+        },
+        "base_armor_reduction": {
+          "type": "number"
+        },
+        "armor_1_reduction": {
+          "type": "number"
+        },
+        "range_blocks": {
+          "type": "number"
+        },
+        "facing_half_angle_degrees": {
+          "type": "number"
+        },
+        "attack_interval_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "hurt_interval_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "attribution_window_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "friendly_fire": {
+          "type": "boolean"
+        },
+        "friendly_knockback": {
+          "type": "boolean"
+        },
+        "cooldowns_on_death": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "melee_line_of_sight": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "max_hp",
+        "wooden_sword_damage",
+        "iron_sword_damage",
+        "base_armor_reduction",
+        "armor_1_reduction",
+        "range_blocks",
+        "facing_half_angle_degrees",
+        "attack_interval_ticks",
+        "hurt_interval_ticks",
+        "attribution_window_ticks",
+        "friendly_fire",
+        "friendly_knockback",
+        "cooldowns_on_death",
+        "melee_line_of_sight"
+      ],
+      "additionalProperties": false
+    },
+    "life": {
+      "type": "object",
+      "properties": {
+        "respawn_delay_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "protection_duration_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "protection_effect": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "protection_end_actions": {
+          "const": [
+            "attack",
+            "break_enemy_bed"
+          ]
+        },
+        "protection_blocks_void": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "respawn_delay_ticks",
+        "protection_duration_ticks",
+        "protection_effect",
+        "protection_end_actions",
+        "protection_blocks_void"
+      ],
+      "additionalProperties": false
+    },
+    "schedule": {
+      "type": "object",
+      "properties": {
+        "global_bed_destruction_tick": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "game_end_tick": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "episode_limit_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "tie_break": {
+          "const": [
+            "alive_plus_respawning",
+            "attributed_enemy_beds"
+          ]
+        }
+      },
+      "required": [
+        "global_bed_destruction_tick",
+        "game_end_tick",
+        "episode_limit_ticks",
+        "tie_break"
+      ],
+      "additionalProperties": false
+    },
+    "protocol": {
+      "type": "object",
+      "properties": {
+        "action_version": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "feedback_version": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "observation_version": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "world_snapshot_version_reserved": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "team_state_version": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "legacy_queue_version": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "policy_soft_timeout_ms": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "observation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "team_reward_win": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "team_reward_loss": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "team_reward_draw": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "action_version",
+        "feedback_version",
+        "observation_version",
+        "world_snapshot_version_reserved",
+        "team_state_version",
+        "legacy_queue_version",
+        "policy_soft_timeout_ms",
+        "observation",
+        "team_reward_win",
+        "team_reward_loss",
+        "team_reward_draw"
+      ],
+      "additionalProperties": false
+    },
+    "budget": {
+      "type": "object",
+      "properties": {
+        "input_bytes_per_player_per_round": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "work_items_per_tick": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "active_scheduled_tasks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "pending_intents": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "ground_entities": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "seen_messages_and_requests": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "snapshot_interval_ticks": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "input_bytes_per_player_per_round",
+        "work_items_per_tick",
+        "active_scheduled_tasks",
+        "pending_intents",
+        "ground_entities",
+        "seen_messages_and_requests",
+        "snapshot_interval_ticks"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "profile_id",
+    "profile_version",
+    "classification",
+    "game",
+    "features",
+    "physics",
+    "inventory",
+    "shop",
+    "building",
+    "generators",
+    "ground_items",
+    "combat",
+    "life",
+    "schedule",
+    "protocol",
+    "budget"
+  ],
+  "additionalProperties": false
+}

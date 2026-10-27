@@ -35,4 +35,4 @@ where = ["src"]
 version = {attr = "bedwars_arena.__version__"}
 
 [tool.setuptools.package-data]
-bedwars_arena = ["core/data/*.json"]
+bedwars_arena = ["core/data/*.json", "data/l1/*.json", "data/l1/schemas/*.json"]

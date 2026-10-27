@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bedwars-arena.invalid/schemas/l1-feedback-v1.schema.json",
+  "title": "L1 feedback v1 (P0 specification; producer not implemented)",
+  "type": "object",
+  "properties": {
+    "protocol_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "match_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[^\\u0000-\\u001f]+$"
+    },
+    "player_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[^\\u0000-\\u001f]+$"
+    },
+    "published_tick": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "request_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[^\\u0000-\\u001f]+$"
+          },
+          "decision_round_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[^\\u0000-\\u001f]+$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "rejected",
+              "accepted",
+              "applied",
+              "failed"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "OK",
+              "NO_CHANGE",
+              "MALFORMED",
+              "UNKNOWN_ACTION",
+              "UNSUPPORTED_PROTOCOL",
+              "INVALID_ID",
+              "DUPLICATE_ID_CONFLICT",
+              "INVALID_BINDING",
+              "WRONG_LIFE",
+              "ROUND_CLOSED",
+              "STALE_OBSERVATION",
+              "CHANNEL_CONFLICT",
+              "GROUP_LIMIT",
+              "ITEM_NOT_HELD",
+              "OUT_OF_RANGE",
+              "BAD_FACING",
+              "OCCLUDED",
+              "INVALID_TARGET",
+              "TARGET_CHANGED",
+              "TARGET_GONE",
+              "FRIENDLY_TARGET",
+              "INVALID_LAYER",
+              "OUT_OF_BOUNDS",
+              "PROTECTED_REGION",
+              "OCCUPIED",
+              "UNSUPPORTED_BLOCK",
+              "WALL_ABOVE_BRIDGE",
+              "INSUFFICIENT_RESOURCE",
+              "INVENTORY_FULL",
+              "ALREADY_OWNED",
+              "INSUFFICIENT_QUANTITY"
+            ]
+          },
+          "processed_tick": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "action_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[^\\u0000-\\u001f]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "request_id",
+          "decision_round_id",
+          "status",
+          "reason",
+          "processed_tick",
+          "action_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "packet_errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "enum": [
+              "MALFORMED",
+              "UNSUPPORTED_PROTOCOL",
+              "INVALID_BINDING",
+              "ROUND_CLOSED",
+              "STALE_OBSERVATION"
+            ]
+          },
+          "decision_round_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[^\\u0000-\\u001f]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "reason",
+          "decision_round_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "action_outcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[^\\u0000-\\u001f]+$"
+          },
+          "action_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[^\\u0000-\\u001f]+$"
+          },
+          "at_tick": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "interrupted"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "COMPLETED",
+              "CANCELLED",
+              "REPLACED",
+              "LIFE_ENDED",
+              "TARGET_INVALIDATED",
+              "HELD_ITEM_CHANGED"
+            ]
+          }
+        },
+        "required": [
+          "request_id",
+          "action_id",
+          "at_tick",
+          "status",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "protocol_version",
+    "match_id",
+    "player_id",
+    "published_tick",
+    "request_results",
+    "packet_errors",
+    "action_outcomes"
+  ],
+  "additionalProperties": false
+}

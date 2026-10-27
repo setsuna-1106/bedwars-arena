@@ -1,5 +1,7 @@
 # 配置
 
+L1 更新（2026-10-27）：固定三岛地图与实验参数 v0.1 已采用，见[参数表](../docs/rules/l1-experiment-parameters-v0.1.md)；P0 已将资产和加载器放入 Python 包；详见[P0 定义](../docs/l1/p0-definitions.md)。以下未定项为此前通用状态，L1 已确认的坐标/数值不再重选。
+
 物理/效果数值资料见[参数说明](../docs/rules/physics-effects-parameters.md)与[97 项目录](../reports/2026-10-26-physics-effects-parameters.json)。它们区分官方历史、兼容参考、候选与平台实验，并保留未知值；当前没有物理运行加载器，不能将资料文件当作自动生效的完整对局配置。
 
 完整对局和批量实验配置仍待设计。已实现的[TeamRules 参考档案](../src/bedwars_arena/core/data/hypixel_team_reference_v1.json)随 Python 包分发，按模式显式加载；它不是完整可运行对局配置。

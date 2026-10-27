@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bedwars-arena.invalid/schemas/l1-scenario-v1.schema.json",
+  "title": "BedWars Arena L1 scenario format v1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "scenario_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "scenario_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "profile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "map": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "initial_tick": {
+      "type": "integer",
+      "const": 0
+    },
+    "players": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "player_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "team_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "player_id",
+          "team_id"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "initial_life_index": {
+      "type": "integer",
+      "const": 1
+    },
+    "initial_life": {
+      "type": "string",
+      "const": "alive"
+    },
+    "initial_actions": {
+      "type": "string",
+      "const": "empty"
+    }
+  },
+  "required": [
+    "schema_version",
+    "scenario_id",
+    "scenario_version",
+    "profile",
+    "map",
+    "initial_tick",
+    "players",
+    "initial_life_index",
+    "initial_life",
+    "initial_actions"
+  ],
+  "additionalProperties": false
+}

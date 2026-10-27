@@ -2,6 +2,8 @@
 
 ## 开始工作
 
+最新范围（2026-10-27）：用户已采用四层目标与 L1 清单，见 `docs/decisions/0016-four-level-platform-and-l1.md`。L1 为二维 2v2、单资源/三类商品、基地＋中央资源点、桥面/墙体、近战、全局观测，最终含最小训练闭环和二维回放。L1-05 改为对应工具拆除材料返还，L1-19 先提出完整实验参数表，其余推荐项采用。`docs/rules/l1-experiment-parameters-v0.1.md` 的数值、免费剪刀、回收去向和保护等新增细则随后已整表采用。`docs/l1-implementation-plan.md` 已编制 P0–P9 实现规划；P0 已完成版本化规则/地图/初始场景校验、协议规格及验收场景，见 `docs/l1/p0-definitions.md`；下一步为 P1，训练算法/预算在 P8 入口另定。完整 L1 未实现。后文既有通用规则保留，分享/陷阱/容器等关闭机制不作为 L1 的实现前置；参数已采用，但不要把实现规划或四层详细架构建议视为已实现。
+
 先读 `README.md`、`docs/architecture.md`、`docs/roadmap.md`；涉及观测、动作和对局推进时再读 `docs/contracts.md`。调研资料保留在根索引与 `reports/`。
 
 core 长讨论的精简续接入口为 `docs/core-design-checkpoint.md`；已确认玩家结构见 `docs/player-state.md`，队伍结构见 `docs/team-state.md`。用户要求按摘要与当前问题定向查阅，避免反复展开全部历史决策；具体条款仍以对应决策为准。

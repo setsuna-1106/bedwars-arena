@@ -2,6 +2,8 @@
 
 当前已实现 [TeamState 行为测试](test_team_core.py)：交易原子结果、报价变化、同级并发、重复陷阱/容量、冷却边界、丢床/淘汰、等待复活、序列化隔离、事件排序/恢复与重试去重。运行 `python -m unittest discover -s tests -v`；[工程检查](../scripts/check.py) 也会执行这些测试。
 
+P0 新增 [L1 定义测试](test_l1_definitions.py)，覆盖默认值、非法字段和数值、地图几何/引用、哈希与隔离；待实现玩法的具体场景见[验收矩阵](../docs/l1/acceptance-scenarios.md)。
+
 测试使用的冷却覆盖值是实验夹具，不能当作 Hypixel 实测参数；同 tick 破床先于死亡是本平台约定。完整对局、物理、视野、训练与 Hypixel 一致性尚未测试。
 
 实现规则后按职责增加：

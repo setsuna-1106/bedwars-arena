@@ -1,5 +1,9 @@
 # 接口与时序草案
 
+L1 的动作/反馈 Schema、类型化载荷、原因码和观测字段已在 [协议 v1](l1/protocol-v1.md) 具体化；接收器与观测生产器仍待 P3。
+
+L1 范围补充（2026-10-27）：[0016](decisions/0016-four-level-platform-and-l1.md)已采用二维 2v2、全局隔离观测、每玩家独立决策、基础操作及持续攻击；原双通道/轮次/生命周期原则沿用。资源丢弃的瞬时组、具体可见字段和参数见[已采用 L1 表](rules/l1-experiment-parameters-v0.1.md)，不能当作已实现 API。以下通用未知项中已由 0016 确定的 L1 范围不重复重选。
+
 世界引擎补充（更新：2026-10-27）：[0013](decisions/0013-world-engine-and-state.md) 已采用完整 tick 边界、固定阶段、统一提交及 W06–W08 规则；[0014](decisions/0014-w09-world-objects.md) 已采用 W09 世界对象设计；[0015](decisions/0015-world-schedule-replay-failures-and-training.md) 已整组采用赛程/终局、快照/重放、故障和训练衔接。默认 k=1，可配置间隔但逐 tick 模拟；完整消息 Schema、世界 API 和处理器尚未实现。
 
 最新补充（2026-10-26）：[物理与药效 P/F/V 方案](physics-effects-confirmation.md)已由用户整组采用，含输入/求解/承载/击退、来源编码、效果应用与新增阶段设计；[具体数值](rules/physics-effects-parameters.md)已按证据分层补入目录，对应旧“待讨论”描述以这两份文件为准。物理/效果处理器尚未实现，R 未全核实；25/32/35/45/55 阶段仍是设计，运行调度代码未改。

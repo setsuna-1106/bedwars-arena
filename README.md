@@ -1,10 +1,12 @@
 # BedWars Arena
 
-二维 BedWars 多智能体仿真平台，用于外部策略接入与可重复实验。
+分四个复杂层级建设的 BedWars 多智能体仿真平台，用于外部策略接入、训练与可重复实验：L1 二维核心版、L2 二维扩展版、L3 三维简化版、L4 Hypixel 仿真版。
 
-现实规则参照已确定为 **Hypixel 的 Minecraft Bed Wars**。后续设计与实现查阅[Hypixel 规则参考](docs/rules/hypixel-bedwars.md)，证据与检索过程见[规则调研](reports/2026-10-25-hypixel-bedwars-rules.md)。具体模式、地图、规则版本及二维化简化仍待确定；第三方 BedWars 项目用于工程参考，其玩法不能直接作为本项目规则标准。
+**当前范围：先完成 L1 二维 2v2。** 已采用单资源、三个商品类别、基地与中央资源点、桥面/墙体、基础近战、全局观测和最小训练闭环；对应工具拆除材料会返还。完整决定见 [0016](docs/decisions/0016-four-level-platform-and-l1.md)，[实验参数表 v0.1](docs/rules/l1-experiment-parameters-v0.1.md)已采用；[完整实现规划](docs/l1-implementation-plan.md)已编制，完整 L1 尚未实现。
 
-**当前阶段：core 基础模块（0.1.0.dev0）。** 已提供 TeamState 类型/JSON 编码、团队交易与状态转换、参考规则档案、确定性事件排序及行为测试。完整世界引擎、玩家物理/效果应用、Agent 对局、远程 API 和回放界面尚未实现，不能启动完整对局。
+现实规则参照已确定为 **Hypixel 的 Minecraft Bed Wars**。后续设计与实现查阅[Hypixel 规则参考](docs/rules/hypixel-bedwars.md)，证据与检索过程见[规则调研](reports/2026-10-25-hypixel-bedwars-rules.md)。L1 已选择自制二维 2v2 实验范围；L4 的目标模式、地图与规则版本仍待确定；第三方 BedWars 项目用于工程参考，其玩法不能直接作为本项目规则标准。
+
+**当前阶段：L1 P0 已完成（0.1.0.dev0）。** 已提供可校验的 L1 规则、固定地图、初始场景与协议规格，此外保留 TeamState 类型/JSON 编码、团队交易与状态转换、参考规则档案和确定性事件排序。完整世界引擎、玩家物理/效果应用、Agent 对局、远程 API 和回放界面尚未实现，不能启动完整对局。
 
 ## 快速开始
 
@@ -20,15 +22,17 @@ bedwars-arena info
 python scripts/check.py
 ```
 
-`bedwars-arena --help` 查看入口，`bedwars-arena info --json` 输出实现状态。当前 CLI 不启动游戏；已实现的内部调用见 [core 类型与排序契约](docs/decisions/0012-team-core-types-and-ordering.md)。
+`bedwars-arena --help` 查看入口，`bedwars-arena info --json` 输出实现状态；`bedwars-arena validate-l1 --json` 校验随包发布的三份定义与内容哈希。当前 CLI 不启动游戏；已实现的内部调用见 [core 类型与排序契约](docs/decisions/0012-team-core-types-and-ordering.md)。
+
+本机现有开发环境使用 `source venv/bin/activate`；旧 `.venv` 的安装问题和修复经过见 [P0 定义说明](docs/l1/p0-definitions.md)。
 
 ## 项目结构与开发
 
 ```text
 src/bedwars_arena/   Python 包：core、interfaces、agents、runner、replay 与 CLI
-configs/            规则与实验配置（预留）
-maps/               地图（预留）
-schemas/            协议与记录格式（预留）
+configs/            规则资料；L1 正式数据随 Python 包发布
+maps/               地图说明；L1 固定地图随 Python 包发布
+schemas/            TeamState 与 L1 动作/反馈格式规格
 examples/           团队纯转换示例；完整策略对局示例待实现
 tests/              团队交易、状态与调度行为测试
 web/                旁观与回放前端（预留）
@@ -40,6 +44,7 @@ artifacts/          本地实验与回放输出（默认忽略）
 ```
 
 - [开发指南](CONTRIBUTING.md)：安装、检查与构建。
+- [L1 P0 定义与校验](docs/l1/p0-definitions.md)、[协议规格](docs/l1/protocol-v1.md)和[分阶段验收场景](docs/l1/acceptance-scenarios.md)：静态定义已实现，世界推进和协议处理仍待后续阶段。
 - [架构说明](docs/architecture.md)、[接口草案](docs/contracts.md)、[开发阶段](docs/roadmap.md)、[决策记录](docs/decisions/README.md)。
 - [世界引擎与训练衔接决策](docs/decisions/0015-world-schedule-replay-failures-and-training.md)：赛程、终局、快照/重放和训练方向已采用；仍待实现与规则核验。
 - [Hypixel 规则参考](docs/rules/hypixel-bedwars.md)：带规则编号的玩法、候选参数与待核对案例，供后续设计和测试引用。
@@ -52,7 +57,7 @@ artifacts/          本地实验与回放输出（默认忽略）
 
 ## 核心目标
 
-构建一个基于 Minecraft BedWars（起床战争）游戏机制的二维模拟对战平台，通过标准化 API 向外部决策算法提供游戏环境信息，接收算法生成的行动指令，并由模拟引擎执行和更新游戏状态。
+构建一个基于 Minecraft BedWars（起床战争）游戏机制、从二维核心实验逐步扩展至三维仿真的模拟对战平台，通过标准化 API 向外部决策算法提供游戏环境信息，接收算法生成的行动指令，并由模拟引擎执行和更新游戏状态。
 
 平台旨在为智能体决策算法开发、多智能体博弈、策略优化及自动化实验提供一个可控、可扩展、可重复的测试环境。
 
@@ -104,4 +109,4 @@ API 接收行动指令
 - [项目调研与适配性评估（2026-10-25）](reports/2026-10-25-project-survey.md)：19 个相关仓库的核查结果、关键源码问题和候选路线比较；附[固定版本与来源清单](reports/2026-10-25-source-manifest.json)。本次为文档与源码调研，尚未试运行或测试性能。
 - [调研结果的轻量验证（2026-10-25）](reports/2026-10-25-reference-validation.md)：5 组隔离运行探针、Blockyard 规则复核及值得优先参考的模块；未验证完整 BedWars 对局或性能。
 - [Hypixel Bed Wars 规则调研（2026-10-25）](reports/2026-10-25-hypixel-bedwars-rules.md)：本项目现实参照的模式、生命周期、经济、商店、隐身与阶段规则；区分官方证据、社区候选和二维适配建议。
-- 当前已初始化工程结构，尚无模拟引擎或 API 实现；资料索引中的推荐方案尚未作为本项目技术选型。
+- 当前已有 L1 静态定义加载和校验，尚无模拟引擎或动作 API 实现；资料索引中的推荐方案尚未作为本项目技术选型。

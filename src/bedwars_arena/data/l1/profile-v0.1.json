@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "profile_id": "l1-2v2-experiment-v0.1",
+  "profile_version": "0.1",
+  "classification": "platform_experiment",
+  "game": {
+    "teams": 2,
+    "players_per_team": 2,
+    "ticks_per_second": 20,
+    "decision_interval_ticks": 1,
+    "coordinate_unit": "block",
+    "horizontal_axes": "x_z",
+    "feet_y": 0,
+    "resource": "iron",
+    "player_order": "scenario_order"
+  },
+  "features": {
+    "generator_sharing": false,
+    "team_upgrades": false,
+    "traps": false,
+    "containers": false,
+    "ranged": false,
+    "explosions": false,
+    "effects": false,
+    "food": false,
+    "absorption": false,
+    "natural_regeneration": false,
+    "dragons": false,
+    "generator_upgrades": false,
+    "jumping": false,
+    "vertical_motion": false,
+    "player_body_blocking": false,
+    "ground_item_merging": false
+  },
+  "physics": {
+    "player_width": 0.6,
+    "player_depth": 0.6,
+    "player_height": 1.8,
+    "speed_blocks_per_second": 4,
+    "speed_blocks_per_tick": 0.2,
+    "movement_input": "world_direction_normalized",
+    "knockback_per_hit": 0.3,
+    "knockback_speed_cap": 0.6,
+    "control_alpha": 0.2,
+    "control_beta": 0.5,
+    "knockback_decay": 0.75,
+    "knockback_stop_below": 0.005,
+    "contact_distance_tolerance": 1e-08,
+    "contact_time_tolerance": 1e-08,
+    "velocity_zero_tolerance": 1e-06,
+    "collision_iterations_per_tick": 8,
+    "void_rule": "first_loss_of_positive_area_support"
+  },
+  "inventory": {
+    "stack_capacity": 8,
+    "stack_limits": {
+      "iron": 64,
+      "wool": 64,
+      "wooden_sword": 1,
+      "iron_sword": 1,
+      "shears": 1
+    },
+    "initial_items": {
+      "wooden_sword": 1,
+      "shears": 1
+    },
+    "initial_held_item": "wooden_sword",
+    "initial_armor_tier": 0,
+    "armor_on_death": "retain",
+    "death_clear": [
+      "iron",
+      "wool",
+      "wooden_sword",
+      "iron_sword",
+      "shears"
+    ],
+    "droppable_items": [
+      "iron"
+    ]
+  },
+  "shop": {
+    "currency": "iron",
+    "range_blocks": 2,
+    "requires_line_of_sight": false,
+    "requires_facing": false,
+    "products": {
+      "wool": {
+        "cost": 4,
+        "quantity": 16,
+        "item": "wool",
+        "kind": "item"
+      },
+      "iron_sword": {
+        "cost": 12,
+        "quantity": 1,
+        "item": "iron_sword",
+        "kind": "replace_wooden_sword"
+      },
+      "armor_1": {
+        "cost": 20,
+        "quantity": 1,
+        "item": "armor_1",
+        "kind": "armor_progression"
+      }
+    }
+  },
+  "building": {
+    "item": "wool",
+    "recovery_tool": "shears",
+    "recovery_quantity": 1,
+    "range_blocks": 3,
+    "facing_half_angle_degrees": 60,
+    "placement_duration_ticks": 4,
+    "wool_break_duration_ticks": 20,
+    "bed_break_duration_ticks": 40,
+    "bridge_y": -1,
+    "wall_y": 0,
+    "recovery_destination": "inventory_then_safe_drop_else_destroy",
+    "bridge_support": "four_neighbor",
+    "wall_support": "below",
+    "bridge_under_wall": "reject_until_wall_removed",
+    "original_islands_breakable": false
+  },
+  "generators": {
+    "base": {
+      "first_spawn_ticks": 20,
+      "period_ticks": 20,
+      "quantity": 1,
+      "capacity": 64
+    },
+    "central": {
+      "first_spawn_ticks": 10,
+      "period_ticks": 10,
+      "quantity": 1,
+      "capacity": 64
+    },
+    "accumulation_half_width": 1.5,
+    "accumulation_min_y": 0,
+    "accumulation_max_y": 1,
+    "full_behavior": "continue_schedule_without_backlog",
+    "resource": "iron"
+  },
+  "ground_items": {
+    "pickup_horizontal_expansion": 0.75,
+    "pickup_vertical_expansion": 0.5,
+    "generator_pickup_delay_ticks": 0,
+    "drop_pickup_delay_ticks": 20,
+    "death_pickup_delay_ticks": 0,
+    "recovery_pickup_delay_ticks": 0,
+    "lifetime_ticks": 2400,
+    "entity_limits": {
+      "iron": 64,
+      "wool": 64
+    },
+    "width": 0.25,
+    "depth": 0.25,
+    "height": 0.25,
+    "center_y": 0.125,
+    "movement": "stationary_remove_when_unsupported",
+    "pickup_order": "player_then_created_at_entity_id"
+  },
+  "combat": {
+    "max_hp": 20,
+    "wooden_sword_damage": 4,
+    "iron_sword_damage": 5,
+    "base_armor_reduction": 0,
+    "armor_1_reduction": 0.2,
+    "range_blocks": 2.5,
+    "facing_half_angle_degrees": 60,
+    "attack_interval_ticks": 10,
+    "hurt_interval_ticks": 6,
+    "attribution_window_ticks": 100,
+    "friendly_fire": false,
+    "friendly_knockback": false,
+    "cooldowns_on_death": "clear",
+    "melee_line_of_sight": true
+  },
+  "life": {
+    "respawn_delay_ticks": 60,
+    "protection_duration_ticks": 40,
+    "protection_effect": "blocks_melee_damage_knockback_attribution",
+    "protection_end_actions": [
+      "attack",
+      "break_enemy_bed"
+    ],
+    "protection_blocks_void": false
+  },
+  "schedule": {
+    "global_bed_destruction_tick": 9600,
+    "game_end_tick": 12000,
+    "episode_limit_ticks": 18000,
+    "tie_break": [
+      "alive_plus_respawning",
+      "attributed_enemy_beds"
+    ]
+  },
+  "protocol": {
+    "action_version": 1,
+    "feedback_version": 1,
+    "observation_version": 1,
+    "world_snapshot_version_reserved": 1,
+    "team_state_version": 1,
+    "legacy_queue_version": 1,
+    "policy_soft_timeout_ms": 1000,
+    "observation": "global_isolated",
+    "team_reward_win": 1,
+    "team_reward_loss": -1,
+    "team_reward_draw": 0
+  },
+  "budget": {
+    "input_bytes_per_player_per_round": 65536,
+    "work_items_per_tick": 16384,
+    "active_scheduled_tasks": 16384,
+    "pending_intents": 16384,
+    "ground_entities": 4096,
+    "seen_messages_and_requests": 2000000,
+    "snapshot_interval_ticks": 200
+  }
+}

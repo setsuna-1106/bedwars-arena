@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "scenario_id": "l1-standard-2v2-v1",
+  "scenario_version": "1",
+  "profile": {
+    "id": "l1-2v2-experiment-v0.1",
+    "version": "0.1"
+  },
+  "map": {
+    "id": "l1-three-islands-v1",
+    "version": "1"
+  },
+  "initial_tick": 0,
+  "players": [
+    {
+      "player_id": "red_1",
+      "team_id": "red"
+    },
+    {
+      "player_id": "red_2",
+      "team_id": "red"
+    },
+    {
+      "player_id": "blue_1",
+      "team_id": "blue"
+    },
+    {
+      "player_id": "blue_2",
+      "team_id": "blue"
+    }
+  ],
+  "initial_life_index": 1,
+  "initial_life": "alive",
+  "initial_actions": "empty"
+}

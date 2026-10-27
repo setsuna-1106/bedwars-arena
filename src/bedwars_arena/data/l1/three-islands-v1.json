@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "map_id": "l1-three-islands-v1",
+  "map_version": "1",
+  "bounds": {
+    "min_x": -32,
+    "max_x": 32,
+    "min_z": -16,
+    "max_z": 16
+  },
+  "terrain": {
+    "original_island_y": -1,
+    "bridge_y": -1,
+    "wall_y": 0,
+    "islands": [
+      {
+        "id": "left_island",
+        "bounds": {
+          "min_x": -28,
+          "max_x": -16,
+          "min_z": -6,
+          "max_z": 6
+        }
+      },
+      {
+        "id": "center_island",
+        "bounds": {
+          "min_x": -5,
+          "max_x": 5,
+          "min_z": -5,
+          "max_z": 5
+        }
+      },
+      {
+        "id": "right_island",
+        "bounds": {
+          "min_x": 16,
+          "max_x": 28,
+          "min_z": -6,
+          "max_z": 6
+        }
+      }
+    ]
+  },
+  "teams": [
+    {
+      "team_id": "red",
+      "spawn": {
+        "x": -25,
+        "z": 0
+      },
+      "facing": {
+        "x": 1,
+        "z": 0
+      },
+      "bed": {
+        "x": -22,
+        "z": 0
+      },
+      "shop": {
+        "x": -25,
+        "z": 3
+      }
+    },
+    {
+      "team_id": "blue",
+      "spawn": {
+        "x": 25,
+        "z": 0
+      },
+      "facing": {
+        "x": -1,
+        "z": 0
+      },
+      "bed": {
+        "x": 21,
+        "z": 0
+      },
+      "shop": {
+        "x": 25,
+        "z": 3
+      }
+    }
+  ],
+  "generators": [
+    {
+      "generator_id": "red_base",
+      "kind": "base",
+      "team_id": "red",
+      "position": {
+        "x": -25,
+        "y": 0.125,
+        "z": -3
+      }
+    },
+    {
+      "generator_id": "center",
+      "kind": "central",
+      "team_id": null,
+      "position": {
+        "x": 0,
+        "y": 0.125,
+        "z": 0
+      }
+    },
+    {
+      "generator_id": "blue_base",
+      "kind": "base",
+      "team_id": "blue",
+      "position": {
+        "x": 25,
+        "y": 0.125,
+        "z": -3
+      }
+    }
+  ],
+  "protected_regions": [
+    {
+      "id": "red_spawn",
+      "kind": "spawn",
+      "target_id": "red",
+      "bounds": {
+        "min_x": -26,
+        "max_x": -24,
+        "min_z": -1,
+        "max_z": 1
+      }
+    },
+    {
+      "id": "blue_spawn",
+      "kind": "spawn",
+      "target_id": "blue",
+      "bounds": {
+        "min_x": 24,
+        "max_x": 26,
+        "min_z": -1,
+        "max_z": 1
+      }
+    },
+    {
+      "id": "red_shop",
+      "kind": "shop",
+      "target_id": "red",
+      "bounds": {
+        "min_x": -26,
+        "max_x": -24,
+        "min_z": 2,
+        "max_z": 4
+      }
+    },
+    {
+      "id": "blue_shop",
+      "kind": "shop",
+      "target_id": "blue",
+      "bounds": {
+        "min_x": 24,
+        "max_x": 26,
+        "min_z": 2,
+        "max_z": 4
+      }
+    },
+    {
+      "id": "red_base",
+      "kind": "generator",
+      "target_id": "red_base",
+      "bounds": {
+        "min_x": -26,
+        "max_x": -24,
+        "min_z": -4,
+        "max_z": -2
+      }
+    },
+    {
+      "id": "blue_base",
+      "kind": "generator",
+      "target_id": "blue_base",
+      "bounds": {
+        "min_x": 24,
+        "max_x": 26,
+        "min_z": -4,
+        "max_z": -2
+      }
+    },
+    {
+      "id": "center",
+      "kind": "generator",
+      "target_id": "center",
+      "bounds": {
+        "min_x": -1,
+        "max_x": 1,
+        "min_z": -1,
+        "max_z": 1
+      }
+    }
+  ]
+}

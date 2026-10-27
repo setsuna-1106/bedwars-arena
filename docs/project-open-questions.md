@@ -2,11 +2,17 @@
 
 更新：2026-10-27。本文件是对当前项目状态的梳理，不是新规则决定，也不把待实现项目算作尚未讨论。已经采用的决策仍以 [0013](decisions/0013-world-engine-and-state.md)、[0014](decisions/0014-w09-world-objects.md)、[0015](decisions/0015-world-schedule-replay-failures-and-training.md)、[物理与药效确认清单](physics-effects-confirmation.md)和对应专题决策为准。
 
+## L1 范围更新（2026-10-27）
+
+[0016](decisions/0016-four-level-platform-and-l1.md)已确认二维 2v2、单资源/三类商品、基地与中央资源点、全局观测/基础动作和训练与回放验收；OPEN-01–03/06/13/14 中这些范围不再作为 L1 未决项。L1-05 修订为对应工具拆除返还。地图数值与工具/返还等新增细则已按[完整参数表](rules/l1-experiment-parameters-v0.1.md)采用；执行入口见[实现规划](l1-implementation-plan.md)，训练算法、采样/预算仍需专门方案。以下是跨层级总清单，未启用的高级机制不阻塞 L1。
+
 ## 当前起点
+
+P0 补充：L1 三岛静态地图、规则/场景数据与加载校验已完成，协议 v1 已形成规格；下表保留跨层级尚未解决的问题，不代表 L1 的这些数据仍待选择。
 
 - **已实现**：Python 工程骨架、CLI、`TeamState` 类型/序列化、纯团队交易与状态转换、团队规则参考档案及事件排序基础。具体边界见 [0012](decisions/0012-team-core-types-and-ordering.md)。
 - **已采用但尚未完整实现**：`WorldState`、玩家生命周期、世界引擎 W01–W12 的已列原则、物理与效果 P/F/V、资源和容器行为、赛程、训练边界、基础奖励及快照重放方向。
-- **还不能完成**：创建并推进完整对局、接入策略对战、生成训练轨迹及跨局更新模型。`maps/` 目前没有可运行地图，`interfaces`、`agents`、`runner`、`replay` 仍是预留模块。
+- **还不能完成**：创建并推进完整对局、接入策略对战、生成训练轨迹及跨局更新模型。已加载的 L1 地图尚不能启动对局，`interfaces`、`agents`、`runner`、`replay` 仍是预留模块。
 
 下列编号只用于讨论，不预设用户已经采纳任何新增方案。“优先”表示建议先讨论的依赖关系，不是已经批准的排期。
 

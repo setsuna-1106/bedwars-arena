@@ -62,6 +62,13 @@ def check_entry_points() -> None:
             text=True,
         )
         json.loads(result.stdout)
+        result = subprocess.run(
+            [str(console), "validate-l1", "--json"],
+            cwd=directory, check=True, capture_output=True, text=True,
+        )
+        definitions = json.loads(result.stdout)
+        if definitions.get("valid") is not True or definitions.get("simulation_available") is not False:
+            raise ValueError("Installed L1 definition validation returned an invalid status")
 
 
 def check_behavior() -> None:
@@ -77,4 +84,4 @@ if __name__ == "__main__":
     except (ValueError, OSError, subprocess.CalledProcessError) as error:
         print(f"Project check failed: {error}", file=sys.stderr)
         raise SystemExit(1)
-    print("Project checks passed: syntax, metadata, JSON, local links, installed CLI and core tests.")
+    print("Project checks passed: syntax, metadata, JSON, local links, installed CLI, L1 definitions and tests.")
