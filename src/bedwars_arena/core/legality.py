@@ -104,6 +104,11 @@ def interaction_error(state,definitions,player_id,kind,payload):
                     return 'UNSUPPORTED_BLOCK'
                 if any(bx==x and bz==z for _,bx,bz in terrain.beds):
                     return 'OCCUPIED'
+                gp=profile['ground_items']
+                for entity in state['entities'].values():
+                    pos=entity['spatial']
+                    if target_box.overlaps(AABB.centered(Vec2(pos['x'],pos['z']),gp['width'],gp['depth'])):
+                        return 'OCCUPIED'
                 for other in state['players'].values():
                     if other['life']['kind']=='alive':
                         box=AABB.centered(_center(other),profile['physics']['player_width'],profile['physics']['player_depth'])

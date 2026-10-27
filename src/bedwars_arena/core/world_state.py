@@ -37,7 +37,7 @@ def definition_ref(definitions: L1Definitions) -> dict:
 def runtime_info() -> dict:
     return {'package_version': __version__, 'implementation': sys.implementation.name,
             'python': '.'.join(map(str, sys.version_info[:3])), 'rng_derivation': 'sha256-v1',
-            'world_engine_revision': 'l1-p3-1'}
+            'world_engine_revision': 'l1-p4-1'}
 
 
 def _seed_states(seed: int) -> dict:
@@ -84,7 +84,7 @@ def create_state(definitions: L1Definitions, *, seed: int, match_id: str | None 
     identifier(match_id, 'match_id')
     if preset is None:
         preset = {}
-    if not isinstance(preset, dict) or preset.keys() - {'players','beds','generator_first_ticks','source'}:
+    if not isinstance(preset, dict) or preset.keys() - {'players','beds','generator_first_ticks','ground_items','source'}:
         raise ValueError('Unknown training preset field')
     overrides = preset.get('players', {})
     beds = preset.get('beds', {})
@@ -178,6 +178,35 @@ def create_state(definitions: L1Definitions, *, seed: int, match_id: str | None 
                                ('game_end',profile['schedule']['game_end_tick'],90)):
         task = _new_task(execution, kind=kind, due=when, phase=stage, order=0, payload={}, budget=budget)
         schedule(state, task, budget)
+    ground_items=preset.get('ground_items',[])
+    if not isinstance(ground_items,list):
+        raise ValueError('Preset ground_items must be an array')
+    from .entities import make_item
+    for spec in ground_items:
+        if not isinstance(spec,dict) or not {'item_key','quantity','x','z'} <= spec.keys() or spec.keys() - {'item_key','quantity','x','z','pickup_ready_at'}:
+            raise ValueError('Invalid preset ground item')
+        item=spec['item_key']
+        if item not in profile['ground_items']['entity_limits']:
+            raise ValueError('Unknown preset ground item')
+        quantity=integer(spec['quantity'],'quantity',1)
+        ready=integer(spec.get('pickup_ready_at',0),'pickup_ready_at')
+        limit=profile['ground_items']['entity_limits'][item]
+        while quantity:
+            count=min(limit,quantity);quantity-=count
+            if len(state['entities'])>=budget['ground_entities']:
+                raise ValueError('Ground entity budget exceeded')
+            entity_id=_id(execution);expires=profile['ground_items']['lifetime_ticks']
+            state['entities'][entity_id]=make_item(entity_id=entity_id,item=item,quantity=count,
+                x=spec['x'],z=spec['z'],created_at=0,pickup_ready_at=ready,expires_at=expires,
+                source={'kind':'preset','source_id':'training'},profile=profile)
+            task=_new_task(execution,kind='expire_ground_item',due=expires,phase=0,order=0,
+                           payload={'entity_id':entity_id},budget=budget)
+            schedule(state,task,budget)
+            fact={'version':1,'category':'fact','id':_id(execution),'commit_id':commit_id,
+                  'kind':'ground_item_preset','happened_at':0,'phase':0,
+                  'payload':{'entity_id':entity_id,'item':item,'quantity':count},'caused_by':None}
+            execution['seen_messages'][fact['id']]=_json(fact)
+            initial_facts.append(fact)
     execution['log_cursor'] = len(initial_facts)
     validate_state(state, definitions, boundary=True)
     return state, tuple(initial_facts)
@@ -198,8 +227,8 @@ def validate_state(state: dict, definitions: L1Definitions, *, boundary: bool = 
         raise ValueError('Invalid world collections')
     if state['containers']:
         raise ValueError('Containers are disabled in L1')
-    if state['entities']:
-        raise ValueError('L1 entity state is not implemented yet')
+    if len(state['entities']) > profile['budget']['ground_entities']:
+        raise ValueError('Ground entity budget exceeded')
     entries = {p['player_id']:p['team_id'] for p in scenario['players']}
     if set(state['players']) != set(entries) or set(state['teams']) != {t['team_id'] for t in map_data['teams']}:
         raise ValueError('World roster mismatch')
@@ -269,6 +298,19 @@ def validate_state(state: dict, definitions: L1Definitions, *, boundary: bool = 
             raise ValueError('Generator identity mismatch')
         integer(gen['next_spawn_at'], 'next_spawn_at', 1)
         unique(gen['schedule_id'])
+    from .entities import validate_item
+    from .terrain import Terrain
+    terrain_view = Terrain.from_world(state,map_data)
+    for entity_id, entity in state['entities'].items():
+        if entity.get('entity_id') != entity_id:
+            raise ValueError('Ground item identity mismatch')
+        unique(entity_id)
+        validate_item(entity,profile=profile,terrain=terrain_view,now=now,phase=cursor['phase'])
+        source=entity['source']
+        if source['kind']=='generator' and source['source_id'] not in gids:
+            raise ValueError('Unknown generator source')
+        if source['kind'] in ('player_drop','recovery','death') and source['source_id'] not in entries:
+            raise ValueError('Unknown player source')
     for player in state['players'].values():
         if player['life']['kind'] == 'alive':
             for effect in player['life']['effects']:
@@ -335,6 +377,10 @@ def validate_state(state: dict, definitions: L1Definitions, *, boundary: bool = 
             raise ValueError('Task lies behind phase cursor')
         if execution['seen_messages'].get(task.task_id) != _json(task.to_dict()):
             raise ValueError('Task ledger mismatch')
+    for entity_id, entity in state['entities'].items():
+        if not any(t.kind == 'expire_ground_item' and t.execute_at == entity['expires_at'] and
+                   t.payload == {'entity_id':entity_id} and t.task_id not in execution['cancelled'] for t in tasks):
+            raise ValueError('Ground item has no matching expiry task')
     for gid, gen in state['generators'].items():
         if not any(t.kind == 'generator_spawn' and t.execute_at == gen['next_spawn_at']
                    and t.payload == {'generator_id':gid,'schedule_id':gen['schedule_id']}

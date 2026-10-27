@@ -242,13 +242,11 @@ class WorldFoundationTests(unittest.TestCase):
         recovered=restore_snapshot(before,self.definitions)
         self.assertEqual(recovered.step()['tick'],1)
 
-    def test_unimplemented_due_task_faults_without_false_event(self):
+    def test_generator_due_task_produces_recorded_entity(self):
         world = self.make(preset={'generator_first_ticks':{'center':1}})
-        before=world.snapshot()
-        with self.assertRaisesRegex(WorldFault,'generator_spawn'):
-            world.step()
-        self.assertEqual(world.snapshot(),before)
-        self.assertEqual(world.last_facts,())
+        world.step()
+        self.assertEqual(len(world.state['entities']),1)
+        self.assertEqual(world.last_facts[0]['kind'],'resource_generated')
         self.assertIsNone(world.state['result'])
 
 

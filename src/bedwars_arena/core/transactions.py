@@ -102,7 +102,7 @@ def apply_plan(state: dict, plan: ChangeSet, *, budget: dict, validate) -> tuple
             raise ValueError('Fact or commit ID was not allocated by this plan')
     candidate = deepcopy(state)
     execution = candidate['execution']
-    allowed_execution = {'pending_requests','request_records','round','round_history','action_outcomes','packet_errors'}
+    allowed_execution = {'pending_requests','request_records','round','round_history','action_outcomes','packet_errors','attributed_beds'}
     if not isinstance(plan.execution_updates,dict) or plan.execution_updates.keys() - allowed_execution:
         raise ValueError('Invalid execution updates')
     for key,value in plan.execution_updates.items():
@@ -194,6 +194,7 @@ def apply_plan(state: dict, plan: ChangeSet, *, budget: dict, validate) -> tuple
     def instance_ids(value):
         ids = {block['instance_id'] for block in value['terrain'].values()}
         ids.update(gen['schedule_id'] for gen in value['generators'].values())
+        ids.update(value['entities'].keys())
         for player in value['players'].values():
             life = player['life']
             if life['kind'] == 'alive':

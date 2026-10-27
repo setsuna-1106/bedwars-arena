@@ -137,9 +137,6 @@ class WorldEngine:
         if phase == 35:
             from .controls import interrupt_invalid_interactions
             return interrupt_invalid_interactions(self._state,self.definitions,tick)
-        if phase in (40,45) and any(item['tick']==tick and item['phase']==phase
-                                    for item in self._state['execution']['pending_requests']):
-            raise NotImplementedError('L1 economic settlement is not implemented yet')
         if phase != 30:
             return None
         from .geometry import Vec2
@@ -198,6 +195,12 @@ class WorldEngine:
         reason = None
         if task.task_id in state['execution']['cancelled']:
             reason = 'cancelled'
+        elif task.kind == 'generator_spawn':
+            from .economy import generator_attempt
+            return generator_attempt(state,self.definitions,task)
+        elif task.kind == 'expire_ground_item':
+            from .economy import expire_ground
+            return expire_ground(state,task)
         elif task.kind == 'expire_protection':
             payload = task.payload
             if set(payload) != {'player_id','life_index','effect_id'}:
@@ -223,6 +226,38 @@ class WorldEngine:
         if reason is not None:
             plan.diagnostics.append({'tick':task.execute_at,'phase':task.phase,'task_id':task.task_id,'reason':reason})
         return plan
+
+    def _process_gameplay_phase(self,tick: int,phase: int,work: int,budget: int) -> int:
+        if phase not in (32,40,45,50):
+            return work
+        from . import building, economy
+        roster=[p['player_id'] for p in self.definitions.scenario.data['players']]
+        order={pid:i for i,pid in enumerate(roster)}
+        tasks=[]
+        if phase==32:
+            entities=sorted(self._state['entities'].values(),key=lambda e:(e['created_at'],e['entity_id']))
+            tasks=[('pickup',pid,e['entity_id']) for pid in roster for e in entities]
+        elif phase==40:
+            pending=[r for r in self._state['execution']['pending_requests'] if r['tick']==tick and r['phase']==40]
+            tasks=[('buy',item,None) for item in sorted(pending,key=lambda r:(order[r['player_id']],r['request_id']))]
+        elif phase==45:
+            tasks=[('place',pid,None) for pid in roster]
+            pending=[r for r in self._state['execution']['pending_requests'] if r['tick']==tick and r['phase']==45]
+            tasks.extend(('drop',item,None) for item in sorted(pending,key=lambda r:(order[r['player_id']],r['request_id'])))
+        elif phase==50:
+            tasks=[('break',pid,None) for pid in roster]
+        for kind,first,second in tasks:
+            work+=1
+            if work>budget:
+                raise ValueError('Work budget exceeded')
+            if kind=='pickup': plan=economy.pickup(self._state,self.definitions,tick,first,second)
+            elif kind=='buy': plan=economy.buy(self._state,self.definitions,tick,first)
+            elif kind=='place': plan=building.place(self._state,self.definitions,tick,first)
+            elif kind=='drop': plan=economy.drop(self._state,self.definitions,tick,first)
+            else: plan=building.break_action(self._state,self.definitions,tick,first)
+            if plan is not None:
+                self._commit(plan)
+        return work
 
     def _handle_intents(self, tick: int, phase: int, work: int, budget: int) -> int:
         due = [i for i in self._state['execution']['pending_intents'] if i['target_phase'] == phase]
@@ -280,6 +315,7 @@ class WorldEngine:
                     if work > budget:
                         raise ValueError('Work budget exceeded')
                     self._commit(plan)
+                work = self._process_gameplay_phase(tick,phase,work,budget)
                 while self._state['execution']['pending_tasks']:
                     task = ScheduledTask.from_dict(self._state['execution']['pending_tasks'][0])
                     if (task.execute_at,task.phase) != (tick,phase):

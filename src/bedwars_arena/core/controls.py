@@ -6,14 +6,14 @@ from .legality import interaction_error
 from .transactions import ChangeSet
 
 
-def _outcome(execution, player_id, action, tick, reason):
+def _outcome(execution, player_id, action, tick, reason, *, status='interrupted'):
     if action is None:
         return
     for rid,entry in execution['request_records'].get(player_id,{}).items():
         if entry['result']['action_id'] == action['action_id']:
             execution['action_outcomes'].setdefault(player_id,[]).append(
                 {'request_id':rid,'action_id':action['action_id'],'at_tick':tick,
-                 'status':'interrupted','reason':reason})
+                 'status':status,'reason':reason})
             return
 
 
@@ -131,6 +131,12 @@ def interrupt_invalid_interactions(state,definitions,tick):
             updated['life']['interaction']=None
             _outcome(work,pid,action,tick,'TARGET_INVALIDATED')
             plan.players[pid]=updated
+        elif action['kind'] in ('place_block','break_block','break_bed'):
+            progress=tick-action['started_at']
+            if action['progress'] != progress:
+                updated=deepcopy(player)
+                updated['life']['interaction']['progress']=progress
+                plan.players[pid]=updated
     if not plan.players:
         return None
     plan.execution_updates['action_outcomes']=outcomes

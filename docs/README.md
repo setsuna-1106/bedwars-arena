@@ -1,10 +1,10 @@
 # 文档索引
 
-- [L1 完整实现规划](l1-implementation-plan.md)：实际代码基线、P0–P9 工作包、依赖/阶段映射及验收；P0–P3 已完成，P4–P9 未实施。
+- [L1 完整实现规划](l1-implementation-plan.md)：实际代码基线、P0–P9 工作包、依赖/阶段映射及验收；P0–P4 已完成，P5–P9 未实施。
 
 - [四层平台与 L1 范围](decisions/0016-four-level-platform-and-l1.md)：已采用的二维 2v2 最小闭环、工具拆除返还与继承边界；未实现完整 L1。
 - [L1 实验参数表 v0.1](rules/l1-experiment-parameters-v0.1.md)：地图坐标、经济、物品/工具、拆建返还、物理战斗、保护、赛程、观测与验收参数已采用；P0–P2 已提供静态定义、世界基础和二维运动；经济/战斗等仍未实现。
-- [P0 定义](l1/p0-definitions.md)、[P1 世界基础](l1/p1-world-foundation.md)、[P2 二维运动](l1/p2-physics.md)、[P3 动作观测](l1/p3-actions.md)、[协议规格](l1/protocol-v1.md)与[验收场景](l1/acceptance-scenarios.md)：定义已加载校验，动作/反馈/观测实现和玩法场景仍待后续阶段。
+- [P0 定义](l1/p0-definitions.md)、[P1 世界基础](l1/p1-world-foundation.md)、[P2 二维运动](l1/p2-physics.md)、[P3 动作观测](l1/p3-actions.md)、[P4 经济与拆建](l1/p4-economy.md)、[协议规格](l1/protocol-v1.md)与[验收场景](l1/acceptance-scenarios.md)：定义已加载校验，动作/反馈/观测实现和玩法场景仍待后续阶段。
 
 - [core 设计断点](core-design-checkpoint.md)：精简上下文、已确认约束与当前世界引擎讨论续接入口。
 - [项目整体待确定事项](project-open-questions.md)：按范围、地图/玩法、接口训练、实现验收及 Hypixel 核验区分当前空缺，附建议讨论顺序。

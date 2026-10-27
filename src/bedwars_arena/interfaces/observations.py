@@ -71,7 +71,10 @@ def observe(state,definitions,player_id):
             'definitions':deepcopy(state['definition_ref']),
             'terrain':{'bounds':deepcopy(map_data['bounds']),'blocks':terrain,
                        'beds':[{'team_id':t['team_id'],'x':t['bed']['x'],'z':t['bed']['z']} for t in map_data['teams']]},
-            'teams':teams,'players':players,'ground_items':deepcopy(list(state['entities'].values())),
+            'teams':teams,'players':players,
+            'ground_items':[{'entity_id':e['entity_id'],'item_key':e['item_key'],'quantity':e['quantity'],
+                             'position':{k:e['spatial'][k] for k in ('x','y','z')}}
+                            for e in sorted(state['entities'].values(),key=lambda v:(v['created_at'],v['entity_id']))],
             'generators':[{'generator_id':g['generator_id'],'next_spawn_at':g['next_spawn_at']}
                           for g in state['generators'].values()],
             'schedule':deepcopy(profile['schedule']),'feedback':feedback(state,player_id)}

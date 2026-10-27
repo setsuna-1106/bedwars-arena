@@ -188,14 +188,13 @@ class ActionTests(unittest.TestCase):
         self.assertIsNone(world.state['players']['red_1']['life']['interaction'])
         self.assertEqual(world.feedback('red_1')['action_outcomes'][-1]['reason'],'TARGET_INVALIDATED')
 
-    def test_purchase_is_accepted_but_unimplemented_settlement_faults(self):
+    def test_purchase_receipt_does_not_deduct_and_rechecks_distance(self):
         world=self.world();world.open_round('r1')
         self.submit(world,requests={'red_1':[{'request_id':'b','kind':'buy','payload':{'product':'wool'}}]})
-        before=world.snapshot()
-        with self.assertRaisesRegex(WorldFault,'economic settlement'):
-            world.step()
-        self.assertEqual(world.snapshot(),before)
         self.assertEqual(world.feedback('red_1')['request_results'][0]['status'],'accepted')
+        world.step()
+        self.assertEqual(world.feedback('red_1')['request_results'][0]['reason'],'OUT_OF_RANGE')
+        self.assertNotIn('wool',world.state['players']['red_1']['life']['inventory'])
 
 
 if __name__=='__main__': unittest.main()
