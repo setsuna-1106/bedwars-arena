@@ -37,7 +37,7 @@ def definition_ref(definitions: L1Definitions) -> dict:
 def runtime_info() -> dict:
     return {'package_version': __version__, 'implementation': sys.implementation.name,
             'python': '.'.join(map(str, sys.version_info[:3])), 'rng_derivation': 'sha256-v1',
-            'world_engine_revision': 'l1-p2-1'}
+            'world_engine_revision': 'l1-p3-1'}
 
 
 def _seed_states(seed: int) -> dict:
@@ -98,9 +98,10 @@ def create_state(definitions: L1Definitions, *, seed: int, match_id: str | None 
     generator_ids = {g['generator_id'] for g in map_data['generators']}
     if overrides.keys() - expected_players or beds.keys() - team_ids or generator_first.keys() - generator_ids:
         raise ValueError('Preset references an unknown player, team or generator')
-    execution = {'version': 1, 'next_id': 1, 'revision': 0, 'cursor': {'tick': 0, 'phase': 90},
+    execution = {'version': 2, 'next_id': 1, 'revision': 0, 'cursor': {'tick': 0, 'phase': 90},
                  'pending_tasks': [], 'pending_intents': [], 'seen_messages': {}, 'cancelled': [],
-                 'pending_requests': [], 'request_records': {}, 'pending_deaths': [], 'diagnostics': [],
+                 'pending_requests': [], 'request_records': {}, 'round': None, 'round_history': {},
+                 'action_outcomes': {}, 'packet_errors': {}, 'pending_deaths': [], 'diagnostics': [],
                  'rng_seed_hex': f'{seed:016x}' if type(seed) is int and 0 <= seed < 2**64 else '',
                  'rng_states': _seed_states(seed), 'log_cursor': 0,
                  'attributed_beds': {team_id: 0 for team_id in sorted(team_ids)}}
@@ -134,6 +135,7 @@ def create_state(definitions: L1Definitions, *, seed: int, match_id: str | None 
         spatial = {'x': override.get('x', team['spawn']['x']), 'z': override.get('z', team['spawn']['z']),
                    'facing_x': override.get('facing_x', team['facing']['x']),
                    'facing_z': override.get('facing_z', team['facing']['z']),
+                   'velocity_x': 0.0, 'velocity_z': 0.0,
                    'knockback_x': override.get('knockback_x', 0.0),
                    'knockback_z': override.get('knockback_z', 0.0)}
         protection = override.get('protection_ticks', profile['life']['protection_duration_ticks'])
@@ -203,9 +205,10 @@ def validate_state(state: dict, definitions: L1Definitions, *, boundary: bool = 
         raise ValueError('World roster mismatch')
     execution = state['execution']
     _require_fields(execution, ('version','next_id','revision','cursor','pending_tasks','pending_intents','seen_messages',
-                                'cancelled','pending_requests','request_records','pending_deaths','diagnostics',
+                                'cancelled','pending_requests','request_records','round','round_history','action_outcomes','packet_errors',
+                                'pending_deaths','diagnostics',
                                 'rng_seed_hex','rng_states','log_cursor','attributed_beds'), 'execution')
-    if type(execution['version']) is not int or execution['version'] != 1:
+    if type(execution['version']) is not int or execution['version'] != 2:
         raise ValueError('Unsupported execution schema (legacy queue is not a world snapshot)')
     integer(execution['next_id'], 'next_id', 1)
     integer(execution['revision'], 'revision')
@@ -279,8 +282,8 @@ def validate_state(state: dict, definitions: L1Definitions, *, boundary: bool = 
     for name in ('pending_tasks','pending_intents','cancelled','pending_requests','pending_deaths','diagnostics'):
         if not isinstance(execution[name], list):
             raise ValueError(f'{name} must be an array')
-    if execution['pending_requests'] or execution['request_records']:
-        raise ValueError('External request handling is not implemented')
+    from bedwars_arena.interfaces.actions import validate_execution_requests
+    validate_execution_requests(execution,state,profile)
     if not isinstance(execution['seen_messages'], dict) or not isinstance(execution['request_records'], dict):
         raise ValueError('Invalid message ledger')
     if len(execution['seen_messages']) > profile['budget']['seen_messages_and_requests']:

@@ -2,7 +2,7 @@
 
 当前已实现 [TeamState 行为测试](test_team_core.py)：交易原子结果、报价变化、同级并发、重复陷阱/容量、冷却边界、丢床/淘汰、等待复活、序列化隔离、事件排序/恢复与重试去重。运行 `python -m unittest discover -s tests -v`；[工程检查](../scripts/check.py) 也会执行这些测试。
 
-P0 的 [L1 定义测试](test_l1_definitions.py)覆盖非法参数、地图引用、哈希与隔离；P1 的[世界测试](test_l1_world.py)覆盖预置、事务失败、调度去重、失效及快照恢复；P2 的[物理测试](test_l1_physics.py)覆盖扫掠、贴墙、承载、击退、虚空候选和玩家互穿。待实现玩法的具体场景见[验收矩阵](../docs/l1/acceptance-scenarios.md)。
+P0 的 [L1 定义测试](test_l1_definitions.py)覆盖非法参数、地图引用、哈希与隔离；P1 的[世界测试](test_l1_world.py)覆盖预置、事务失败、调度去重、失效及快照恢复；P2 的[物理测试](test_l1_physics.py)覆盖扫掠、贴墙、承载、击退、虚空候选和玩家互穿。P3 的[动作与观测测试](test_l1_actions.py)覆盖请求去重、封口、冲突、隔离、旧生命及控制中断；待实现玩法的具体场景见[验收矩阵](../docs/l1/acceptance-scenarios.md)。
 
 测试使用的冷却覆盖值是实验夹具，不能当作 Hypixel 实测参数；同 tick 破床先于死亡是本平台约定。L1 二维基础物理已按实验档案测试；完整对局、视野、训练与 Hypixel 一致性尚未测试。
 

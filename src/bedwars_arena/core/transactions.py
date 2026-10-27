@@ -26,6 +26,7 @@ class ChangeSet:
     pending_deaths: list = field(default_factory=list)
     facts: list = field(default_factory=list)
     diagnostics: list = field(default_factory=list)
+    execution_updates: dict = field(default_factory=dict)
 
     @classmethod
     def from_state(cls, state: dict):
@@ -101,6 +102,11 @@ def apply_plan(state: dict, plan: ChangeSet, *, budget: dict, validate) -> tuple
             raise ValueError('Fact or commit ID was not allocated by this plan')
     candidate = deepcopy(state)
     execution = candidate['execution']
+    allowed_execution = {'pending_requests','request_records','round','round_history','action_outcomes','packet_errors'}
+    if not isinstance(plan.execution_updates,dict) or plan.execution_updates.keys() - allowed_execution:
+        raise ValueError('Invalid execution updates')
+    for key,value in plan.execution_updates.items():
+        execution[key] = deepcopy(value)
     for field_name in ('players','teams','generators','entities'):
         updates = getattr(plan, field_name)
         if not isinstance(updates, dict):

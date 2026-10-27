@@ -57,7 +57,7 @@ def validate_player(player: dict, profile: dict, *, tick: int) -> None:
     _fields(life, ('kind','spatial','vitality','inventory','held_item','effects',
                    'movement','interaction','last_attacker'), 'alive')
     spatial = life['spatial']
-    _fields(spatial, ('x','z','facing_x','facing_z','knockback_x','knockback_z'), 'spatial')
+    _fields(spatial, ('x','z','facing_x','facing_z','velocity_x','velocity_z','knockback_x','knockback_z'), 'spatial')
     for key, value in spatial.items():
         _number(value, key)
     facing = math.hypot(spatial['facing_x'], spatial['facing_z'])

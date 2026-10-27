@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bedwars-arena.invalid/schemas/l1-action-v1.schema.json",
-  "title": "L1 action envelope v1 (P0 specification; receiver not implemented)",
+  "title": "L1 action envelope v1",
   "type": "object",
   "properties": {
     "protocol_version": {

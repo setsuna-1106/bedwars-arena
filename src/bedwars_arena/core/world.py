@@ -54,6 +54,61 @@ class WorldEngine:
         from bedwars_arena.replay.snapshot import encode_snapshot
         return encode_snapshot(self._published, self.definitions)
 
+    def _publish_input(self, candidate):
+        if self._fault is not None or self._state['result'] is not None:
+            raise WorldFault('World cannot accept input after fault or result')
+        candidate['execution']['revision'] += 1
+        validate_state(candidate,self.definitions,boundary=True)
+        self._state=candidate
+        self._published=deepcopy(candidate)
+
+    def open_round(self, decision_round_id: str):
+        from .time import identifier
+        identifier(decision_round_id,'decision_round_id')
+        execution=self._state['execution']
+        current=execution['round']
+        if current is not None and current['observed_tick'] == self._state['tick']:
+            raise ValueError('A round already exists at this boundary')
+        if decision_round_id in execution['round_history']:
+            raise ValueError('Decision round ID already used')
+        if execution['pending_requests']:
+            raise ValueError('Cannot open a round while earlier input is pending')
+        candidate=deepcopy(self._state)
+        candidate['execution']['round']={'id':decision_round_id,'observed_tick':candidate['tick'],
+                                         'sealed':False,'submitted':[]}
+        candidate['execution']['round_history'][decision_round_id]=candidate['tick']
+        self._publish_input(candidate)
+
+    def receive_actions(self, packet: dict) -> dict:
+        from bedwars_arena.interfaces.receiver import receive
+        if self._fault is not None or self._state['result'] is not None:
+            raise WorldFault('World cannot accept input after fault or result')
+        candidate,reply=receive(self._state,self.definitions,packet)
+        if candidate is not self._state:
+            self._publish_input(candidate)
+        return deepcopy(reply)
+
+    def seal_round(self):
+        current=self._state['execution']['round']
+        if current is None or current['observed_tick'] != self._state['tick'] or current['sealed']:
+            raise ValueError('No open round at this boundary')
+        pending={(d['player_id'],d['life_index']) for d in self._state['execution']['pending_deaths']}
+        required={pid for pid,p in self._state['players'].items()
+                  if p['life']['kind']=='alive' and (pid,p['life_index']) not in pending}
+        if not required.issubset(current['submitted']):
+            raise ValueError('Required player packets are missing')
+        candidate=deepcopy(self._state)
+        candidate['execution']['round']['sealed']=True
+        self._publish_input(candidate)
+
+    def observe(self, player_id: str) -> dict:
+        from bedwars_arena.interfaces.observations import observe
+        return observe(self._published,self.definitions,player_id)
+
+    def feedback(self, player_id: str) -> dict:
+        from bedwars_arena.interfaces.observations import feedback
+        return feedback(self._published,player_id)
+
     def _validate(self, value):
         validate_state(value, self.definitions)
 
@@ -76,6 +131,15 @@ class WorldEngine:
 
     def _phase_plan(self, tick: int, phase: int) -> ChangeSet | None:
         """Build internal phase changes from the current committed state."""
+        if phase == 20:
+            from .controls import process_controls
+            return process_controls(self._state,self.definitions,tick)
+        if phase == 35:
+            from .controls import interrupt_invalid_interactions
+            return interrupt_invalid_interactions(self._state,self.definitions,tick)
+        if phase in (40,45) and any(item['tick']==tick and item['phase']==phase
+                                    for item in self._state['execution']['pending_requests']):
+            raise NotImplementedError('L1 economic settlement is not implemented yet')
         if phase != 30:
             return None
         from .geometry import Vec2
@@ -90,7 +154,14 @@ class WorldEngine:
             pid = entry['player_id']
             player = state['players'][pid]
             life = player['life']
-            if life['kind'] != 'alive' or (pid,player['life_index']) in awaiting:
+            if life['kind'] != 'alive':
+                continue
+            if (pid,player['life_index']) in awaiting:
+                if life['spatial']['velocity_x'] or life['spatial']['velocity_z']:
+                    updated=deepcopy(player)
+                    updated['life']['spatial']['velocity_x']=0.0
+                    updated['life']['spatial']['velocity_z']=0.0
+                    plan.players[pid]=updated
                 continue
             spatial = life['spatial']
             action = life['movement']
@@ -102,6 +173,8 @@ class WorldEngine:
             updated=deepcopy(player)
             new_spatial=updated['life']['spatial']
             new_spatial.update(x=motion.position.x,z=motion.position.z,
+                               velocity_x=motion.position.x-spatial['x'],
+                               velocity_z=motion.position.z-spatial['z'],
                                knockback_x=motion.knockback.x,knockback_z=motion.knockback.z)
             if updated != player:
                 plan.players[pid]=updated
@@ -180,6 +253,9 @@ class WorldEngine:
             raise WorldFault('Faulted world cannot advance; restore a complete snapshot')
         if self._state['result'] is not None:
             raise ValueError('Finished world cannot advance')
+        current=self._state['execution']['round']
+        if current is not None and current['observed_tick']==self._state['tick'] and not current['sealed']:
+            raise ValueError('Seal the decision round before advancing')
         tick = self._state['tick'] + 1
         budget = self.definitions.profile.data['budget']['work_items_per_tick']
         work = 0

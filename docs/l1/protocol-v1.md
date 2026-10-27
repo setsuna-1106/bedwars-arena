@@ -1,6 +1,6 @@
 # L1 动作、反馈与观测协议 v1 规格
 
-P0 冻结字段和语义；**本文件和 Schema 不是已实现的接收器、观测构造器或游戏处理器**。格式、原因码和行为的后续不兼容变更必须升各自协议版本。依据 [W08](../decisions/0013-world-engine-and-state.md)、[W11/W12](../decisions/0015-world-schedule-replay-failures-and-training.md) 与 [L1 参数](../rules/l1-experiment-parameters-v0.1.md)。
+P0 冻结字段和语义；P3 已提供接收器、控制和观测基础，见 [P3](p3-actions.md)；经济、战斗和终局处理器仍待后续阶段。格式、原因码和行为的后续不兼容变更必须升各自协议版本。依据 [W08](../decisions/0013-world-engine-and-state.md)、[W11/W12](../decisions/0015-world-schedule-replay-failures-and-training.md) 与 [L1 参数](../rules/l1-experiment-parameters-v0.1.md)。
 
 ## 通用编码与轮次
 
