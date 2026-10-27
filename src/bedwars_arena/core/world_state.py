@@ -1,8 +1,10 @@
 """Construction and strict validation for the L1 world and its execution state."""
 from copy import deepcopy
 from hashlib import sha256
+from functools import lru_cache
 import json
 import math
+from pathlib import Path
 import random
 import re
 import sys
@@ -21,7 +23,8 @@ RNG_STREAMS = ('world', 'physics', 'economy', 'combat')
 SNAPSHOT_VERSION = 1
 
 
-def definition_ref(definitions: L1Definitions) -> dict:
+@lru_cache(maxsize=128)
+def _verified_definition_ref(definitions: L1Definitions) -> str:
     if not isinstance(definitions, L1Definitions):
         raise ValueError('Expected L1Definitions')
     checked = validate_l1_definitions(definitions.profile.data, definitions.map.data,
@@ -29,15 +32,33 @@ def definition_ref(definitions: L1Definitions) -> dict:
     for key in ('profile','map','scenario'):
         if getattr(checked, key) != getattr(definitions, key):
             raise ValueError('Inconsistent definition identity or content')
-    return {name: {'id': getattr(definitions, name).id, 'version': getattr(definitions, name).version,
-                   'sha256': getattr(definitions, name).sha256}
-            for name in ('profile','map','scenario')}
+    return _json({name: {'id': getattr(definitions, name).id, 'version': getattr(definitions, name).version,
+                        'sha256': getattr(definitions, name).sha256}
+                  for name in ('profile','map','scenario')})
+
+
+def definition_ref(definitions: L1Definitions) -> dict:
+    # Never expose the cached object itself as mutable world state.
+    return json.loads(_verified_definition_ref(definitions))
+
+
+@lru_cache(maxsize=1)
+def _package_code_hash() -> str:
+    root=Path(__file__).resolve().parent.parent
+    digest=sha256()
+    files=sorted(path for path in root.rglob('*') if path.is_file() and path.suffix in ('.py','.json'))
+    for path in files:
+        name=path.relative_to(root).as_posix().encode('utf-8')
+        content=path.read_bytes()
+        digest.update(len(name).to_bytes(8,'big'));digest.update(name)
+        digest.update(len(content).to_bytes(8,'big'));digest.update(content)
+    return digest.hexdigest()
 
 
 def runtime_info() -> dict:
     return {'package_version': __version__, 'implementation': sys.implementation.name,
             'python': '.'.join(map(str, sys.version_info[:3])), 'rng_derivation': 'sha256-v1',
-            'world_engine_revision': 'l1-p5-1'}
+            'world_engine_revision': 'l1-p6-1', 'code_sha256':_package_code_hash()}
 
 
 def _seed_states(seed: int) -> dict:

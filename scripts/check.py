@@ -67,7 +67,7 @@ def check_entry_points() -> None:
             cwd=directory, check=True, capture_output=True, text=True,
         )
         definitions = json.loads(result.stdout)
-        if definitions.get("valid") is not True or definitions.get("simulation_available") is not False:
+        if definitions.get("valid") is not True or definitions.get("simulation_available") is not True:
             raise ValueError("Installed L1 definition validation returned an invalid status")
 
 

@@ -2,7 +2,7 @@
 
 当前已实现 [TeamState 行为测试](test_team_core.py)：交易原子结果、报价变化、同级并发、重复陷阱/容量、冷却边界、丢床/淘汰、等待复活、序列化隔离、事件排序/恢复与重试去重。运行 `python -m unittest discover -s tests -v`；[工程检查](../scripts/check.py) 也会执行这些测试。
 
-P0 的 [L1 定义测试](test_l1_definitions.py)覆盖非法参数、地图引用、哈希与隔离；P1 的[世界测试](test_l1_world.py)覆盖预置、事务失败、调度去重、失效及快照恢复；P2 的[物理测试](test_l1_physics.py)覆盖扫掠、贴墙、承载、击退、虚空候选和玩家互穿。P3 的[动作与观测测试](test_l1_actions.py)覆盖请求去重、封口、冲突、隔离、旧生命及控制中断；P4 的[经济与拆建测试](test_l1_economy.py)覆盖生成、竞争、容量、采购、丢弃、拆建返还与承载；P5 的[战斗测试](test_l1_combat.py)覆盖互杀、资源结算、复活、失床与终局；待实现玩法的具体场景见[验收矩阵](../docs/l1/acceptance-scenarios.md)。
+P0 的 [L1 定义测试](test_l1_definitions.py)覆盖非法参数、地图引用、哈希与隔离；P1 的[世界测试](test_l1_world.py)覆盖预置、事务失败、调度去重、失效及快照恢复；P2 的[物理测试](test_l1_physics.py)覆盖扫掠、贴墙、承载、击退、虚空候选和玩家互穿。P3 的[动作与观测测试](test_l1_actions.py)覆盖请求去重、封口、冲突、隔离、旧生命及控制中断；P4 的[经济与拆建测试](test_l1_economy.py)覆盖生成、竞争、容量、采购、丢弃、拆建返还与承载；P5 的[战斗测试](test_l1_combat.py)覆盖互杀、资源结算、复活、失床与终局；P6 的 [Runner 测试](test_l1_runner.py)覆盖 k、异常备用、时限/终局、策略生命周期与记录；待实现玩法的具体场景见[验收矩阵](../docs/l1/acceptance-scenarios.md)。
 
 测试使用的冷却覆盖值是实验夹具，不能当作 Hypixel 实测参数；同 tick 破床先于死亡是本平台约定。L1 二维基础物理已按实验档案测试；完整对局、视野、训练与 Hypixel 一致性尚未测试。
 

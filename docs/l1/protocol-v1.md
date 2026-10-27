@@ -69,12 +69,13 @@ Runner 绑定 `match_id`、`player_id`、`decision_round_id`、`observed_tick` �
 
 ## 观测 v1 字段表
 
-每位可行动玩家独立获得完整边界的深拷贝；等待复活/淘汰席位按 0015 生命周期处理，不把等待当永久终止。以下为目标字段规格，具体生产器未实现：
+每位可行动玩家独立获得完整边界的深拷贝；等待复活/淘汰席位按 0015 生命周期处理，不把等待当永久终止。以下为公开字段规格，P3/P6 已实现生产与隔离：
 
 | 字段 | 类型与内容 |
 | --- | --- |
 | `protocol_version`, `match_id`, `decision_round_id`, `observed_tick`, `self_player_id` | 协议版本、身份和本次共同边界 |
 | `definitions` | profile/map 的 ID、内容版本及 SHA-256；场景身份和哈希用于追溯 |
+| `map`, `rules` | 公布的固定地图与 L1 玩法参数，供策略导航和决策 |
 | `terrain` | 地图范围、原始地面、公开的玩家方块 `{x,z,layer,instance_id}`，以及各队床格/是否存在 |
 | `teams[]` | `team_id`、固定成员 ID、床状态、参赛/淘汰状态、已发布的有归属敌方破床数 |
 | `players[]` | `player_id`、`team_id`、`life_index`、生命分支、已发布击杀/死亡统计；存活分支附下列字段 |

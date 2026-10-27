@@ -88,6 +88,22 @@ class WorldEngine:
             self._publish_input(candidate)
         return deepcopy(reply)
 
+    def receive_actions_batch(self, packets: list[dict]) -> list[dict]:
+        """Atomically publish several independent player receipts at one boundary."""
+        from bedwars_arena.interfaces.receiver import receive
+        if self._fault is not None or self._state['result'] is not None:
+            raise WorldFault('World cannot accept input after fault or result')
+        if not isinstance(packets,list):
+            raise ValueError('Packets must be a list')
+        candidate=self._state
+        replies=[]
+        for packet in packets:
+            candidate,reply=receive(candidate,self.definitions,packet)
+            replies.append(deepcopy(reply))
+        if candidate is not self._state:
+            self._publish_input(candidate)
+        return replies
+
     def seal_round(self):
         current=self._state['execution']['round']
         if current is None or current['observed_tick'] != self._state['tick'] or current['sealed']:
@@ -120,14 +136,22 @@ class WorldEngine:
         self._working_facts.extend(f.to_dict() for f in facts)
 
     def _enter_phase(self, tick: int, phase: int):
-        candidate = deepcopy(self._state)
-        old = candidate['execution']['cursor']
+        old = self._state['execution']['cursor']
         if (tick, phase) <= (old['tick'], old['phase']):
             raise ValueError('Phase cursor must advance')
-        candidate['execution']['cursor'] = {'tick':tick,'phase':phase}
-        candidate['execution']['revision'] += 1
-        self._validate(candidate)
-        self._state = candidate
+        execution=self._state['execution']
+        target=(tick,phase)
+        if any((t['execute_at'],t['phase']) < target for t in execution['pending_tasks']):
+            raise ValueError('Scheduled task lies behind the phase cursor')
+        if any((r['tick'],r['phase']) < target for r in execution['pending_requests']):
+            raise ValueError('Pending request lies behind the phase cursor')
+        if any((i['created_at'],i['target_phase']) < target for i in execution['pending_intents']):
+            raise ValueError('Pending intent lies behind the phase cursor')
+        candidate=self._state.copy()
+        candidate['execution']=execution.copy()
+        candidate['execution']['cursor']={'tick':tick,'phase':phase}
+        candidate['execution']['revision']+=1
+        self._state=candidate
 
     def _phase_plan(self, tick: int, phase: int) -> ChangeSet | None:
         """Build internal phase changes from the current committed state."""
@@ -345,7 +369,7 @@ class WorldEngine:
                 work = self._handle_intents(tick, phase, work, budget)
                 if work > budget:
                     raise ValueError('Work budget exceeded')
-            candidate = deepcopy(self._state)
+            candidate = self._state.copy()
             candidate['tick'] = tick
             validate_state(candidate, self.definitions, boundary=True)
             self._state = candidate

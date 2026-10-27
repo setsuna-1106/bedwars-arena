@@ -1,8 +1,8 @@
 # 架构与目录职责
 
-当前进度：P1–P5 的世界事务/快照、二维运动、动作观测、经济拆建、战斗复活和终局已实现，见 [P1](l1/p1-world-foundation.md)、[P2](l1/p2-physics.md)、[P3](l1/p3-actions.md)[P4](l1/p4-economy.md)和 [P5](l1/p5-combat.md)；Runner 与完整对局仍待后续阶段。下方较早设计条目的“未实现”状态以此更新为准。
+当前进度：P1–P6 的世界、事务、二维运动、动作观测、经济、战斗及 Runner 已实现，见 [P1](l1/p1-world-foundation.md)、[P2](l1/p2-physics.md)、[P3](l1/p3-actions.md)、[P4](l1/p4-economy.md)、[P5](l1/p5-combat.md)和 [P6](l1/p6-runner.md)；回放与训练仍待后续阶段。下方较早设计条目的“未实现”状态以此更新为准。
 
-L1 P0 已将 profile/map/scenario 的唯一数据源与格式 Schema 放入 Python 包，提供独立版本、哈希及加载校验；此入口不构造世界。协议仅为规格。见 [P0 定义](l1/p0-definitions.md)。
+L1 P0 已将 profile/map/scenario 的唯一数据源与格式 Schema 放入 Python 包，提供独立版本、哈希及加载校验；此入口不构造世界。动作接收与观测后续已按 P3 接入。见 [P0 定义](l1/p0-definitions.md)。
 
 范围更新（2026-10-27）：按 [0016](decisions/0016-four-level-platform-and-l1.md)建设四个层级，当前先做 L1 二维 2v2。已有通用引擎/物理规则继续适用；L1 显式关闭分享、陷阱、团队升级、容器等机制。L2–L4 细分与共享架构仍需落实；[L1 数值表](rules/l1-experiment-parameters-v0.1.md)已采用；[实现规划](l1-implementation-plan.md)已编制，不改变已实现状态。
 

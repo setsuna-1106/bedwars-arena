@@ -2,9 +2,9 @@
 
 ## 开始工作
 
-最新范围（2026-10-27）：用户已采用四层目标与 L1 清单，见 `docs/decisions/0016-four-level-platform-and-l1.md`。L1 为二维 2v2、单资源/三类商品、基地＋中央资源点、桥面/墙体、近战、全局观测，最终含最小训练闭环和二维回放。L1-05 改为对应工具拆除材料返还，L1-19 先提出完整实验参数表，其余推荐项采用。`docs/rules/l1-experiment-parameters-v0.1.md` 的数值、免费剪刀、回收去向和保护等新增细则随后已整表采用。`docs/l1-implementation-plan.md` 已编制 P0–P9 实现规划；P0 已完成版本化规则/地图/初始场景校验、协议规格及验收场景，见 `docs/l1/p0-definitions.md`；P1 已完成世界状态、原子提交、调度及基础快照，见 `docs/l1/p1-world-foundation.md`；P2 已完成二维几何/运动和待 P5 结算的虚空候选，见 `docs/l1/p2-physics.md`；P3 已完成动作接收、控制和观测基础，见 `docs/l1/p3-actions.md`；P4 已完成资源、购物、拆建与回收，见 `docs/l1/p4-economy.md`；P5 已完成近战、死亡复活及自然终局，见 `docs/l1/p5-combat.md`；下一步为 P6，训练算法/预算在 P8 入口另定。完整 L1 未实现。后文既有通用规则保留，分享/陷阱/容器等关闭机制不作为 L1 的实现前置；参数已采用，但不要把实现规划或四层详细架构建议视为已实现。
+最新范围（2026-10-27）：用户已采用四层目标与 L1 清单，见 `docs/decisions/0016-four-level-platform-and-l1.md`。L1 为二维 2v2、单资源/三类商品、基地＋中央资源点、桥面/墙体、近战、全局观测，最终含最小训练闭环和二维回放。L1-05 改为对应工具拆除材料返还，L1-19 先提出完整实验参数表，其余推荐项采用。`docs/rules/l1-experiment-parameters-v0.1.md` 的数值、免费剪刀、回收去向和保护等新增细则随后已整表采用。`docs/l1-implementation-plan.md` 已编制 P0–P9 实现规划；P0 已完成版本化规则/地图/初始场景校验、协议规格及验收场景，见 `docs/l1/p0-definitions.md`；P1 已完成世界状态、原子提交、调度及基础快照，见 `docs/l1/p1-world-foundation.md`；P2 已完成二维几何/运动和虚空候选，后者已由 P5 结算，见 `docs/l1/p2-physics.md`；P3 已完成动作接收、控制和观测基础，见 `docs/l1/p3-actions.md`；P4 已完成资源、购物、拆建与回收，见 `docs/l1/p4-economy.md`；P5 已完成近战、死亡复活及自然终局，见 `docs/l1/p5-combat.md`；P6 已完成 Runner、脚本策略和受控完整 2v2，见 `docs/l1/p6-runner.md`；下一步为 P7，训练算法/预算在 P8 入口另定。完整 L1 未实现。后文既有通用规则保留，分享/陷阱/容器等关闭机制不作为 L1 的实现前置；参数已采用，但不要把实现规划或四层详细架构建议视为已实现。
 
-后文历史记录中 P1–P5 对应的“未实现”描述以最新阶段说明为准；资源和赛程已有处理器，但 Runner 与完整策略对局尚未实现。
+后文历史记录中 P1–P6 对应的“未实现”描述以最新阶段说明为准；资源和赛程已有处理器，Runner 已运行受控完整策略对局；回放与训练仍待实现。
 
 先读 `README.md`、`docs/architecture.md`、`docs/roadmap.md`；涉及观测、动作和对局推进时再读 `docs/contracts.md`。调研资料保留在根索引与 `reports/`。
 

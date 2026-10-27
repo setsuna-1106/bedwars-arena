@@ -6,7 +6,7 @@
 
 现实规则参照已确定为 **Hypixel 的 Minecraft Bed Wars**。后续设计与实现查阅[Hypixel 规则参考](docs/rules/hypixel-bedwars.md)，证据与检索过程见[规则调研](reports/2026-10-25-hypixel-bedwars-rules.md)。L1 已选择自制二维 2v2 实验范围；L4 的目标模式、地图与规则版本仍待确定；第三方 BedWars 项目用于工程参考，其玩法不能直接作为本项目规则标准。
 
-**当前阶段：L1 P5 已完成（0.1.0.dev0）。** 已实现世界状态、二维运动、动作观测、经济拆建、近战、死亡复活及自然终局。对局 Runner 与脚本策略仍待 P6，CLI 尚不能启动完整对局。
+**当前阶段：L1 P6 已完成（0.1.0.dev0）。** 已可用两种脚本策略运行并记录二维 2v2 对局，覆盖资源、拆建、近战、死亡复活和自然终局。二维回放、最小训练闭环及端到端验收仍待 P7–P9。
 
 ## 快速开始
 
@@ -22,7 +22,7 @@ bedwars-arena info
 python scripts/check.py
 ```
 
-`bedwars-arena --help` 查看入口，`bedwars-arena info --json` 输出实现状态；`bedwars-arena validate-l1 --json` 校验随包发布的三份定义与内容哈希。当前 CLI 不启动游戏；已实现的内部调用见 [core 类型与排序契约](docs/decisions/0012-team-core-types-and-ordering.md)。
+`bedwars-arena --help` 查看入口，`bedwars-arena info --json` 输出实现状态；`bedwars-arena validate-l1 --json` 校验三份定义。`bedwars-arena run-l1 --seed 101 --output artifacts/run-101 --json` 启动标准对局并保存记录；受控预置、批量运行与结果说明见 [P6 Runner](docs/l1/p6-runner.md)。
 
 本机现有开发环境使用 `source venv/bin/activate`；旧 `.venv` 的安装问题和修复经过见 [P0 定义说明](docs/l1/p0-definitions.md)。
 
@@ -33,8 +33,8 @@ src/bedwars_arena/   Python 包：core、interfaces、agents、runner、replay �
 configs/            规则资料；L1 正式数据随 Python 包发布
 maps/               地图说明；L1 固定地图随 Python 包发布
 schemas/            TeamState 与 L1 动作/反馈格式规格
-examples/           团队纯转换示例；完整策略对局示例待实现
-tests/              团队交易、状态与调度行为测试
+examples/           团队纯转换示例与 L1 受控对局预置
+tests/              状态、协议、几何、经济、战斗与 Runner 行为测试
 web/                旁观与回放前端（预留）
 docs/               架构、契约、开发阶段和决策记录
 reports/            已有项目调研与来源清单
@@ -44,15 +44,15 @@ artifacts/          本地实验与回放输出（默认忽略）
 ```
 
 - [开发指南](CONTRIBUTING.md)：安装、检查与构建。
-- [L1 P0 定义与校验](docs/l1/p0-definitions.md)、[P1 世界基础](docs/l1/p1-world-foundation.md)、[P2 二维运动](docs/l1/p2-physics.md)、[P3 动作与观测](docs/l1/p3-actions.md)、[P4 经济与拆建](docs/l1/p4-economy.md)、[P5 战斗与终局](docs/l1/p5-combat.md)、[协议规格](docs/l1/protocol-v1.md)和[分阶段验收场景](docs/l1/acceptance-scenarios.md)：内部世界骨架已实现，完整玩法及策略协议仍待后续阶段。
+- [L1 P0 定义与校验](docs/l1/p0-definitions.md)、[P1 世界基础](docs/l1/p1-world-foundation.md)、[P2 二维运动](docs/l1/p2-physics.md)、[P3 动作与观测](docs/l1/p3-actions.md)、[P4 经济与拆建](docs/l1/p4-economy.md)、[P5 战斗与终局](docs/l1/p5-combat.md)、[P6 Runner](docs/l1/p6-runner.md)、[协议规格](docs/l1/protocol-v1.md)和[分阶段验收场景](docs/l1/acceptance-scenarios.md)：L1 脚本对局已实现，回放与训练仍待后续阶段。
 - [架构说明](docs/architecture.md)、[接口草案](docs/contracts.md)、[开发阶段](docs/roadmap.md)、[决策记录](docs/decisions/README.md)。
 - [世界引擎与训练衔接决策](docs/decisions/0015-world-schedule-replay-failures-and-training.md)：赛程、终局、快照/重放和训练方向已采用；仍待实现与规则核验。
 - [Hypixel 规则参考](docs/rules/hypixel-bedwars.md)：带规则编号的玩法、候选参数与待核对案例，供后续设计和测试引用。
-- 本次使用 Python 和 setuptools 建立骨架；仿真底座、PettingZoo 适配、网络与前端框架仍待选择。
-- 首版策略接入已选择 [Python 进程内调用](docs/decisions/0002-in-process-agent-interface.md)，并保留转向独立进程的边界；具体接口与运行链路尚未实现。
-- 空间表示已选择 [三维方块网格、玩家连续移动与轴对齐矩形碰撞体](docs/decisions/0003-grid-terrain-continuous-players.md)，方块边长为 1、水平 `(x, z)` 取矩形中心、向上为正的 `y` 为脚底高度；正式采用平面加高度 B，前期 A 实验限制单一行走层、无上下重叠通路。已接受路径碰撞检查、表面接触合法与贴面滑动；地形底层存储、身体尺寸和碰撞求解细节待定，尚未实现。
-- 玩家之间可互相穿过，玩家仍与方块碰撞；玩家占据出生位置不阻挡复活。命中与伤害规则分别设计，尚未实现。
-- 玩家生命周期已选择 [存活、等待复活与淘汰三种互斥分支](docs/decisions/0010-player-lifecycle-branches.md)，身份、队伍、本局统计与购买进度保留在外层；完整字段和转换细节待定，尚未实现。
+- L1 使用 Python 自建仿真底座；PettingZoo 适配、网络与前端框架仍待选择。
+- 首版策略接入采用 [Python 进程内调用](docs/decisions/0002-in-process-agent-interface.md)，P6 已实现 Runner；独立进程适配仍待后续工作。
+- 空间表示已选择 [三维方块网格、玩家连续移动与轴对齐矩形碰撞体](docs/decisions/0003-grid-terrain-continuous-players.md)，方块边长为 1、水平 `(x, z)` 取矩形中心、向上为正的 `y` 为脚底高度；正式采用平面加高度 B，前期 A 实验限制单一行走层、无上下重叠通路。已接受路径碰撞检查、表面接触合法与贴面滑动；L1 已实现单行走层地图、身体尺寸及碰撞求解，三维高度仍待实现。
+- 玩家之间可互相穿过，玩家仍与方块碰撞；玩家占据出生位置不阻挡复活。L1 近战命中与伤害已实现。
+- 玩家生命周期已选择 [存活、等待复活与淘汰三种互斥分支](docs/decisions/0010-player-lifecycle-branches.md)，身份、队伍、本局统计与购买进度保留在外层；L1 生命转换已实现。
 - 项目许可证待选择。
 
 ## 核心目标
@@ -109,4 +109,4 @@ API 接收行动指令
 - [项目调研与适配性评估（2026-10-25）](reports/2026-10-25-project-survey.md)：19 个相关仓库的核查结果、关键源码问题和候选路线比较；附[固定版本与来源清单](reports/2026-10-25-source-manifest.json)。本次为文档与源码调研，尚未试运行或测试性能。
 - [调研结果的轻量验证（2026-10-25）](reports/2026-10-25-reference-validation.md)：5 组隔离运行探针、Blockyard 规则复核及值得优先参考的模块；未验证完整 BedWars 对局或性能。
 - [Hypixel Bed Wars 规则调研（2026-10-25）](reports/2026-10-25-hypixel-bedwars-rules.md)：本项目现实参照的模式、生命周期、经济、商店、隐身与阶段规则；区分官方证据、社区候选和二维适配建议。
-- 当前已有 L1 世界状态/调度基础，玩法处理器和动作 API 尚未完整实现；资料索引中的推荐方案尚未作为本项目技术选型。
+- 当前已有 L1 世界、动作接入与脚本对局；资料索引中的推荐方案尚未作为本项目技术选型。

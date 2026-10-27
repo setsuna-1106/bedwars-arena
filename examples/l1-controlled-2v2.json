@@ -1,0 +1,15 @@
+{
+  "source": "l1-p6-controlled-acceptance-v1",
+  "players": {
+    "red_1": {
+      "x": -25, "z": -3, "armor_tier": 1, "protection_ticks": 0,
+      "inventory": {"wooden_sword": 1, "shears": 1, "iron": 8}
+    },
+    "red_2": {
+      "x": -25, "z": -3, "armor_tier": 1, "protection_ticks": 0,
+      "inventory": {"wooden_sword": 1, "shears": 1, "iron": 8}
+    },
+    "blue_1": {"health": 4, "protection_ticks": 0},
+    "blue_2": {"health": 4, "protection_ticks": 0}
+  }
+}

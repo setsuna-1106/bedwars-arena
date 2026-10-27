@@ -12,7 +12,8 @@ def receive(state,definitions,packet):
                             max_bytes=profile['budget']['input_bytes_per_player_per_round'])
     if issue:
         return state, {'request_results':[], 'packet_errors':[packet_error(issue)]}
-    candidate=deepcopy(state)
+    candidate=state.copy()
+    candidate['execution']=deepcopy(state['execution'])
     execution=candidate['execution']
     pid=packet['player_id'];round_id=packet['decision_round_id']
     ledger=execution['request_records'].setdefault(pid,{})

@@ -68,7 +68,8 @@ def observe(state,definitions,player_id):
                       'attributed_enemy_beds':state['execution']['attributed_beds'][team_id]})
     return {'protocol_version':1,'match_id':state['match_id'],'decision_round_id':current['id'],
             'observed_tick':state['tick'],'self_player_id':player_id,
-            'definitions':deepcopy(state['definition_ref']),
+            'definitions':deepcopy(state['definition_ref']),'map':deepcopy(map_data),
+            'rules':{key:deepcopy(profile[key]) for key in ('physics','shop','building','combat','inventory','life')},
             'terrain':{'bounds':deepcopy(map_data['bounds']),'blocks':terrain,
                        'beds':[{'team_id':t['team_id'],'x':t['bed']['x'],'z':t['bed']['z']} for t in map_data['teams']]},
             'teams':teams,'players':players,

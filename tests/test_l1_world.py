@@ -88,6 +88,7 @@ class WorldFoundationTests(unittest.TestCase):
         x=deepcopy(snap); x['definition_ref']['map']['sha256']='0'*64; mutations.append(x)
         x=deepcopy(snap); x['runtime']['python']='0.0.0'; mutations.append(x)
         x=deepcopy(snap); del x['runtime']['world_engine_revision']; mutations.append(x)
+        x=deepcopy(snap); x['runtime']['code_sha256']='0'*64; mutations.append(x)
         x=deepcopy(snap); x['schema_version']=True; mutations.append(x)
         x=deepcopy(snap); x['state']['execution']['cursor']['phase']=20; mutations.append(x)
         x=deepcopy(snap); x['state']['players']['red_1']['life']['spatial']['x']=float('inf'); mutations.append(x)
