@@ -1,6 +1,8 @@
 # 测试
 
-当前没有 BedWars 行为实现，因此暂不创建空测试或伪规则测试。工程冒烟检查见 [scripts/check.py](../scripts/check.py)。
+当前已实现 [TeamState 行为测试](test_team_core.py)：交易原子结果、报价变化、同级并发、重复陷阱/容量、冷却边界、丢床/淘汰、等待复活、序列化隔离、事件排序/恢复与重试去重。运行 `python -m unittest discover -s tests -v`；[工程检查](../scripts/check.py) 也会执行这些测试。
+
+测试使用的冷却覆盖值是实验夹具，不能当作 Hypixel 实测参数；同 tick 破床先于死亡是本平台约定。完整对局、物理、视野、训练与 Hypixel 一致性尚未测试。
 
 实现规则后按职责增加：
 

@@ -23,7 +23,7 @@ python -m build
 
 也可用 `make install`、`make check`、`make build`；先激活虚拟环境。
 
-`scripts/check.py` 检查 Python 语法、TOML/JSON 格式、Markdown 本地链接，并从仓库外运行模块入口和已安装的命令行入口。当前没有游戏行为测试，后续测试范围见 [tests/README.md](tests/README.md)。
+`scripts/check.py` 检查 Python 语法、TOML/JSON 格式、Markdown 本地链接，从仓库外运行模块/命令行入口，并执行标准库 unittest。也可单独运行 `python -m unittest discover -s tests -v`。行为测试范围见 [tests/README.md](tests/README.md)。
 
 GitHub Actions 使用 Linux/Python 3.11、Linux/Python 3.14 和 macOS/Python 3.14，检查开发安装、构建、从 sdist 构建 wheel 以及独立环境中的 wheel 安装。这些检查不发布 PyPI 包。
 

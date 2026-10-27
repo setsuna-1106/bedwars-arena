@@ -1,0 +1,1096 @@
+{
+  "schema_version": 1,
+  "catalog_id": "physics-effects-reference-2026-10-26-v1",
+  "reviewed_on": "2026-10-26",
+  "status": "reference_catalog_not_runtime_configuration",
+  "design_approval": "P01-P10 F01-F10 V01-V03 accepted by user 2026-10-26",
+  "current_server_verified": false,
+  "selected_hypixel_mode": null,
+  "selected_hypixel_patch": null,
+  "selected_map": null,
+  "ticks_per_second": 20,
+  "evidence_policy": {
+    "platform_convention": "Already accepted platform protocol; not a Hypixel internal implementation claim",
+    "official_historical": "Valid for cited past patch, not a complete current-server claim",
+    "compatibility_reference": "Primary third-party implementation/data, not official vanilla or Hypixel verification",
+    "derived_compatibility": "Explicit calculation from compatibility source; arena behavior may differ",
+    "community_candidate": "Player-authored source; explicit opt-in required before use",
+    "experimental": "Platform experiment only; explicit named-profile opt-in required",
+    "unresolved": "null means unknown and must not become zero/off/infinite"
+  },
+  "activation": {
+    "runtime_loader_implemented": false,
+    "automatic_activation": false,
+    "required_future_behavior": "Validate source category and enabled feature completeness; no silent fallback",
+    "experiment_profile_id": "arena-physics-effects-experiment-v1",
+    "experiment_values_validated_as_hypixel": false
+  },
+  "sources": {
+    "H12": {
+      "kind": "hypixel_official_historical",
+      "url": "https://hypixel.net/threads/bed-wars-update-1-2.1369753/",
+      "locator": "first post bug fixes: invisibility >30 s; footstep particles"
+    },
+    "H16": {
+      "kind": "hypixel_official_historical",
+      "url": "https://hypixel.net/threads/bed-wars-v1-6-pop-up-tower-4v4-mode-voidless-new-maps-and-more.2034329/",
+      "locator": "first post: trap 8 s; potion overwrite; milk description 30 s"
+    },
+    "H21": {
+      "kind": "hypixel_official_historical",
+      "url": "https://hypixel.net/threads/bed-wars-update-challenges-bug-fixes-more.4585683/",
+      "locator": "first post: Counter Offensive Speed II + Jump II, 15 s; player-hit reveal"
+    },
+    "H193": {
+      "kind": "hypixel_official_historical",
+      "url": "https://hypixel.net/threads/bed-wars-v1-9-3-new-settings-menu-other-changes.5828709/",
+      "locator": "first post gameplay tweaks: Miner Fatigue 8 s"
+    },
+    "PHYS": {
+      "kind": "third_party_implementation",
+      "repository": "PrismarineJS/prismarine-physics",
+      "commit": "4d573bc9bdf8e049a0bc9f9f93b56a68073f4950",
+      "path": "index.js",
+      "blob_sha": "b83330f3d54ecd17bf9bfe004e42d680e7173028",
+      "url": "https://github.com/PrismarineJS/prismarine-physics/blob/4d573bc9bdf8e049a0bc9f9f93b56a68073f4950/index.js",
+      "locator": "62-84, 433-445, 625-697, 861-884; multi-version engine, not Hypixel code"
+    },
+    "DIG": {
+      "kind": "third_party_implementation",
+      "repository": "PrismarineJS/prismarine-block",
+      "commit": "8c8d4e02ecffb2e9d47d07575687520ffef30852",
+      "path": "index.js",
+      "blob_sha": "99b54948089ef855e63587d3084437deb197332d",
+      "url": "https://github.com/PrismarineJS/prismarine-block/blob/8c8d4e02ecffb2e9d47d07575687520ffef30852/index.js",
+      "locator": "99-107 fatigue; 311-384 mining"
+    },
+    "BLOCKS": {
+      "kind": "third_party_versioned_data",
+      "repository": "PrismarineJS/minecraft-data",
+      "commit": "5e063fa99cfe8ded065ec6788b66696b7e4ef143",
+      "path": "data/pc/1.8/blocks.json",
+      "blob_sha": "ae737520acc6e57377f5cb0c4ac4b439cb3bfb07",
+      "url": "https://github.com/PrismarineJS/minecraft-data/blob/5e063fa99cfe8ded065ec6788b66696b7e4ef143/data/pc/1.8/blocks.json"
+    },
+    "MATERIALS": {
+      "kind": "third_party_versioned_data",
+      "repository": "PrismarineJS/minecraft-data",
+      "commit": "5e063fa99cfe8ded065ec6788b66696b7e4ef143",
+      "path": "data/pc/1.8/materials.json",
+      "blob_sha": "69c797e02765bf035fee42140730c43c5cdfdf13",
+      "url": "https://github.com/PrismarineJS/minecraft-data/blob/5e063fa99cfe8ded065ec6788b66696b7e4ef143/data/pc/1.8/materials.json"
+    },
+    "CB_EFFECT": {
+      "kind": "third_party_implementation",
+      "repository": "cuberite/cuberite",
+      "commit": "7fd3fa5c9345a3f1b949c0988c4849db00a68486",
+      "path": "src/Entities/EntityEffect.cpp",
+      "blob_sha": "ea3a90d9d2ea9a7670f19846f8be32eafd6dee5f",
+      "url": "https://github.com/cuberite/cuberite/blob/7fd3fa5c9345a3f1b949c0988c4849db00a68486/src/Entities/EntityEffect.cpp",
+      "locator": "240-252 speed coefficient (level mapping not verified); 366-383 regeneration I/II only"
+    },
+    "CB_PLAYER": {
+      "kind": "third_party_implementation",
+      "repository": "cuberite/cuberite",
+      "commit": "7fd3fa5c9345a3f1b949c0988c4849db00a68486",
+      "path": "src/Entities/Player.cpp",
+      "blob_sha": "50fd034a5fa0124504075c31039f5ee29f12bca8",
+      "url": "https://github.com/cuberite/cuberite/blob/7fd3fa5c9345a3f1b949c0988c4849db00a68486/src/Entities/Player.cpp",
+      "locator": "59 MAX_HEALTH; 2148-2160 natural regeneration conditions"
+    },
+    "GS_FOOD": {
+      "kind": "third_party_implementation",
+      "repository": "GlowstoneMC/Glowstone",
+      "commit": "e9aeaa46330326f0d3917dce8f9bc4cdd1e434bd",
+      "path": "src/main/java/net/glowstone/block/itemtype/ItemFood.java",
+      "blob_sha": "4d7bb2c3b662a54f32a52f122ed34706a334416c",
+      "url": "https://github.com/GlowstoneMC/Glowstone/blob/e9aeaa46330326f0d3917dce8f9bc4cdd1e434bd/src/main/java/net/glowstone/block/itemtype/ItemFood.java",
+      "locator": "74 usage time 32 ticks; food only, does not prove potion drinking time"
+    },
+    "GS_APPLE": {
+      "kind": "third_party_implementation",
+      "repository": "GlowstoneMC/Glowstone",
+      "commit": "e9aeaa46330326f0d3917dce8f9bc4cdd1e434bd",
+      "path": "src/main/java/net/glowstone/block/itemtype/ItemGoldenApple.java",
+      "blob_sha": "570bf6bc410812cb71c00c56afc1de90f86b659b",
+      "url": "https://github.com/GlowstoneMC/Glowstone/blob/e9aeaa46330326f0d3917dce8f9bc4cdd1e434bd/src/main/java/net/glowstone/block/itemtype/ItemGoldenApple.java",
+      "locator": "normal golden apple: Absorption I 2 min, Regeneration II 5 s"
+    },
+    "MC_APPLE": {
+      "kind": "minecraft_official_article",
+      "url": "https://www.minecraft.net/en-us/article/ten-rare-recipes",
+      "locator": "Golden Apple: Absorption I and Regeneration II, not duration/amount"
+    },
+    "GUIDE17": {
+      "kind": "community_player_guide",
+      "url": "https://hypixel.net/threads/a-comprehensive-guide-to-bed-wars.1003443/",
+      "locator": "first post potion/utility sections; historical, contains inaccurate HP/hearts wording elsewhere"
+    },
+    "GUIDE20": {
+      "kind": "community_player_guide",
+      "url": "https://hypixel.net/threads/guide-every-item-in-bedwars.3349356/",
+      "locator": "first post Golden Apple: 2 golden hearts; total-healing statement not adopted"
+    },
+    "PLATFORM": {
+      "kind": "platform_convention_or_experiment",
+      "url": null,
+      "locator": "user-adopted P/F/V design and explicitly named arena experiment; not Hypixel evidence"
+    },
+    "AZ_EFFECT": {
+      "kind": "third_party_modern_java_client",
+      "repository": "azalea-rs/azalea",
+      "commit": "0d38e0dcf47eb258c41b1b09ebc2bcde7253e185",
+      "path": "azalea-entity/src/effects.rs",
+      "blob_sha": "9ce15d88271c623f390fd92bcadc716957332d39",
+      "url": "https://github.com/azalea-rs/azalea/blob/0d38e0dcf47eb258c41b1b09ebc2bcde7253e185/azalea-entity/src/effects.rs",
+      "locator": "111-117 speed coefficient; 179-185 maximum absorption coefficient; 208-213 amplifier+1. Modern implementation reference, not proof of Java 1.8 or Hypixel server behavior."
+    }
+  },
+  "entries": [
+    {
+      "id": "clock.ticks_per_second",
+      "value": 20,
+      "unit": "ticks/second",
+      "evidence": "platform_convention",
+      "sources": [
+        "PLATFORM"
+      ]
+    },
+    {
+      "id": "body.width",
+      "value": 0.6,
+      "unit": "blocks",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ]
+    },
+    {
+      "id": "body.depth",
+      "value": 0.6,
+      "unit": "blocks",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ]
+    },
+    {
+      "id": "body.height",
+      "value": 1.8,
+      "unit": "blocks",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ]
+    },
+    {
+      "id": "vitality.base_max_health",
+      "value": 20,
+      "unit": "HP",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "CB_PLAYER"
+      ],
+      "note": "20 HP is 10 displayed hearts; not 20 hearts."
+    },
+    {
+      "id": "motion.base_attribute",
+      "value": 0.1,
+      "unit": "attribute",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "Not the displacement in blocks per tick."
+    },
+    {
+      "id": "motion.input_damping",
+      "value": 0.98,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ]
+    },
+    {
+      "id": "motion.default_slipperiness",
+      "value": 0.6,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ]
+    },
+    {
+      "id": "motion.horizontal_air_inertia",
+      "value": 0.91,
+      "unit": "ratio/tick",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ]
+    },
+    {
+      "id": "motion.horizontal_ground_inertia",
+      "value": 0.546,
+      "unit": "ratio/tick",
+      "evidence": "derived_compatibility",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "0.6 * 0.91; native total velocity friction, independent arena knockback adaptation is experimental."
+    },
+    {
+      "id": "motion.ground_acceleration_constant",
+      "value": 0.1627714,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ]
+    },
+    {
+      "id": "motion.walk_speed",
+      "value": 0.21585911571053507,
+      "unit": "blocks/tick",
+      "evidence": "derived_compatibility",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "Steady straight ground speed mapped to instant arena movement; native acceleration is intentionally not imported.",
+      "blocks_per_second": 4.317182314210701,
+      "derivation": "(0.98 * 0.1 * 0.1627714 / (0.6*0.91)^3) / (1-0.6*0.91)"
+    },
+    {
+      "id": "motion.sprint_multiplier",
+      "value": 1.3,
+      "unit": "ratio",
+      "evidence": "derived_compatibility",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "1 + sprint attribute modifier 0.3; not sprint-jump speed."
+    },
+    {
+      "id": "motion.sprint_speed",
+      "value": 0.2806168504236956,
+      "unit": "blocks/tick",
+      "evidence": "derived_compatibility",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "Ground straight speed only.",
+      "blocks_per_second": 5.612337008473912
+    },
+    {
+      "id": "motion.sneak_input_multiplier",
+      "value": 0.3,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "Recorded for B/reference; A excludes crouch edge protection."
+    },
+    {
+      "id": "motion.sneak_speed",
+      "value": 0.06475773471316051,
+      "unit": "blocks/tick",
+      "evidence": "derived_compatibility",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "Single-axis steady speed reference; not proof of Hypixel legal posture/mode rules.",
+      "blocks_per_second": 1.2951546942632102
+    },
+    {
+      "id": "motion.gravity",
+      "value": 0.08,
+      "unit": "blocks/tick^2",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "Apply gravity after current-tick movement, then vertical drag; not continuous Earth g."
+    },
+    {
+      "id": "motion.vertical_drag",
+      "value": 0.9800000190734863,
+      "unit": "ratio/tick",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "Source uses float32-rounded 0.98 promoted to float64; nominal value 0.98."
+    },
+    {
+      "id": "motion.jump_initial_velocity",
+      "value": 0.41999998688697815,
+      "unit": "blocks/tick",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "Nominal 0.42; source float32 rounding preserved."
+    },
+    {
+      "id": "effect.jump_boost_velocity_per_level",
+      "value": 0.1,
+      "unit": "blocks/tick/level",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "Logical level I=1; applied to future takeoff."
+    },
+    {
+      "id": "effect.jump_boost_V_initial_velocity",
+      "value": 0.9199999868869781,
+      "unit": "blocks/tick",
+      "evidence": "derived_compatibility",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "Candidate jump V launch velocity; disabled in A."
+    },
+    {
+      "id": "effect.jump_boost_II_initial_velocity",
+      "value": 0.6199999868869781,
+      "unit": "blocks/tick",
+      "evidence": "derived_compatibility",
+      "sources": [
+        "PHYS"
+      ]
+    },
+    {
+      "id": "motion.air_acceleration_reference",
+      "value": 0.02,
+      "unit": "blocks/tick^2",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "Native acceleration reference, not arena instantaneous input speed."
+    },
+    {
+      "id": "motion.air_sprint_acceleration_reference",
+      "value": 0.026,
+      "unit": "blocks/tick^2",
+      "evidence": "derived_compatibility",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "0.02 * 1.3; B control model still needs calibration."
+    },
+    {
+      "id": "motion.step_height_reference",
+      "value": 0.6,
+      "unit": "blocks",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "PHYS"
+      ],
+      "note": "A explicitly disables auto-step."
+    },
+    {
+      "id": "potion.speed_II.duration",
+      "value": 45,
+      "unit": "seconds",
+      "evidence": "community_candidate",
+      "sources": [
+        "GUIDE17"
+      ],
+      "ticks_at_20hz": 900
+    },
+    {
+      "id": "potion.speed_II.level",
+      "value": 2,
+      "unit": "logical_level",
+      "evidence": "community_candidate",
+      "sources": [
+        "GUIDE17"
+      ]
+    },
+    {
+      "id": "potion.jump_V.duration",
+      "value": 45,
+      "unit": "seconds",
+      "evidence": "community_candidate",
+      "sources": [
+        "GUIDE17"
+      ],
+      "ticks_at_20hz": 900
+    },
+    {
+      "id": "potion.jump_V.level",
+      "value": 5,
+      "unit": "logical_level",
+      "evidence": "community_candidate",
+      "sources": [
+        "GUIDE17"
+      ]
+    },
+    {
+      "id": "potion.invisibility.duration",
+      "value": 30,
+      "unit": "seconds",
+      "evidence": "official_historical",
+      "sources": [
+        "H12"
+      ],
+      "note": "Official historical fix supports 30 s; current server not tested.",
+      "ticks_at_20hz": 600
+    },
+    {
+      "id": "magic_milk.duration",
+      "value": 30,
+      "unit": "seconds",
+      "evidence": "official_historical",
+      "sources": [
+        "H16"
+      ],
+      "note": "Does not settle trigger/consumption/alarm matrix.",
+      "ticks_at_20hz": 600
+    },
+    {
+      "id": "trap.blindness.duration",
+      "value": 8,
+      "unit": "seconds",
+      "evidence": "official_historical",
+      "sources": [
+        "H16"
+      ],
+      "note": "Historic It's a Trap; complete current effect combination/levels unresolved.",
+      "ticks_at_20hz": 160
+    },
+    {
+      "id": "trap.mining_fatigue.duration",
+      "value": 8,
+      "unit": "seconds",
+      "evidence": "official_historical",
+      "sources": [
+        "H193"
+      ],
+      "ticks_at_20hz": 160
+    },
+    {
+      "id": "trap.counter_offensive.duration",
+      "value": 15,
+      "unit": "seconds",
+      "evidence": "official_historical",
+      "sources": [
+        "H21"
+      ],
+      "ticks_at_20hz": 300
+    },
+    {
+      "id": "trap.counter_offensive.speed_level",
+      "value": 2,
+      "unit": "logical_level",
+      "evidence": "official_historical",
+      "sources": [
+        "H21"
+      ]
+    },
+    {
+      "id": "trap.counter_offensive.jump_level",
+      "value": 2,
+      "unit": "logical_level",
+      "evidence": "official_historical",
+      "sources": [
+        "H21"
+      ]
+    },
+    {
+      "id": "consumable.food_use_duration",
+      "value": 32,
+      "unit": "ticks",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "GS_FOOD"
+      ],
+      "note": "1.6 s at platform 20 Hz; does not by itself prove Hypixel use duration."
+    },
+    {
+      "id": "consumable.potion_use_duration",
+      "value": null,
+      "unit": "ticks",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "No suitable direct source retrieved; do not silently copy food time."
+    },
+    {
+      "id": "golden_apple.regeneration.duration",
+      "value": 5,
+      "unit": "seconds",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "GS_APPLE",
+        "GUIDE17"
+      ],
+      "ticks_at_20hz": 100
+    },
+    {
+      "id": "golden_apple.regeneration.level",
+      "value": 2,
+      "unit": "logical_level",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "GS_APPLE",
+        "MC_APPLE"
+      ]
+    },
+    {
+      "id": "golden_apple.absorption.duration",
+      "value": 120,
+      "unit": "seconds",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "GS_APPLE",
+        "GUIDE17"
+      ],
+      "ticks_at_20hz": 2400
+    },
+    {
+      "id": "golden_apple.absorption.level",
+      "value": 1,
+      "unit": "logical_level",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "GS_APPLE",
+        "MC_APPLE"
+      ]
+    },
+    {
+      "id": "golden_apple.absorption.amount",
+      "value": 4,
+      "unit": "HP",
+      "evidence": "community_candidate",
+      "sources": [
+        "GUIDE20"
+      ],
+      "note": "2 golden hearts; no reuse of the guide's incorrect total-healing claim. Refresh/top-up mechanics unresolved."
+    },
+    {
+      "id": "effect.regeneration_I.period",
+      "value": 50,
+      "unit": "ticks",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "CB_EFFECT"
+      ],
+      "note": "Only levels I/II are imported; do not extrapolate Cuberite division formula to higher grades."
+    },
+    {
+      "id": "effect.regeneration_II.period",
+      "value": 25,
+      "unit": "ticks",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "CB_EFFECT"
+      ]
+    },
+    {
+      "id": "effect.regeneration.amount_per_pulse",
+      "value": 1,
+      "unit": "HP",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "CB_EFFECT"
+      ]
+    },
+    {
+      "id": "effect.natural_regeneration.period_reference",
+      "value": 80,
+      "unit": "ticks",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "CB_PLAYER"
+      ],
+      "note": "Requires hunger/other native conditions; Hypixel applicability and arena hunger abstraction unresolved."
+    },
+    {
+      "id": "effect.natural_regeneration.food_threshold_reference",
+      "value": 18,
+      "unit": "food_points",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "CB_PLAYER"
+      ]
+    },
+    {
+      "id": "effect.haste.per_level_speed_bonus",
+      "value": 0.2,
+      "unit": "ratio/level",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "DIG"
+      ],
+      "note": "Mining only; multiplier = 1 + 0.2*logical_level."
+    },
+    {
+      "id": "effect.mining_fatigue.level_1_multiplier",
+      "value": 0.3,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "DIG"
+      ],
+      "note": "Effect magnitude reference; does not establish Hypixel trap grade."
+    },
+    {
+      "id": "effect.mining_fatigue.level_2_multiplier",
+      "value": 0.09,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "DIG"
+      ],
+      "note": "Effect magnitude reference; does not establish Hypixel trap grade."
+    },
+    {
+      "id": "effect.mining_fatigue.level_3_multiplier",
+      "value": 0.0027,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "DIG"
+      ],
+      "note": "Effect magnitude reference; does not establish Hypixel trap grade."
+    },
+    {
+      "id": "effect.mining_fatigue.level_4_multiplier",
+      "value": 0.00081,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "DIG"
+      ],
+      "note": "Effect magnitude reference; does not establish Hypixel trap grade."
+    },
+    {
+      "id": "effect.speed.coefficient_reference",
+      "value": 0.2,
+      "unit": "ratio/intensity",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "CB_EFFECT"
+      ],
+      "note": "Coefficient only. Cuberite intensity mapping was not validated as logical level; no automatic Speed II=1.4 activation."
+    },
+    {
+      "id": "effect.speed_II.multiplier",
+      "value": 1.4000000059604645,
+      "unit": "ratio",
+      "evidence": "derived_compatibility",
+      "sources": [
+        "AZ_EFFECT"
+      ],
+      "note": "Source speed coefficient float32 0.2, modifier multiplied by amplifier+1. Logical II -> amplifier 1; nominal multiplier 1.4, not Hypixel measured."
+    },
+    {
+      "id": "mining.harvest_divisor",
+      "value": 30,
+      "unit": "ticks",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "DIG"
+      ],
+      "note": "Per-tick progress = effective_speed / hardness / divisor; tool can harvest."
+    },
+    {
+      "id": "mining.cannot_harvest_divisor",
+      "value": 100,
+      "unit": "ticks",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "DIG"
+      ]
+    },
+    {
+      "id": "mining.airborne_speed_divisor",
+      "value": 5,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "DIG"
+      ]
+    },
+    {
+      "id": "mining.submerged_speed_divisor_without_aqua_affinity",
+      "value": 5,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "DIG"
+      ],
+      "note": "A excludes fluid mechanics."
+    },
+    {
+      "id": "material.wool.hardness",
+      "value": 0.8,
+      "unit": "hardness",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "BLOCKS"
+      ],
+      "note": "Java 1.8 third-party dataset; custom Hypixel flags/changes not verified."
+    },
+    {
+      "id": "material.glass.hardness",
+      "value": 0.3,
+      "unit": "hardness",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "BLOCKS"
+      ],
+      "note": "Java 1.8 third-party dataset; custom Hypixel flags/changes not verified."
+    },
+    {
+      "id": "material.end_stone.hardness",
+      "value": 3,
+      "unit": "hardness",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "BLOCKS"
+      ],
+      "note": "Java 1.8 third-party dataset; custom Hypixel flags/changes not verified."
+    },
+    {
+      "id": "material.planks.hardness",
+      "value": 2,
+      "unit": "hardness",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "BLOCKS"
+      ],
+      "note": "Java 1.8 third-party dataset; custom Hypixel flags/changes not verified."
+    },
+    {
+      "id": "material.stained_hardened_clay.hardness",
+      "value": 1.25,
+      "unit": "hardness",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "BLOCKS"
+      ],
+      "note": "Java 1.8 third-party dataset; custom Hypixel flags/changes not verified."
+    },
+    {
+      "id": "material.obsidian.hardness",
+      "value": 50,
+      "unit": "hardness",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "BLOCKS"
+      ],
+      "note": "Java 1.8 third-party dataset; custom Hypixel flags/changes not verified."
+    },
+    {
+      "id": "tool.matching_material_speed.wood",
+      "value": 2,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "MATERIALS"
+      ],
+      "note": "Correct material/tool pairing only."
+    },
+    {
+      "id": "tool.matching_material_speed.stone",
+      "value": 4,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "MATERIALS"
+      ],
+      "note": "Correct material/tool pairing only."
+    },
+    {
+      "id": "tool.matching_material_speed.iron",
+      "value": 6,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "MATERIALS"
+      ],
+      "note": "Correct material/tool pairing only."
+    },
+    {
+      "id": "tool.matching_material_speed.diamond",
+      "value": 8,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "MATERIALS"
+      ],
+      "note": "Correct material/tool pairing only."
+    },
+    {
+      "id": "tool.matching_material_speed.gold",
+      "value": 12,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "MATERIALS"
+      ],
+      "note": "Correct material/tool pairing only."
+    },
+    {
+      "id": "tool.shears_wool_speed_reference",
+      "value": 4.8,
+      "unit": "ratio",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "MATERIALS"
+      ],
+      "note": "Value actually present in pinned 1.8 data; do not substitute a generic 15x assumption."
+    },
+    {
+      "id": "experiment.distance_epsilon",
+      "value": 1e-8,
+      "unit": "blocks",
+      "evidence": "experimental",
+      "sources": [
+        "PLATFORM"
+      ],
+      "note": "Arena experiment only; numerical-scale checks are not solver validation."
+    },
+    {
+      "id": "experiment.velocity_zero_epsilon",
+      "value": 0.000001,
+      "unit": "blocks/tick",
+      "evidence": "experimental",
+      "sources": [
+        "PLATFORM"
+      ]
+    },
+    {
+      "id": "experiment.toi_epsilon",
+      "value": 1e-8,
+      "unit": "ticks",
+      "evidence": "experimental",
+      "sources": [
+        "PLATFORM"
+      ],
+      "note": "Within-tick collision time, independent of distance tolerance."
+    },
+    {
+      "id": "experiment.max_collision_iterations",
+      "value": 8,
+      "unit": "iterations/tick",
+      "evidence": "experimental",
+      "sources": [
+        "PLATFORM"
+      ]
+    },
+    {
+      "id": "experiment.knockback_reverse_alpha",
+      "value": 0.2,
+      "unit": "ratio",
+      "evidence": "experimental",
+      "sources": [
+        "PLATFORM"
+      ]
+    },
+    {
+      "id": "experiment.knockback_lateral_beta",
+      "value": 0.5,
+      "unit": "ratio",
+      "evidence": "experimental",
+      "sources": [
+        "PLATFORM"
+      ]
+    },
+    {
+      "id": "experiment.knockback_release_speed",
+      "value": 0.005,
+      "unit": "blocks/tick",
+      "evidence": "experimental",
+      "sources": [
+        "PLATFORM"
+      ],
+      "note": "Arena control release, not a verified server knockback threshold."
+    },
+    {
+      "id": "experiment.knockback_max_horizontal_speed",
+      "value": 0.8,
+      "unit": "blocks/tick",
+      "evidence": "experimental",
+      "sources": [
+        "PLATFORM"
+      ],
+      "note": "Limit scripted experimental impulses; not Hypixel attack strength."
+    },
+    {
+      "id": "experiment.normal_vision_radius",
+      "value": 32,
+      "unit": "blocks",
+      "evidence": "experimental",
+      "sources": [
+        "PLATFORM"
+      ]
+    },
+    {
+      "id": "experiment.blindness_vision_radius",
+      "value": 4,
+      "unit": "blocks",
+      "evidence": "experimental",
+      "sources": [
+        "PLATFORM"
+      ]
+    },
+    {
+      "id": "experiment.coordinate_validation_magnitude",
+      "value": 1024,
+      "unit": "blocks",
+      "evidence": "experimental",
+      "sources": [
+        "PLATFORM"
+      ],
+      "note": "Numerical-check domain, not a selected Hypixel map extent."
+    },
+    {
+      "id": "trap.shared_cooldown",
+      "value": null,
+      "unit": "ticks",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "Q15 remains unresolved; effect duration is not trigger cooldown."
+    },
+    {
+      "id": "trap.trigger_radius",
+      "value": null,
+      "unit": "blocks",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "Map/mode/current geometry unverified."
+    },
+    {
+      "id": "trap.mining_fatigue.level",
+      "value": null,
+      "unit": "logical_level",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "Historical guide grades cannot establish current trap grade."
+    },
+    {
+      "id": "trap.blindness.slowness_level",
+      "value": null,
+      "unit": "logical_level",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "Complete current combination/levels unresolved."
+    },
+    {
+      "id": "trap.reveal.duration",
+      "value": null,
+      "unit": "ticks",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "Historical reveal intent known; no guessed expiry."
+    },
+    {
+      "id": "heal_pool.radius",
+      "value": null,
+      "unit": "blocks",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "Historical guides conflict on radius; no current calibrated default."
+    },
+    {
+      "id": "heal_pool.period",
+      "value": null,
+      "unit": "ticks",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "Do not equate unspecified Heal Pool with generic Regeneration I automatically."
+    },
+    {
+      "id": "motion.hypixel_knockback_initial_horizontal",
+      "value": null,
+      "unit": "blocks/tick",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "Client physics inertia does not identify server impulse."
+    },
+    {
+      "id": "motion.hypixel_knockback_initial_vertical",
+      "value": null,
+      "unit": "blocks/tick",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "Per-source sprint/enchantment/explosion effects unresolved."
+    },
+    {
+      "id": "motion.hypixel_void_death_height",
+      "value": null,
+      "unit": "blocks",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "Map/server behavior unverified."
+    },
+    {
+      "id": "protection.respawn_duration",
+      "value": null,
+      "unit": "ticks",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "Historical values/current applicability conflict; not selected."
+    },
+    {
+      "id": "protection.damage_interval",
+      "value": null,
+      "unit": "ticks",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "No universal all-damage immunity chosen."
+    },
+    {
+      "id": "credit.last_attacker_window",
+      "value": null,
+      "unit": "ticks",
+      "evidence": "unresolved",
+      "sources": [],
+      "note": "An XP attribution rule in another implementation is not Hypixel kill-credit evidence."
+    },
+    {
+      "id": "effect.speed.per_level_modifier",
+      "value": 0.20000000298023224,
+      "unit": "ratio/level",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "AZ_EFFECT"
+      ],
+      "note": "Nominal 0.2; modern Java-client reference, validate target version."
+    },
+    {
+      "id": "effect.absorption.capacity_per_level_reference",
+      "value": 4,
+      "unit": "HP/level",
+      "evidence": "compatibility_reference",
+      "sources": [
+        "AZ_EFFECT"
+      ],
+      "note": "Maximum absorption attribute contribution, not proof of refill/removal behavior."
+    }
+  ],
+  "known_differences": [
+    {
+      "id": "D01",
+      "description": "Arena first-full-period + half-open expiry produces pulses at 25/50/75 for a 100-tick Regeneration II grant: 3 HP before caps. Do not claim vanilla/Hypixel 4-HP equivalence or secretly lengthen duration."
+    },
+    {
+      "id": "D02",
+      "description": "Arena instant active movement uses steady native-like ground speed; native active inertia/diagonal details are not imported."
+    },
+    {
+      "id": "D03",
+      "description": "Arena independent dominant knockback and source clock/zone refresh policies are adopted simulation choices, not verified server algorithms."
+    },
+    {
+      "id": "D04",
+      "description": "A support loss is same-tick void death and A blindness uses a radius adaptation; B remains separate."
+    }
+  ]
+}

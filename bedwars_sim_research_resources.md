@@ -3,9 +3,13 @@
 更新：2026-10-25（补充关键源码核查）  
 目标：建立可无头运行的 2D BedWars 环境；外部 Agent 读取局部观测并提交行动；支持重复实验、批量对战、数据分析、事件回放。
 
+现实参照已确定为 Hypixel Minecraft Bed Wars；日常查阅[规则参考](docs/rules/hypixel-bedwars.md)，证据见[规则调研与待核对参数](reports/2026-10-25-hypixel-bedwars-rules.md)。下列第三方项目用于工程借鉴，不能替代 Hypixel 规则核对。
+
 > **检索结论（有限范围）**：已有 BedWars 风格独立 AI 仿真项目、BedWars 游戏规则代码、成熟的 2D 多智能体仿真框架与 Agent 通信框架；但尚未确认一个能够开箱即用地同时满足完整 2D BedWars、外部 Agent API、批量实验和网页回放的成熟项目。这里的“适合复用”是根据仓库文档与公开代码结构判断，**不是实测兼容性保证**。
 
 **进一步核查**：[项目调研与适配性评估](reports/2026-10-25-project-survey.md)覆盖本索引的 16 个仓库和 3 个补充仓库；[来源清单](reports/2026-10-25-source-manifest.json)保存固定提交、许可证标识和已获取文件。此次核查发现 C# 项目的前向模拟函数未实现、MicroRTS 系列已宣布停更，以及多个框架的多人/回放能力边界。以下条目已据此修正；本次未安装、试运行或测试性能。
+
+**运行补充**：[轻量验证与参考优先级](reports/2026-10-25-reference-validation.md)记录了随后完成的 5 组隔离探针。优先参考 PettingZoo 的接口、Blockyard 的规则状态机、Lux/bots 的策略接入；Lab2D 已跑通双玩家网格例子，是否作为底座仍取决于二维模型。
 
 ## A. 最值得查看：BedWars 与 AI 仿真本身
 

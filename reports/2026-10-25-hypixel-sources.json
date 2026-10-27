@@ -1,0 +1,466 @@
+{
+  "schema_version": 1,
+  "research_date_local": "2026-10-25",
+  "timezone": "Asia/Shanghai",
+  "status": "research_evidence_not_runtime_configuration",
+  "accepted_user_requirement": "以 Hypixel Minecraft Bed Wars 为本项目现实规则参照",
+  "scope": {
+    "selected_target_patch": null,
+    "latest_named_official_patch_found": "v1.11.3",
+    "latest_named_official_patch_publish_date": "2026-09-29",
+    "selected_mode": null,
+    "selected_map": null,
+    "selected_2d_abstraction": null,
+    "rotating_item_pool": null,
+    "challenges": null
+  },
+  "method": {
+    "official_first_posts_preferred": true,
+    "community_data_is_candidate_only": true,
+    "hypixel_gameplay_tests_performed": false,
+    "hypixel_server_configuration_obtained": false,
+    "complete_rules_verified": false,
+    "web_posts_are_mutable": true,
+    "full_webpage_snapshots_saved": false,
+    "exact_server_tick_order_unverified": true
+  },
+  "sources": [
+    {
+      "id": "O01",
+      "type": "official_game_overview",
+      "title": "Hypixel 游戏介绍",
+      "url": "https://hypixel.net/play/#games",
+      "published_date_as_displayed": null,
+      "publisher": "官方网站",
+      "locator": "Bed Wars 段落",
+      "relevance": "四资源、床与复活、攻防与胜利目标",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O02",
+      "type": "official_patch_index",
+      "title": "Bed Wars Patch Notes",
+      "url": "https://hypixel.net/forums/bed-wars-patch-notes.262/",
+      "published_date_as_displayed": null,
+      "publisher": "官方补丁目录",
+      "locator": "目录首页与第二页",
+      "relevance": "本轮查到最新命名补丁为 v1.11.3；不等于完整服务器配置",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O03",
+      "type": "official_historical_patch",
+      "title": "Bed Wars v0.3",
+      "url": "https://hypixel.net/threads/new-bed-wars-patch-v0-3-now-live-in-the-ptl.979320/",
+      "published_date_as_displayed": "2017-01-24",
+      "publisher": "PixelBaker；归档官方补丁",
+      "locator": "首帖 General Updates / Invisibility Potion",
+      "relevance": "等待复活时破床不因此淘汰；护甲隐藏、受伤解除；历史值不是当前全面校准",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O04",
+      "type": "official_historical_patch",
+      "title": "Bed Wars v0.6",
+      "url": "https://hypixel.net/threads/new-bed-wars-patch-v0-6-is-now-live.1085173/",
+      "published_date_as_displayed": "2017-04-20",
+      "publisher": "Nitroholic_，官方开发者",
+      "locator": "首帖",
+      "relevance": "出生保护历史 3 秒；材料/火球、装备与箱子历史变化",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O05",
+      "type": "official_release",
+      "title": "Bed Wars v1.0",
+      "url": "https://hypixel.net/threads/bed-wars-v1-0-is-live-play-the-full-release-now.1193624/",
+      "published_date_as_displayed": "2017-06-29",
+      "publisher": "FarAfield；官方发布",
+      "locator": "首帖",
+      "relevance": "正式发布和历史火球改动；不作为现版全量参数",
+      "access_method": "search_index_body_only",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O06",
+      "type": "official_historical_patch",
+      "title": "Bed Wars Update 1.2",
+      "url": "https://hypixel.net/threads/bed-wars-update-1-2.1369753/",
+      "published_date_as_displayed": "2017-10-05",
+      "publisher": "Simon",
+      "locator": "首帖 New Items / Tools / General Changes",
+      "relevance": "防爆玻璃、工具降级与永久性、脚步粒子；旧价格与批次数量可能已改变",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O07",
+      "type": "official_beta_patch",
+      "title": "Bed Wars v1.4 BETA",
+      "url": "https://hypixel.net/threads/bed-wars-v1-4-beta-capture-mode-new-maps-more.1527824/",
+      "published_date_as_displayed": "2018-02-01",
+      "publisher": "ConnorLinfoot",
+      "locator": "首帖 Gameplay & Balance Changes",
+      "relevance": "陷阱队列、奶、物品模式价差；原文明确为 BETA，不能当当前确定值",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O08",
+      "type": "official_historical_patch",
+      "title": "Bed Wars v1.6",
+      "url": "https://hypixel.net/threads/bed-wars-v1-6-pop-up-tower-4v4-mode-voidless-new-maps-and-more.2034329/",
+      "published_date_as_displayed": "2019-08-22",
+      "publisher": "ConnorLinfoot",
+      "locator": "首帖 Balancing / 4v4 / Bug Fixes",
+      "relevance": "独立 4v4、物品价格、奶描述修为 30 秒、同类药水覆盖",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O09",
+      "type": "official_patch",
+      "title": "Challenges, Bug Fixes & More",
+      "url": "https://hypixel.net/threads/bed-wars-update-challenges-bug-fixes-more.4585683/",
+      "published_date_as_displayed": "2021-10-14",
+      "publisher": "Hypixel Team",
+      "locator": "首帖 Shop Balancing / QOL",
+      "relevance": "挑战、重连 10 秒、桥蛋/箭/梯子/弓平衡、被击中解除隐身",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O10",
+      "type": "official_patch",
+      "title": "Item Rotation and Bug Fixes",
+      "url": "https://hypixel.net/threads/bed-wars-update-item-rotation-and-bug-fixes.5180486/",
+      "published_date_as_displayed": "2022-12-07",
+      "publisher": "Hypixel Team",
+      "locator": "首帖 Rotating Items",
+      "relevance": "轮换物品长期系统，价格和节奏可继续调整",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O11",
+      "type": "official_patch",
+      "title": "New Practice Modes, QoL Changes & More",
+      "url": "https://hypixel.net/threads/bed-wars-update-new-practice-modes-qol-changes-more.5339873/",
+      "published_date_as_displayed": "2023-05-03",
+      "publisher": "RapidTheNerd，官方开发者",
+      "locator": "首帖 Quality of Life & Balancing",
+      "relevance": "锁链 24 铁、模式水桶价格、蠹虫价格、Forge 容量；统一生成速度当时仅是实验计划",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O12",
+      "type": "official_patch",
+      "title": "Bed Wars v1.9.2",
+      "url": "https://hypixel.net/threads/bed-wars-v1-9-2-new-maps-qol-changes.5790365/",
+      "published_date_as_displayed": "2024-12-09",
+      "publisher": "MotorGorilla，官方游戏设计师",
+      "locator": "首帖 Other Changes",
+      "relevance": "箱子快速存入、陷阱可移除但不退款",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O13",
+      "type": "official_patch",
+      "title": "Bed Wars v1.9.3",
+      "url": "https://hypixel.net/threads/bed-wars-v1-9-3-new-settings-menu-other-changes.5828709/",
+      "published_date_as_displayed": "2025-01-29",
+      "publisher": "MotorGorilla，官方游戏设计师",
+      "locator": "首帖 Gameplay Tweaks / Trap Removal / Punch To Deposit",
+      "relevance": "疲劳陷阱 8 秒，缓降靴替代 Dragon Buff；陷阱新名称与移除限制；补充龙",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O14",
+      "type": "official_patch",
+      "title": "Bed Wars v1.10",
+      "url": "https://hypixel.net/threads/bed-wars-v1-10-one-block-bed-wars-community-suggestions-and-more.5961701/",
+      "published_date_as_displayed": "2025-09-15",
+      "publisher": "MotorGorilla，官方游戏设计师",
+      "locator": "首帖",
+      "relevance": "One Block、轮换物品、4v4 旧商店价格修复",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O15",
+      "type": "official_patch",
+      "title": "Bed Wars v1.11",
+      "url": "https://hypixel.net/threads/bed-wars-v1-11-dreamfeast.6003011/",
+      "published_date_as_displayed": "2026-05-20",
+      "publisher": "Hypixel Team",
+      "locator": "首帖 Miscellaneous / Bug Fixes / Map Fixes",
+      "relevance": "越界伤害、安全珍珠、生成器/禁建修复，额外龙修复",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O16",
+      "type": "official_patch",
+      "title": "Bed Wars v1.11.1",
+      "url": "https://hypixel.net/threads/bed-wars-v1-11-1-changes-bug-fixes.6100154/",
+      "published_date_as_displayed": "2026-05-21",
+      "publisher": "Hypixel Team",
+      "locator": "首帖",
+      "relevance": "越界计时回落与死亡清零；坠落退出时资源归属修复",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O17",
+      "type": "official_patch",
+      "title": "Bed Wars v1.11.2",
+      "url": "https://hypixel.net/threads/bed-wars-v1-11-2-changes-bug-fixes.6101931/",
+      "published_date_as_displayed": "2026-06-09",
+      "publisher": "bugfroggy，官方开发者",
+      "locator": "首帖",
+      "relevance": "新版客户端隐身粒子替代；珍珠穿顶、地图禁建等修复",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "O18",
+      "type": "official_patch",
+      "title": "Bed Wars v1.11.3",
+      "url": "https://hypixel.net/threads/bed-wars-v1-11-3-balancing-qol-bug-fixes.6115422/",
+      "published_date_as_displayed": "2026-09-29",
+      "publisher": "Hypixel Team",
+      "locator": "首帖",
+      "relevance": "本轮最新命名补丁；Dreamfeast、商店交互与地图/Dreams 修复",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "C01",
+      "type": "community_wiki",
+      "title": "Hypixel Wiki: Bed Wars",
+      "url": "https://hypixel.fandom.com/wiki/Bed_Wars",
+      "published_date_as_displayed": null,
+      "publisher": "社区编辑者",
+      "locator": "搜索索引返回正文；直接 open 失败",
+      "relevance": "页自标 v1.11.1 且提示过时；5 秒复活、商品与持久性候选",
+      "access_method": "search_index_body_only",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "C02",
+      "type": "community_reference_table",
+      "title": "BedWars Shop and Upgrades",
+      "url": "https://breezil.github.io/Breezil-Hypixel-Utils/reference/bedwars/shop",
+      "published_date_as_displayed": null,
+      "publisher": "Breezil；非官方",
+      "locator": "物品及升级表",
+      "relevance": "补全常见价格与队伍费用；未验证数据采集来源或独立性",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "C03",
+      "type": "community_reference_table",
+      "title": "BedWars Teams, Maps, Events, XP, and Modes",
+      "url": "https://breezil.github.io/Breezil-Hypixel-Utils/reference/bedwars/game",
+      "published_date_as_displayed": null,
+      "publisher": "Breezil；非官方",
+      "locator": "Events / Generators / Modes",
+      "relevance": "阶段时间线候选；生成周期未细分模式，4v4/地图布局不能全盘采用",
+      "access_method": "web_page_relevant_sections_read",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "C04",
+      "type": "community_historical_guide",
+      "title": "BedWars - Everything you need to know",
+      "url": "https://hypixel.net/threads/guide-bedwars-everything-you-need-to-know.1203017/",
+      "published_date_as_displayed": null,
+      "publisher": "玩家指南",
+      "locator": "搜索索引中 Generators 段落",
+      "relevance": "历史记录按八队/四队区分绿宝石周期；旧版且有事件时间表述错误，只用于识别混用风险",
+      "access_method": "search_index_body_only",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "C05",
+      "type": "community_discussion",
+      "title": "Upcoming Bed Wars Update 讨论中的出生保护描述",
+      "url": "https://hypixel.net/threads/upcoming-bed-wars-update-what-do-you-want-to-see.5735415/post-40400940",
+      "published_date_as_displayed": null,
+      "publisher": "玩家讨论；不是官方规则文档",
+      "locator": "搜索索引摘要",
+      "relevance": "玩家描述 5 秒出生保护，不能据此取代历史官方 3 秒或当前实测",
+      "access_method": "search_index_excerpt_only",
+      "accessed_date_local": "2026-10-25"
+    },
+    {
+      "id": "S01",
+      "type": "third_party_source_comparison",
+      "title": "Blockyard BedWars server.ts",
+      "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/src/games/bedwars/server.ts#L220-L251",
+      "published_date_as_displayed": null,
+      "publisher": "Potrock/blockyard；不是 Hypixel",
+      "locator": "前轮源码验证，destroyBed",
+      "relevance": "取消等待复活者的实现与 Hypixel 历史公告有差异；仅作工程对照",
+      "access_method": "previous_local_source_review",
+      "accessed_date_local": "2026-10-25"
+    }
+  ],
+  "claims": [
+    {
+      "id": "LIFE-01",
+      "topic": "bed_and_final_death",
+      "classification": "official_core",
+      "source_ids": [
+        "O01"
+      ],
+      "current_gameplay_tested": false
+    },
+    {
+      "id": "LIFE-02",
+      "topic": "bed_destroyed_while_respawn_pending",
+      "classification": "official_historical_conflicts_with_third_party",
+      "source_ids": [
+        "O03",
+        "S01"
+      ],
+      "historical_hypixel": "not_eliminated_merely_due_to_bed_break",
+      "blockyard": "pending_respawn_cancelled_and_player_out",
+      "current_online_verification_required": true
+    },
+    {
+      "id": "LIFE-03",
+      "topic": "normal_respawn_duration",
+      "classification": "community_candidate",
+      "candidate_seconds": 5,
+      "source_ids": [
+        "C01"
+      ],
+      "current_online_verification_required": true
+    },
+    {
+      "id": "LIFE-04",
+      "topic": "spawn_protection",
+      "classification": "unresolved_version_conflict",
+      "historical_official_seconds": 3,
+      "community_report_seconds": 5,
+      "source_ids": [
+        "O04",
+        "C05"
+      ],
+      "current_online_verification_required": true
+    },
+    {
+      "id": "MODE-01",
+      "topic": "four_vs_four_is_not_four_team_fours",
+      "classification": "official_historical_variant",
+      "source_ids": [
+        "O08",
+        "O14"
+      ],
+      "current_online_verification_required": true
+    },
+    {
+      "id": "ECON-01",
+      "topic": "emerald_generator_periods",
+      "classification": "mode_mixing_risk",
+      "source_ids": [
+        "C03",
+        "C04"
+      ],
+      "chosen_periods": null,
+      "current_online_verification_required": true
+    },
+    {
+      "id": "TRAP-01",
+      "topic": "miner_fatigue_trap_duration",
+      "classification": "official_patch_value",
+      "seconds": 8,
+      "patch": "v1.9.3",
+      "source_ids": [
+        "O13"
+      ],
+      "current_gameplay_tested": false
+    },
+    {
+      "id": "UPGRADE-01",
+      "topic": "dragon_buff_replaced_with_cushioned_boots",
+      "classification": "official_patch_change",
+      "patch": "v1.9.3",
+      "source_ids": [
+        "O13",
+        "O15"
+      ],
+      "current_gameplay_tested": false
+    },
+    {
+      "id": "MILK-01",
+      "topic": "duration_and_reveal_interaction",
+      "classification": "historical_correction_not_current_calibration",
+      "source_ids": [
+        "O07",
+        "O08"
+      ],
+      "selected_current_duration_seconds": null,
+      "current_online_verification_required": true
+    },
+    {
+      "id": "OBS-01",
+      "topic": "invisibility_leaves_cues",
+      "classification": "official_versioned_mechanic",
+      "source_ids": [
+        "O03",
+        "O06",
+        "O07",
+        "O09",
+        "O17"
+      ],
+      "client_version_dependency": true,
+      "current_gameplay_tested": false
+    },
+    {
+      "id": "TIME-01",
+      "topic": "event_schedule",
+      "classification": "community_candidate_not_all_modes",
+      "source_ids": [
+        "C03",
+        "O08"
+      ],
+      "selected_schedule": null,
+      "current_online_verification_required": true
+    },
+    {
+      "id": "MAP-01",
+      "topic": "height_limit_damage_and_pearl_safety",
+      "classification": "official_patch_changes",
+      "source_ids": [
+        "O15",
+        "O16",
+        "O17"
+      ],
+      "current_gameplay_tested": false
+    }
+  ],
+  "pending_checks": [
+    "mode/map/patch/rotation/challenge profile",
+    "death/bed-break/respawn event ordering",
+    "normal respawn/rejoin/spawn protection distinction",
+    "map-specific forge rates, capacity and pickup duplication",
+    "complete shop batches/prices and death persistence",
+    "milk/trap/reveal/visibility interactions",
+    "damage/hit interval/knockback/fall/block breaking/explosion mechanics",
+    "forced bed destruction, simultaneous elimination and timeout result"
+  ],
+  "related_files": [
+    "2026-10-25-hypixel-bedwars-rules.md",
+    "2026-10-25-reference-validation.md"
+  ]
+}

@@ -33,3 +33,6 @@ where = ["src"]
 
 [tool.setuptools.dynamic]
 version = {attr = "bedwars_arena.__version__"}
+
+[tool.setuptools.package-data]
+bedwars_arena = ["core/data/*.json"]

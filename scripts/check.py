@@ -1,4 +1,4 @@
-"""Check scaffold files and installed entry points using the standard library."""
+"""Check project files, installed entry points and core behavior."""
 
 import compileall
 import json
@@ -21,8 +21,9 @@ def check_files() -> None:
             raise ValueError(f"Invalid Python syntax in {directory}")
     with (ROOT / "pyproject.toml").open("rb") as source:
         tomllib.load(source)
-    for path in (ROOT / "reports").rglob("*.json"):
-        json.loads(path.read_text(encoding="utf-8"))
+    for directory in ("reports", "configs", "schemas", "src"):
+        for path in (ROOT / directory).rglob("*.json"):
+            json.loads(path.read_text(encoding="utf-8"))
 
     markdown = [ROOT / "README.md", ROOT / "CONTRIBUTING.md", ROOT / "AGENTS.md"]
     for directory in (
@@ -63,11 +64,17 @@ def check_entry_points() -> None:
         json.loads(result.stdout)
 
 
+def check_behavior() -> None:
+    subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", "tests"],
+                   cwd=ROOT, check=True)
+
+
 if __name__ == "__main__":
     try:
         check_files()
         check_entry_points()
+        check_behavior()
     except (ValueError, OSError, subprocess.CalledProcessError) as error:
-        print(f"Scaffold check failed: {error}", file=sys.stderr)
+        print(f"Project check failed: {error}", file=sys.stderr)
         raise SystemExit(1)
-    print("Scaffold checks passed: syntax, metadata, JSON, local links and installed CLI.")
+    print("Project checks passed: syntax, metadata, JSON, local links, installed CLI and core tests.")

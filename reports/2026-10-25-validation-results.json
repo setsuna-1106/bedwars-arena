@@ -1,0 +1,205 @@
+{
+  "date_local": "2026-10-25",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "python": "3.13.15 (main, Aug  5 2026, 12:25:43) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "packages": {
+    "pettingzoo": "1.27.0",
+    "gymnasium": "1.4.0",
+    "dmlab2d": "1.0.2",
+    "magent2": "0.3.4",
+    "numpy": "2.5.4"
+  },
+  "results": {
+    "pettingzoo": {
+      "status": "passed",
+      "lifecycle_fixture_parallel_api": "passed",
+      "invalid_revival_rejected": "agent cannot be revived once dead",
+      "tutorial_unique_starts_with_same_seed": 9,
+      "tutorial_observation_matches_declared_space": false,
+      "scope": "Interface fixture and upstream tutorial; no BedWars rules implemented"
+    },
+    "lab2d": {
+      "status": "passed",
+      "level": "clean_up",
+      "players": 2,
+      "steps": 50,
+      "same_seed_observation_trace_equal": true,
+      "different_seed_observation_trace_differs": true,
+      "trace_sha256": "601fe553e9798b2b6fe617a2245711cbed5086f512e3507ba46b3e87921b159b",
+      "observation_names": [
+        "GLOBAL.TEXT",
+        "WORLD.RGB",
+        "WORLD.PLAYER_FINE_COUNT",
+        "1.REWARD",
+        "1.CONTRIB",
+        "1.POSITION",
+        "1.LAYER",
+        "1.RGB",
+        "2.REWARD",
+        "2.CONTRIB",
+        "2.POSITION",
+        "2.LAYER",
+        "2.RGB"
+      ],
+      "action_names": [
+        "1.move",
+        "1.turn",
+        "1.fireClean",
+        "1.fireFine",
+        "2.move",
+        "2.turn",
+        "2.fireClean",
+        "2.fireFine"
+      ],
+      "scope": "Observed outputs, rewards/status; not a hash of all hidden engine state"
+    },
+    "magent2": {
+      "status": "passed",
+      "parallel_api": "passed",
+      "environment": "battle_v4",
+      "initial_agents": 4,
+      "observation_shape": [
+        13,
+        13,
+        5
+      ],
+      "steps": 40,
+      "same_seed_trace_equal": true,
+      "different_seed_trace_differs": false,
+      "trace_sha256": "c36b45e8d79ddd3b068eab3f1a126cff247622098b5f8b51f3fa98ce4318926f",
+      "scope": "Public observations, state(), rewards and lifecycle; not all native internal state"
+    },
+    "lux_process": {
+      "status": "passed",
+      "independent_processes": 2,
+      "json_round_trip": "passed",
+      "caller_timeout": true,
+      "scope": "Unmodified BotProcess module; timeout added by this probe, full Lux game/runner not run"
+    },
+    "bots": {
+      "status": "passed",
+      "build": "passed",
+      "tcp_clients": 2,
+      "local_view_shape": [
+        5,
+        5
+      ],
+      "command_round_trip": "passed",
+      "scope": "Local TCP smoke; no WebSocket, tournament or whole-game determinism test"
+    }
+  },
+  "method": {
+    "full_bedwars_matches_tested": false,
+    "benchmarks_performed": false,
+    "cross_platform_determinism_tested": false,
+    "core_project_dependencies_changed": false
+  },
+  "sources": {
+    "runtime_module_sources": [
+      {
+        "repository": "Farama-Foundation/PettingZoo",
+        "path": "tutorials/CustomEnvironment/tutorial3_action_masking.py",
+        "url": "https://github.com/Farama-Foundation/PettingZoo/blob/b0fe02166d2106f8fcb6a6e0ca8125765699bdba/tutorials/CustomEnvironment/tutorial3_action_masking.py",
+        "blob_sha": "c2295482cdcf767102bb4e08a32c531219879785",
+        "local_file_sha256": "158385aedcf6ae5aa6a9fbeacdbe1a7a6f5afb2ee21d674054db9962074ee4a2"
+      },
+      {
+        "repository": "Lux-AI-Challenge/Lux-Design-S2",
+        "path": "luxai_s2/luxai_runner/process.py",
+        "url": "https://github.com/Lux-AI-Challenge/Lux-Design-S2/blob/5bcb3c775d536cecda32a3c041a9814279b79c5b/luxai_s2/luxai_runner/process.py",
+        "blob_sha": "be7d303eac80b4ac01f50695b5b29f7f18464e5c",
+        "local_file_sha256": "e65f236be7dd18eeaa94585fed2881a397a78be274483fafedea480eb7f03807"
+      },
+      {
+        "repository": "Lux-AI-Challenge/Lux-Design-S2",
+        "path": "luxai_s2/luxai_runner/logger.py",
+        "url": "https://github.com/Lux-AI-Challenge/Lux-Design-S2/blob/5bcb3c775d536cecda32a3c041a9814279b79c5b/luxai_s2/luxai_runner/logger.py",
+        "blob_sha": "e2a07b360a496201615527a0685968e088d2b3c5",
+        "local_file_sha256": "35f63985dc6d3b6142e80fcd2ccb4032e672d27606fdbc013bb1cb98055bce89"
+      },
+      {
+        "repository": "Lux-AI-Challenge/Lux-Design-S2",
+        "path": "luxai_s2/luxai_s2/globals.py",
+        "url": "https://github.com/Lux-AI-Challenge/Lux-Design-S2/blob/5bcb3c775d536cecda32a3c041a9814279b79c5b/luxai_s2/luxai_s2/globals.py",
+        "blob_sha": "5313c18bc3260b5ecf330805491989491160ae56",
+        "local_file_sha256": "177cc390a737b21a00f5b4b8500668b1d9aa9f146669e179d3a5fa605326787e"
+      }
+    ],
+    "source_review": [
+      {
+        "repository": "Potrock/blockyard",
+        "path": "src/games/bedwars/server.ts",
+        "commit": "7daddbec178997236d664bc29975d49801574332",
+        "review": "Death/respawn/bed/elimination paths; no runtime",
+        "url": "https://github.com/Potrock/blockyard/blob/7daddbec178997236d664bc29975d49801574332/src/games/bedwars/server.ts",
+        "blob_sha": "4942ea70afa71b2993e1c06d39e940f6665ea35c"
+      },
+      {
+        "repository": "google-deepmind/lab2d",
+        "path": "dmlab2d/__init__.py",
+        "commit": "f6de2d6e40e476093b6413cd496137ad8fd8d3d5",
+        "review": "Python wrapper usage",
+        "url": "https://github.com/google-deepmind/lab2d/blob/f6de2d6e40e476093b6413cd496137ad8fd8d3d5/dmlab2d/__init__.py",
+        "blob_sha": "824e24479cf8ee4d32452363c298a520addc6dc6"
+      },
+      {
+        "repository": "google-deepmind/lab2d",
+        "path": "dmlab2d/random_agent.py",
+        "commit": "f6de2d6e40e476093b6413cd496137ad8fd8d3d5",
+        "review": "Example setup",
+        "url": "https://github.com/google-deepmind/lab2d/blob/f6de2d6e40e476093b6413cd496137ad8fd8d3d5/dmlab2d/random_agent.py",
+        "blob_sha": "123220df37e0808414ed2913c0bf8b65b7d004a4"
+      }
+    ]
+  },
+  "bots_archive": {
+    "url": "https://codeload.github.com/markusfisch/bots/tar.gz/3ce66349ee2e239dd0ac79d1d7ec455e682c5c64",
+    "sha256": "89cba8a255f1dc819ef27937e71fe733e4a4bc6cfe5d271dea320958f87b069b"
+  },
+  "probe_script": {
+    "path": "scripts/research_validation.py",
+    "sha256": "e88c26eb0055a46d40f877d9c38081431386c8cb0fedf3e6d930ba0025e9394c"
+  },
+  "dependency_freeze": [
+    "absl-py==2.5.1",
+    "attrs==26.1.0",
+    "cloudpickle==3.1.2",
+    "dm-env==1.6",
+    "dm-tree==0.1.10",
+    "dmlab2d==1.0.2",
+    "farama-notifications==0.0.6",
+    "gymnasium==1.4.0",
+    "magent2==0.3.4",
+    "numpy==2.5.4",
+    "pettingzoo==1.27.0",
+    "pygame-ce==2.5.8",
+    "typing-extensions==4.16.0",
+    "wrapt==2.5.1"
+  ],
+  "published_distributions": [
+    {
+      "package": "pettingzoo",
+      "version": "1.27.0",
+      "filename": "pettingzoo-1.27.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/7b/1f/ff1bebbe1fc168b6435b482a34d9757249c9da1b14ebc61868cc19998cca/pettingzoo-1.27.0-py3-none-any.whl",
+      "pypi_declared_sha256": "075a6ab7c32d32d9a674f1af395010198bf09c172341aa38fa5415461601ac61",
+      "metadata_source": "https://pypi.org/pypi/pettingzoo/1.27.0/json"
+    },
+    {
+      "package": "dmlab2d",
+      "version": "1.0.2",
+      "filename": "dmlab2d-1.0.2-cp313-cp313-macosx_15_0_arm64.whl",
+      "url": "https://files.pythonhosted.org/packages/47/cd/24257b47db7b6d1ca36b16c396f14d612e97fef0325b47f7aaab694758e0/dmlab2d-1.0.2-cp313-cp313-macosx_15_0_arm64.whl",
+      "pypi_declared_sha256": "f15dffda08d40f525639f517ff19f463b7a9560c415ccf3072ef23f601a6ef32",
+      "metadata_source": "https://pypi.org/pypi/dmlab2d/1.0.2/json"
+    },
+    {
+      "package": "magent2",
+      "version": "0.3.4",
+      "filename": "magent2-0.3.4-cp313-cp313-macosx_11_0_arm64.whl",
+      "url": "https://files.pythonhosted.org/packages/7b/89/5d3079fc8b03f5b3d029ed93e54af534ce57dc595c39e2fd50c488ec94bd/magent2-0.3.4-cp313-cp313-macosx_11_0_arm64.whl",
+      "pypi_declared_sha256": "b3fc100e73a83f95c967faf8b03c2d0552b7ddf6a46f0faa9f59693d370ba86a",
+      "metadata_source": "https://pypi.org/pypi/magent2/0.3.4/json"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bedwars-arena:team-state:1",
+  "title": "TeamState v1 (full internal state, not agent observation)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["team_id", "bed_state", "upgrades", "trap_queue", "trap_ready_at"],
+  "properties": {
+    "team_id": {"$ref": "#/$defs/id"},
+    "bed_state": {
+      "oneOf": [
+        {"type": "object", "additionalProperties": false,
+         "required": ["status", "destroyed_at"],
+         "properties": {"status": {"const": "present"}, "destroyed_at": {"type": "null"}}},
+        {"type": "object", "additionalProperties": false,
+         "required": ["status", "destroyed_at"],
+         "properties": {"status": {"const": "destroyed"}, "destroyed_at": {"$ref": "#/$defs/tick"}}}
+      ]
+    },
+    "upgrades": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "sharpened_swords": {"$ref": "#/$defs/level"},
+        "reinforced_armor": {"$ref": "#/$defs/level"},
+        "maniac_miner": {"$ref": "#/$defs/level"},
+        "forge": {"$ref": "#/$defs/level"},
+        "heal_pool": {"$ref": "#/$defs/level"},
+        "cushioned_boots": {"$ref": "#/$defs/level"}
+      }
+    },
+    "trap_queue": {"type": "array", "items": {"$ref": "#/$defs/trap"}},
+    "trap_ready_at": {"$ref": "#/$defs/tick"}
+  },
+  "$defs": {
+    "id": {"type": "string", "minLength": 1, "maxLength": 128, "not": {"pattern": "[\\u0000-\\u001f]"}},
+    "tick": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "level": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+    "trap": {
+      "type": "object", "additionalProperties": false,
+      "required": ["trap_id", "trap_type", "purchased_by", "purchased_at"],
+      "properties": {
+        "trap_id": {"$ref": "#/$defs/id"},
+        "trap_type": {"enum": ["blindness", "miner_fatigue", "reveal", "counter_offensive"]},
+        "purchased_by": {"$ref": "#/$defs/id"},
+        "purchased_at": {"$ref": "#/$defs/tick"}
+      }
+    }
+  }
+}

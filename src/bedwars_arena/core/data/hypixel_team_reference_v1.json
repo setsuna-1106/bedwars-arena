@@ -1,0 +1,40 @@
+{
+  "profile_id": "hypixel-team-reference-v1",
+  "reviewed_on": "2026-10-26",
+  "current_server_verified": false,
+  "queue_prices_diamonds": [1, 2, 4],
+  "queue_price_evidence": "official_historical_v1.4_beta",
+  "upgrade_price_evidence": "community_candidate_requires_explicit_opt_in",
+  "upgrade_prices": {
+    "solo_doubles": {
+      "sharpened_swords": [4], "reinforced_armor": [2, 4, 8, 16],
+      "maniac_miner": [2, 4], "forge": [2, 4, 6, 8],
+      "heal_pool": [1], "cushioned_boots": [1, 2]
+    },
+    "threes_fours": {
+      "sharpened_swords": [8], "reinforced_armor": [5, 10, 20, 30],
+      "maniac_miner": [4, 6], "forge": [4, 8, 12, 16],
+      "heal_pool": [3], "cushioned_boots": [2, 4]
+    }
+  },
+  "effect_duration_seconds": {
+    "blindness": 8, "miner_fatigue": 8, "counter_offensive": 15,
+    "reveal": null, "magic_milk": 30
+  },
+  "shared_trap_cooldown_ticks": null,
+  "unresolved": [
+    "Q15_shared_cooldown_scope_duration_and_reset",
+    "trap_trigger_region_geometry",
+    "milk_trigger_consumption_alarm_interaction",
+    "current_upgrade_prices",
+    "exact_server_tick_order"
+  ],
+  "sources": {
+    "queue_prices": "https://hypixel.net/threads/bed-wars-v1-4-beta-capture-mode-new-maps-more.1527824/",
+    "blindness_duration": "https://hypixel.net/threads/bed-wars-v1-6-pop-up-tower-4v4-mode-voidless-new-maps-and-more.2034329/",
+    "fatigue_duration_and_names": "https://hypixel.net/threads/bed-wars-v1-9-3-new-settings-menu-other-changes.5828709/",
+    "counter_offensive_duration": "https://hypixel.net/threads/bed-wars-update-challenges-bug-fixes-more.4585683/",
+    "milk_duration": "https://hypixel.net/threads/bed-wars-v1-6-pop-up-tower-4v4-mode-voidless-new-maps-and-more.2034329/",
+    "upgrade_price_candidate": "https://hypixel.fandom.com/wiki/Bed_Wars"
+  }
+}

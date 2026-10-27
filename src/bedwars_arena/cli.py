@@ -23,14 +23,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         metadata = {
             "name": "BedWars Arena",
             "version": __version__,
-            "stage": "scaffold",
+            "stage": "core_foundations",
+            "team_state_available": True,
             "simulation_available": False,
         }
         if args.json:
             print(json.dumps(metadata, ensure_ascii=False, indent=2))
         else:
             print(f"BedWars Arena {__version__}")
-            print("阶段：工程骨架；模拟引擎尚未实现。")
+            print("阶段：TeamState 与事件调度基础；完整对局引擎尚未实现。")
         return 0
 
     parser.print_help()
