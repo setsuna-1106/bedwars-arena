@@ -1,6 +1,6 @@
 # 架构与目录职责
 
-当前进度：P1–P4 的世界事务/快照、二维运动、动作观测、经济与拆建已实现，见 [P1](l1/p1-world-foundation.md)、[P2](l1/p2-physics.md)、[P3](l1/p3-actions.md)和 [P4](l1/p4-economy.md)；战斗、死亡结算与完整对局仍待后续阶段。下方较早设计条目的“未实现”状态以此更新为准。
+当前进度：P1–P5 的世界事务/快照、二维运动、动作观测、经济拆建、战斗复活和终局已实现，见 [P1](l1/p1-world-foundation.md)、[P2](l1/p2-physics.md)、[P3](l1/p3-actions.md)[P4](l1/p4-economy.md)和 [P5](l1/p5-combat.md)；Runner 与完整对局仍待后续阶段。下方较早设计条目的“未实现”状态以此更新为准。
 
 L1 P0 已将 profile/map/scenario 的唯一数据源与格式 Schema 放入 Python 包，提供独立版本、哈希及加载校验；此入口不构造世界。协议仅为规格。见 [P0 定义](l1/p0-definitions.md)。
 

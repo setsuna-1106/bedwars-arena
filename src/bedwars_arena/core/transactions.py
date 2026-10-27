@@ -27,6 +27,7 @@ class ChangeSet:
     facts: list = field(default_factory=list)
     diagnostics: list = field(default_factory=list)
     execution_updates: dict = field(default_factory=dict)
+    result: dict | None = None
 
     @classmethod
     def from_state(cls, state: dict):
@@ -102,7 +103,7 @@ def apply_plan(state: dict, plan: ChangeSet, *, budget: dict, validate) -> tuple
             raise ValueError('Fact or commit ID was not allocated by this plan')
     candidate = deepcopy(state)
     execution = candidate['execution']
-    allowed_execution = {'pending_requests','request_records','round','round_history','action_outcomes','packet_errors','attributed_beds'}
+    allowed_execution = {'pending_requests','request_records','round','round_history','action_outcomes','packet_errors','attributed_beds','pending_deaths'}
     if not isinstance(plan.execution_updates,dict) or plan.execution_updates.keys() - allowed_execution:
         raise ValueError('Invalid execution updates')
     for key,value in plan.execution_updates.items():
@@ -173,6 +174,10 @@ def apply_plan(state: dict, plan: ChangeSet, *, budget: dict, validate) -> tuple
     if len(intents) > budget['pending_intents']:
         raise ValueError('Pending intent budget exceeded')
     execution['pending_deaths'].extend(deepcopy(plan.pending_deaths))
+    if plan.result is not None:
+        if candidate['result'] is not None:
+            raise ValueError('World result is already fixed')
+        candidate['result'] = deepcopy(plan.result)
     for fact in plan.facts:
         if not isinstance(fact, FactEvent):
             raise ValueError('Expected FactEvent')

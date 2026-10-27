@@ -37,7 +37,7 @@ def definition_ref(definitions: L1Definitions) -> dict:
 def runtime_info() -> dict:
     return {'package_version': __version__, 'implementation': sys.implementation.name,
             'python': '.'.join(map(str, sys.version_info[:3])), 'rng_derivation': 'sha256-v1',
-            'world_engine_revision': 'l1-p4-1'}
+            'world_engine_revision': 'l1-p5-1'}
 
 
 def _seed_states(seed: int) -> dict:
@@ -387,6 +387,13 @@ def validate_state(state: dict, definitions: L1Definitions, *, boundary: bool = 
                    and t.task_id not in execution['cancelled'] for t in tasks):
             raise ValueError('Generator has no matching current schedule')
     for pid, player in state['players'].items():
+        if player['life']['kind'] == 'respawning':
+            due=player['life']['respawn_at']
+            expected={'player_id':pid,'life_index':player['life_index'],'respawn_at':due}
+            if not any(t.kind=='respawn' and t.execute_at==due and t.payload==expected and
+                       t.task_id not in execution['cancelled'] for t in tasks):
+                raise ValueError('Respawning life has no matching task')
+            continue
         if player['life']['kind'] != 'alive':
             continue
         for effect in player['life']['effects']:
@@ -458,7 +465,30 @@ def validate_state(state: dict, definitions: L1Definitions, *, boundary: bool = 
         except (TypeError, ValueError) as error:
             raise ValueError('Invalid RNG state') from error
     if state['result'] is not None:
-        raise ValueError('Result settlement is not implemented')
+        result=state['result']
+        _require_fields(result,('kind','winner_team_id','reason','tick'),'world result')
+        integer(result['tick'],'result tick',1)
+        if result['tick']>now or result['kind'] not in ('win','draw') or result['reason'] not in ('elimination','mutual_elimination','game_end'):
+            raise ValueError('Invalid world result')
+        if result['kind']=='win' and result['winner_team_id'] not in state['teams'] or result['kind']=='draw' and result['winner_team_id'] is not None:
+            raise ValueError('Invalid result winner')
+        if result['tick'] != now or cursor['phase'] != 90:
+            raise ValueError('Result must be at its completed outcome phase')
+        active=[team_id for team_id in state['teams'] if any(
+            p['team_id']==team_id and p['life']['kind']!='eliminated' for p in state['players'].values())]
+        if result['reason']=='mutual_elimination' and (active or result['kind']!='draw'):
+            raise ValueError('Mutual-elimination result does not match lives')
+        if result['reason']=='elimination' and (len(active)!=1 or result['winner_team_id']!=active[0] or result['kind']!='win'):
+            raise ValueError('Elimination result does not match lives')
+        if result['reason']=='game_end':
+            if result['tick']!=profile['schedule']['game_end_tick'] or len(active)<2:
+                raise ValueError('Invalid Game End boundary')
+            scores={team_id:(sum(p['team_id']==team_id and p['life']['kind']!='eliminated' for p in state['players'].values()),
+                             execution['attributed_beds'][team_id]) for team_id in active}
+            best=max(scores.values());winners=[team_id for team_id in active if scores[team_id]==best]
+            if (result['kind']=='win' and (len(winners)!=1 or result['winner_team_id']!=winners[0]) or
+                    result['kind']=='draw' and len(winners)==1):
+                raise ValueError('Game End result does not match scores')
     # An internal plan must not introduce penetration or unrecorded loss of support.
     _validate_initial_positions(state, profile, map_data)
 

@@ -194,7 +194,7 @@ class EconomyTests(unittest.TestCase):
         self.assertEqual(self.result(w,'red_1','b')['reason'],'WALL_ABOVE_BRIDGE')
         self.assertIn('-16,-1,0',w.state['terrain'])
 
-    def test_removing_own_support_produces_void_candidate_same_tick(self):
+    def test_removing_own_support_settles_void_death_same_tick(self):
         w=self.world({'players':{'red_1':{'x':-17.2,'z':0.5,'held_item':'wool',
                     'inventory':{'wooden_sword':1,'shears':1,'wool':1}}}})
         self.round(w,'r1',{'red_1':[self.req('p','place_block',{'x':-16,'z':0,'layer':'bridge'})]})
@@ -208,8 +208,9 @@ class EconomyTests(unittest.TestCase):
         self.round(w,'r3',{'red_1':[self.req('c','cancel',{'channel':'movement'}),req]})
         for _ in range(20): w.step()
         self.assertNotIn('-16,-1,0',w.state['terrain'])
-        self.assertEqual(w.state['execution']['pending_deaths'][0]['player_id'],'red_1')
-        self.assertEqual(w.state['players']['red_1']['life']['kind'],'alive')
+        self.assertEqual(w.state['execution']['pending_deaths'],[])
+        self.assertEqual(w.state['players']['red_1']['life']['kind'],'respawning')
+        self.assertTrue(any(f['kind']=='player_died' and f['payload']['reason']=='void' for f in w.last_facts))
 
     def test_expiration_occurs_before_pickup_at_same_tick(self):
         profile=deepcopy(self.definitions.profile.data)

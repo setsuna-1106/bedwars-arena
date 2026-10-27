@@ -137,6 +137,15 @@ class WorldEngine:
         if phase == 35:
             from .controls import interrupt_invalid_interactions
             return interrupt_invalid_interactions(self._state,self.definitions,tick)
+        if phase == 60:
+            from .combat import resolve_damage_and_deaths
+            return resolve_damage_and_deaths(self._state,self.definitions,tick)
+        if phase == 70:
+            from .outcome import team_eliminations
+            return team_eliminations(self._state,self.definitions,tick)
+        if phase == 90:
+            from .outcome import natural_outcome
+            return natural_outcome(self._state,self.definitions,tick)
         if phase != 30:
             return None
         from .geometry import Vec2
@@ -195,6 +204,15 @@ class WorldEngine:
         reason = None
         if task.task_id in state['execution']['cancelled']:
             reason = 'cancelled'
+        elif task.kind == 'respawn':
+            from .combat import respawn
+            return respawn(state,self.definitions,task)
+        elif task.kind == 'global_bed_destruction':
+            from .outcome import global_beds
+            return global_beds(state,task)
+        elif task.kind == 'game_end':
+            from .outcome import game_end
+            return game_end(state,self.definitions,task)
         elif task.kind == 'generator_spawn':
             from .economy import generator_attempt
             return generator_attempt(state,self.definitions,task)

@@ -185,7 +185,7 @@ class GeometryAndMotionTests(unittest.TestCase):
                        validate=lambda candidate:validate_state(candidate,self.definitions))
         self.assertNotIn('-25,0,0',state['terrain'])
 
-    def test_world_movement_void_intent_is_not_a_death_fact_and_restores(self):
+    def test_world_movement_void_death_settles_and_restores(self):
         class OneMove(WorldEngine):
             def _phase_plan(self,tick,phase):
                 if tick==1 and phase==20:
@@ -202,16 +202,13 @@ class GeometryAndMotionTests(unittest.TestCase):
         world.step()
         state=world.state
         self.assertEqual(state['tick'],1)
-        self.assertAlmostEqual(state['players']['red_1']['life']['spatial']['x'],-15.7)
-        self.assertEqual(state['players']['red_1']['life']['kind'],'alive')
-        self.assertEqual(len(state['execution']['pending_deaths']),1)
-        self.assertEqual(state['execution']['pending_deaths'][0]['reason'],'void')
+        self.assertEqual(state['players']['red_1']['life'],{'kind':'respawning','died_at':1,'respawn_at':61})
+        self.assertEqual(state['execution']['pending_deaths'],[])
         self.assertEqual(state['execution']['pending_intents'],[])
-        self.assertEqual(world.last_facts,())
+        self.assertTrue(any(f['kind']=='player_died' and f['payload']['reason']=='void' for f in world.last_facts))
         restored=restore_snapshot(world.snapshot(),self.definitions)
         self.assertEqual(world.step(),restored.step())
-        self.assertEqual(len(world.state['execution']['pending_deaths']),1)
-        self.assertAlmostEqual(world.state['players']['red_1']['life']['spatial']['x'],-15.7)
+        self.assertEqual(world.state['players']['red_1']['stats']['deaths'],1)
 
     def test_players_are_not_collision_obstacles(self):
         class Cross(WorldEngine):
