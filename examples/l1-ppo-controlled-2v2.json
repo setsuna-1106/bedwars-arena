@@ -1,0 +1,10 @@
+{
+  "source": "l1-ppo-controlled-combat-v1",
+  "beds": {"blue": false},
+  "players": {
+    "red_1": {"x": -25, "z": 2, "armor_tier": 1, "protection_ticks": 0},
+    "red_2": {"x": -25, "z": 2, "armor_tier": 1, "protection_ticks": 0},
+    "blue_1": {"x": -23, "z": 2, "health": 4, "protection_ticks": 0},
+    "blue_2": {"x": -23, "z": 2, "health": 4, "protection_ticks": 0}
+  }
+}

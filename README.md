@@ -6,7 +6,7 @@
 
 现实规则参照已确定为 **Hypixel 的 Minecraft Bed Wars**。后续设计与实现查阅[Hypixel 规则参考](docs/rules/hypixel-bedwars.md)，证据与检索过程见[规则调研](reports/2026-10-25-hypixel-bedwars-rules.md)。L1 已选择自制二维 2v2 实验范围；L4 的目标模式、地图与规则版本仍待确定；第三方 BedWars 项目用于工程参考，其玩法不能直接作为本项目规则标准。
 
-**当前阶段：L1 P7 已完成（0.1.0.dev0）。** 已可用两种脚本策略运行和记录二维 2v2 对局，逐 tick 重放验证，并导出离线二维回放。最小训练闭环和端到端验收仍待 P8–P9。
+**当前阶段：L1 P8 已完成（0.1.0.dev0）。** 已可运行、重放二维 2v2 对局，并使用共享参数 PPO 完成跨局采样、更新、冻结评估及检查点恢复。标准 40 局端到端验收仍待 P9。
 
 ## 快速开始
 
@@ -24,12 +24,14 @@ python scripts/check.py
 
 `bedwars-arena --help` 查看入口，`bedwars-arena info --json` 输出实现状态；`bedwars-arena validate-l1 --json` 校验三份定义。`bedwars-arena run-l1 --seed 101 --output artifacts/run-101 --json` 启动标准对局并保存记录；受控预置、批量运行与结果说明见 [P6 Runner](docs/l1/p6-runner.md)。使用 `bedwars-arena replay-l1 artifacts/run-101 --html artifacts/run-101/replay.html` 可校验新版记录并导出离线回放；更多示例见 [P7 重放说明](docs/l1/p7-replay.md)。
 
+可选训练依赖通过 `python -m pip install -e '.[training]'` 安装；训练、恢复与实验边界见 [P8 说明](docs/l1/p8-training.md)。
+
 本机现有开发环境使用 `source venv/bin/activate`；旧 `.venv` 的安装问题和修复经过见 [P0 定义说明](docs/l1/p0-definitions.md)。
 
 ## 项目结构与开发
 
 ```text
-src/bedwars_arena/   Python 包：core、interfaces、agents、runner、replay 与 CLI
+src/bedwars_arena/   Python 包：core、interfaces、agents、runner、replay、training 与 CLI
 configs/            规则资料；L1 正式数据随 Python 包发布
 maps/               地图说明；L1 固定地图随 Python 包发布
 schemas/            TeamState 与 L1 动作/反馈格式规格
@@ -44,7 +46,7 @@ artifacts/          本地实验与回放输出（默认忽略）
 ```
 
 - [开发指南](CONTRIBUTING.md)：安装、检查与构建。
-- [L1 P0 定义与校验](docs/l1/p0-definitions.md)、[P1 世界基础](docs/l1/p1-world-foundation.md)、[P2 二维运动](docs/l1/p2-physics.md)、[P3 动作与观测](docs/l1/p3-actions.md)、[P4 经济与拆建](docs/l1/p4-economy.md)、[P5 战斗与终局](docs/l1/p5-combat.md)、[P6 Runner](docs/l1/p6-runner.md)、[P7 重放](docs/l1/p7-replay.md)、[协议规格](docs/l1/protocol-v1.md)和[分阶段验收场景](docs/l1/acceptance-scenarios.md)：L1 脚本对局与离线回放已实现，训练仍待后续阶段。
+- [L1 P0 定义与校验](docs/l1/p0-definitions.md)、[P1 世界基础](docs/l1/p1-world-foundation.md)、[P2 二维运动](docs/l1/p2-physics.md)、[P3 动作与观测](docs/l1/p3-actions.md)、[P4 经济与拆建](docs/l1/p4-economy.md)、[P5 战斗与终局](docs/l1/p5-combat.md)、[P6 Runner](docs/l1/p6-runner.md)、[P7 重放](docs/l1/p7-replay.md)、[P8 训练](docs/l1/p8-training.md)、[协议规格](docs/l1/protocol-v1.md)和[分阶段验收场景](docs/l1/acceptance-scenarios.md)：L1 脚本对局、离线回放与最小训练闭环已实现，端到端验收仍待 P9。
 - [架构说明](docs/architecture.md)、[接口草案](docs/contracts.md)、[开发阶段](docs/roadmap.md)、[决策记录](docs/decisions/README.md)。
 - [世界引擎与训练衔接决策](docs/decisions/0015-world-schedule-replay-failures-and-training.md)：赛程、终局、快照/重放和训练方向已采用；L1 对应子集已实现，其余扩展与规则核验仍待完成。
 - [Hypixel 规则参考](docs/rules/hypixel-bedwars.md)：带规则编号的玩法、候选参数与待核对案例，供后续设计和测试引用。
@@ -61,7 +63,7 @@ artifacts/          本地实验与回放输出（默认忽略）
 
 平台旨在为智能体决策算法开发、多智能体博弈、策略优化及自动化实验提供一个可控、可扩展、可重复的测试环境。
 
-用户已明确平台还需用于决策模型训练，支持跨局持续学习；每局世界初始化与模型、优化器等学习状态的初始化分开。每局策略绑定固定模型版本、训练器可跨局更新，基础结果奖励和检查点方向已确定；训练算法、完整接口与实现仍待落实，目前尚无训练实现。
+平台支持跨局持续学习；每局世界与模型、优化器等学习状态分开。P8 使用共享参数 PPO 和固定脚本对手完成受控 2v2 的采样、更新、冻结评估及跨进程恢复；更多训练预算与模型效果仍需单独实验。
 
 ## 基本交互闭环
 
@@ -81,7 +83,7 @@ API 接收行动指令
 
 外部算法负责决策，模拟引擎负责规则执行和状态更新。具体可见信息、行动语义和推进时序需要在 API 契约中明确。
 
-## 模块职责（目录已预留，行为待实现）
+## 模块职责
 
 | 部分 | 建议职责 |
 | --- | --- |
@@ -99,7 +101,7 @@ API 接收行动指令
 - **观测边界**：智能体能获得的信息、视野规则及隐藏信息的处理。
 - **行动与时间**：动作粒度、执行耗时、多智能体动作的收集与结算顺序。
 - **接入契约**：首版采用 Python 进程内调用；具体方法签名、策略生命周期及异常和非法动作的处理待确定，未来进程/网络协议另行选择。
-- **复现标准**：首期采用 binary64，固定程序版本/运行环境下重放一致、浮点快照往返恢复已定；P7 保存定义、环境、输入、逐 tick 状态和事实；训练算法版本及跨局学习状态仍待 P8。
+- **复现标准**：首期采用 binary64，固定程序版本/运行环境下重放一致、浮点快照往返恢复已定；P7 保存定义、环境、输入、逐 tick 状态和事实；P8 在独立检查点保存模型、优化器及训练 RNG。
 
 接入方式、模块边界、上述空间表示和玩家生命周期分支等已有设计决策；其余具体方案与实现边界详见[接口与时序草案](docs/contracts.md)。
 

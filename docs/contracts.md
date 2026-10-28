@@ -1,6 +1,6 @@
 # 接口与时序草案
 
-当前进度：P1 的内部世界事务/边界快照与 P2 的二维运动已实现，见 [P1](l1/p1-world-foundation.md) 和 [P2](l1/p2-physics.md)；本文件旧段落的对应历史状态以此更新为准。P3 的动作接收与独立观测、P4/P5 的经济和战斗结算、[P6 Runner](l1/p6-runner.md) 以及 [P7 重放](l1/p7-replay.md) 已实现；训练仍待后续阶段。
+当前进度：P1 的内部世界事务/边界快照与 P2 的二维运动已实现，见 [P1](l1/p1-world-foundation.md) 和 [P2](l1/p2-physics.md)；本文件旧段落的对应历史状态以此更新为准。P3 的动作接收与独立观测、P4/P5 的经济和战斗结算、[P6 Runner](l1/p6-runner.md)、[P7 重放](l1/p7-replay.md) 以及 [P8 训练](l1/p8-training.md) 已实现；端到端验收仍待 P9。
 
 L1 的动作/反馈 Schema、类型化载荷、原因码和观测字段已在 [协议 v1](l1/protocol-v1.md) 具体化；接收器与观测生产器已按 [P3](l1/p3-actions.md) 实现，玩法结算分阶段接入。
 

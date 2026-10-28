@@ -20,6 +20,7 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["build>=1.2"]
+training = ["numpy==2.3.5"]
 
 [project.scripts]
 bedwars-arena = "bedwars_arena.cli:main"

@@ -1,6 +1,7 @@
 """Project information and validation of the L1 definition bundle."""
 
 import argparse
+import importlib.util
 import json
 import sys
 from collections.abc import Sequence
@@ -48,22 +49,40 @@ def main(argv: Sequence[str] | None = None) -> int:
     replay.add_argument('--from-tick',type=int,help='从已索引的完整快照恢复；默认从起始边界')
     replay.add_argument('--html',help='校验通过后导出独立 HTML 回放；不能覆盖已有文件')
     replay.add_argument('--json',action='store_true',help='输出 JSON 报告')
+    train=commands.add_parser('train-l1',help='使用共享参数 PPO 采样、更新、评估并保存检查点')
+    train.add_argument('--output',required=True,help='必须尚不存在的训练记录目录')
+    train.add_argument('--resume',help='从完整训练检查点继续')
+    train.add_argument('--seed',type=int,help='训练 RNG 的 64 位种子；新训练默认 2026')
+    train.add_argument('--episode-limit',type=int,help='外部 episode tick 上限')
+    train.add_argument('--decision-interval',type=int,help='每次决策后逐 tick 推进次数')
+    train.add_argument('--opponent',choices=('attack','defend'),help='固定脚本对手；默认 defend')
+    train.add_argument('--preset',help='可选训练预置 JSON')
+    train.add_argument('--profile',help='规则 JSON 路径')
+    train.add_argument('--map',dest='map_path',help='固定地图 JSON 路径')
+    train.add_argument('--scenario',help='初始场景 JSON 路径')
+    train.add_argument('--episodes-per-update',type=int,default=2)
+    train.add_argument('--updates',type=int,default=1)
+    train.add_argument('--eval-games',type=int,default=2,help='每个模型的评估局数；0 或偶数')
+    train.add_argument('--eval-seed',type=int,default=1001)
+    train.add_argument('--json',action='store_true',help='输出 JSON 报告')
     args = parser.parse_args(argv)
 
     if args.command == "info":
         metadata = {
             "name": "BedWars Arena",
             "version": __version__,
-            "stage": "l1_p7",
+            "stage": "l1_p8",
             "team_state_available": True,
             "l1_definitions_available": True,
             "simulation_available": True,
+            "training_implemented": True,
+            "training_dependency_available": importlib.util.find_spec('numpy') is not None,
         }
         if args.json:
             print(json.dumps(metadata, ensure_ascii=False, indent=2))
         else:
             print(f"BedWars Arena {__version__}")
-            print("阶段：L1 P7 完整重放与二维回放；训练仍待实现。")
+            print("阶段：L1 P8 训练闭环；P9 端到端验收待完成。训练需要可选依赖。")
         return 0
 
     if args.command == "validate-l1":
@@ -101,6 +120,23 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1
         except (ValueError,OSError,L1DefinitionError) as error:
             parser.exit(2,f'重放失败：{error}\n')
+
+    if args.command == 'train-l1':
+        try:
+            from bedwars_arena.training.run import run_training
+        except ModuleNotFoundError as error:
+            if error.name=='numpy':parser.exit(2,'训练需要可选依赖：pip install "bedwars-arena[training]"\n')
+            raise
+        try:
+            definitions=load_l1_definitions(profile_path=args.profile,map_path=args.map_path,scenario_path=args.scenario)
+            result=run_training(definitions,output=args.output,seed=args.seed,episode_limit_ticks=args.episode_limit,
+                                decision_interval=args.decision_interval,opponent=args.opponent,preset_path=args.preset,
+                                resume=args.resume,episodes_per_update=args.episodes_per_update,updates=args.updates,
+                                eval_games=args.eval_games,eval_seed=args.eval_seed)
+            print(json.dumps(result,ensure_ascii=False,indent=2,allow_nan=False))
+            return 0
+        except (ValueError,OSError,L1DefinitionError) as error:
+            parser.exit(2,f'训练失败：{error}\n')
 
     if args.command in ('run-l1','batch-l1'):
         from bedwars_arena.agents.scripts import EconomicAttacker, DefensiveCounterattacker
