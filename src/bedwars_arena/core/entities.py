@@ -1,7 +1,7 @@
 """L1 stationary ground items, capacity and atomic construction."""
 import math
 
-from .geometry import AABB, Vec2
+from .geometry import Vec2
 from .messages import ScheduledTask
 from .terrain import Terrain
 from .time import identifier, integer

@@ -71,7 +71,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         metadata = {
             "name": "BedWars Arena",
             "version": __version__,
-            "stage": "l1_p8",
+            "stage": "l1_p9",
             "team_state_available": True,
             "l1_definitions_available": True,
             "simulation_available": True,

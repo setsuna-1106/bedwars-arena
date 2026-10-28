@@ -1,5 +1,5 @@
 """Versioned public-observation and discrete-request adapter for L1 PPO."""
-from math import floor, hypot, isfinite
+from math import floor, hypot
 import numpy as np
 
 GRID_X=16

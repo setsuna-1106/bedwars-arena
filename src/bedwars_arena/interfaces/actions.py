@@ -1,5 +1,4 @@
 """L1 request validation and recoverable request ledger (protocol v1)."""
-from copy import deepcopy
 import json
 import math
 

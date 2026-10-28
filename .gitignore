@@ -5,6 +5,9 @@
 .vscode/
 *.swp
 
+# Local security-scanner tool state
+.mimosa/
+
 # Python environments and build artifacts
 .venv/
 venv/

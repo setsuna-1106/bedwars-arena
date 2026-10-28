@@ -9,7 +9,6 @@ from bedwars_arena.core.physics import move_player
 class EconomicAttacker:
     name='economic-attacker'
     version='1.0'
-    intercept_range=2.8
 
     def __init__(self):
         self._move=None

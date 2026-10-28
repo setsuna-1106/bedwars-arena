@@ -1,4 +1,4 @@
-"""L1 world engine foundation. A full game is not yet implemented."""
+"""L1 world engine: phase pipeline, atomic commits, scheduling and snapshots."""
 from copy import deepcopy
 
 from .messages import Intent, PHASES, ScheduledTask

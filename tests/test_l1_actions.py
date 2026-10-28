@@ -1,11 +1,10 @@
 """P3 action intake, round sealing, feedback and isolated observations."""
 from copy import deepcopy
-import math
 import unittest
 
 from bedwars_arena.core.definitions import load_l1_definitions
 from bedwars_arena.core.transactions import ChangeSet
-from bedwars_arena.core.world import WorldEngine, WorldFault
+from bedwars_arena.core.world import WorldEngine
 from bedwars_arena.replay.snapshot import restore_snapshot
 
 
