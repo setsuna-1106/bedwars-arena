@@ -93,6 +93,7 @@ def main():
     total_ticks = sum(row['summary']['tick'] - row['summary']['start_tick'] for row in rows)
     measured_wall = (args.matrix / 'matrix-summary.json').stat().st_mtime - (args.matrix / 'matrix-config.json').stat().st_mtime
     elapsed = [row['wall_seconds'] for row in rows]
+    simulation_seconds = sum(row['simulation_seconds'] for row in rows)
     result = {'schema_version': 1, 'runtime': config['runtime'], 'definitions': config['definitions'],
               'games': len(rows), 'episode_limit_ticks': config['episode_limit_ticks'],
               'terminated': sum(row['summary']['terminated'] for row in rows),
@@ -103,6 +104,8 @@ def main():
               'game_wall_seconds_min': min(elapsed), 'game_wall_seconds_median': statistics.median(elapsed),
               'game_wall_seconds_max': max(elapsed), 'batch_elapsed_seconds': measured_wall,
               'batch_ticks_per_second': total_ticks / measured_wall if measured_wall > 0 else None,
+              'summed_simulation_seconds': simulation_seconds,
+              'per_world_ticks_per_second': total_ticks / simulation_seconds if simulation_seconds > 0 else None,
               'measurement_note': 'Batch elapsed uses matrix-config and final summary modification times; '
                                   'it includes other concurrent work, pauses and coordinator overhead.',
               'max_process_peak_rss_bytes': max(row['peak_process_rss_bytes'] for row in rows),
