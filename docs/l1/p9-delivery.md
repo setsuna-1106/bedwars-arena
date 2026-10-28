@@ -14,6 +14,9 @@ python examples/l1-p9-parallel.py artifacts/l1-p9-matrix
 
 # 从两个索引快照核对同一局剩余的输入、状态和事实
 python examples/l1-p9-verify.py artifacts/l1-p9-matrix/101-A artifacts/l1-p9-matrix/101-A-replay-check.json
+
+# 40 局和四个预选样本重放均完成后，重新核对输入哈希及事实计数并汇总
+python examples/l1-p9-report.py artifacts/l1-p9-matrix artifacts/l1-p9-matrix/audit.json
 ```
 
 每局的 `manifest.json` 保留策略名称/版本、seed、定义和代码哈希；`matrix-row.json` 另记会话席位、外部截断、故障/备用动作、事实计数、完整决策序列哈希、模拟/写盘墙钟、进程峰值内存和记录大小。`matrix-summary.json` 逐局更新。配置及运行时不匹配、或已存在的局缺少完整记录时不继续复用；中断后尚未发布的局需重新运行。E1/E2、D1/D2 分别是同一种确定性策略的独立会话，即使完整执行了两个配置，完全相同的决策序列也不视为独立随机样本。
@@ -22,7 +25,7 @@ python examples/l1-p9-verify.py artifacts/l1-p9-matrix/101-A artifacts/l1-p9-mat
 
 ## 受控功能验收
 
-当前代码的 [P6 受控预置](../../examples/l1-controlled-2v2.json)在 seed 101 于 tick 752 自然结束，红队获胜；发生 6 次购买、22 次放置、1 次玩家破床、2 次最终淘汰。该预置双方初始资源、护甲和生命值不对称，不是策略强度对比。完整记录已从初始快照逐 tick 核对至终局（752 tick、226 条后续事实），并导出离线页面；本机输出为 `artifacts/l1-p9-controlled-101/`，按项目约定不提交。
+当前代码的 [P6 受控预置](../../examples/l1-controlled-2v2.json)在 seed 101 于 tick 752 自然结束，红队获胜；发生 6 次购买、22 次放置、1 次玩家破床、2 次最终淘汰。该预置双方初始资源、护甲和生命值不对称，不是策略强度对比。完整记录已从初始快照逐 tick 核对至终局（752 tick、226 条后续事实），并导出离线页面；本机输出为 `artifacts/l1-p9-controlled-101-v2/`，按项目约定不提交。
 
 世界级无效任务和工作量超限故障注入见 `tests/test_l1_delivery_faults.py`；策略异常、错误输入、容量超限与提交故障、已封口输入、等待复活、持续拆除和满包回收分别有其他既有测试，详见[验收场景](acceptance-scenarios.md)。故障不发布半个 tick；先前阶段可能已经在内部提交，不能误称整 tick 回滚。
 
