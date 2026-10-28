@@ -58,7 +58,7 @@ def _package_code_hash() -> str:
 def runtime_info() -> dict:
     return {'package_version': __version__, 'implementation': sys.implementation.name,
             'python': '.'.join(map(str, sys.version_info[:3])), 'rng_derivation': 'sha256-v1',
-            'world_engine_revision': 'l1-p6-1', 'code_sha256':_package_code_hash()}
+            'world_engine_revision': 'l1-p7-3', 'code_sha256':_package_code_hash()}
 
 
 def _seed_states(seed: int) -> dict:

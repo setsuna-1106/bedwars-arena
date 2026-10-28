@@ -43,13 +43,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     batch=commands.add_parser('batch-l1',help='运行多局 L1 2v2 并保存记录')
     add_run_options(batch)
     batch.add_argument('--games',type=int,default=2,help='对局数量；逐局递增 seed')
+    replay=commands.add_parser('replay-l1',help='按输入重放并逐 tick 校验记录')
+    replay.add_argument('record',help='P7 对局记录目录')
+    replay.add_argument('--from-tick',type=int,help='从已索引的完整快照恢复；默认从起始边界')
+    replay.add_argument('--html',help='校验通过后导出独立 HTML 回放；不能覆盖已有文件')
+    replay.add_argument('--json',action='store_true',help='输出 JSON 报告')
     args = parser.parse_args(argv)
 
     if args.command == "info":
         metadata = {
             "name": "BedWars Arena",
             "version": __version__,
-            "stage": "l1_p6",
+            "stage": "l1_p7",
             "team_state_available": True,
             "l1_definitions_available": True,
             "simulation_available": True,
@@ -58,7 +63,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(json.dumps(metadata, ensure_ascii=False, indent=2))
         else:
             print(f"BedWars Arena {__version__}")
-            print("阶段：L1 P6 完整 2v2 对局；回放和训练仍待实现。")
+            print("阶段：L1 P7 完整重放与二维回放；训练仍待实现。")
         return 0
 
     if args.command == "validate-l1":
@@ -79,6 +84,23 @@ def main(argv: Sequence[str] | None = None) -> int:
             for name, definition in result["definitions"].items():
                 print(f"{name}: {definition['id']} v{definition['version']}  sha256={definition['sha256']}")
         return 0
+
+    if args.command == 'replay-l1':
+        from bedwars_arena.replay.verify import ReplayMismatch, verify_run
+        try:
+            result=verify_run(args.record,from_tick=args.from_tick)
+            if args.html:
+                from bedwars_arena.replay.viewer import export_viewer
+                result['html']=str(export_viewer(args.record,args.html).resolve())
+            print(json.dumps(result,ensure_ascii=False,indent=2,allow_nan=False))
+            return 0
+        except ReplayMismatch as error:
+            result={'valid':False,'tick':error.tick,'path':error.path,
+                    'expected':error.expected,'actual':error.actual}
+            print(json.dumps(result,ensure_ascii=False,indent=2,default=repr),file=sys.stderr)
+            return 1
+        except (ValueError,OSError,L1DefinitionError) as error:
+            parser.exit(2,f'重放失败：{error}\n')
 
     if args.command in ('run-l1','batch-l1'):
         from bedwars_arena.agents.scripts import EconomicAttacker, DefensiveCounterattacker

@@ -1,6 +1,6 @@
 # L1 P6：Runner 与首场完整 2v2
 
-P6 提供无界面 L1 2v2 Runner、两种进程内脚本策略及单局/批量 CLI。它完成的是 [L1 规划](../l1-implementation-plan.md)的 G1；二维回放、完整输入重放验证、训练和 40 局端到端验收分别留在 P7–P9。
+P6 提供无界面 L1 2v2 Runner、两种进程内脚本策略及单局/批量 CLI。它完成的是 [L1 规划](../l1-implementation-plan.md)的 G1；二维回放及输入重放已由 [P7](p7-replay.md) 实现，训练和 40 局端到端验收留在 P8–P9。
 
 ```bash
 # 标准初始状态；结束或达到 episode 上限后写入新目录

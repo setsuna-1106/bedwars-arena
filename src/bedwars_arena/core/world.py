@@ -208,6 +208,11 @@ class WorldEngine:
                                knockback_x=motion.knockback.x,knockback_z=motion.knockback.z)
             if updated != player:
                 plan.players[pid]=updated
+            if motion.contacts:
+                plan.emit(kind='movement_collision',tick=tick,phase=30,
+                          payload={'player_id':pid,'life_index':player['life_index'],
+                                   'contacts':[{'obstacle':list(key),'normal':[nx,nz]}
+                                               for key,nx,nz in motion.contacts]})
             if motion.iteration_limit_reached:
                 plan.diagnostics.append({'tick':tick,'phase':phase,'player_id':pid,
                                          'reason':'collision_iteration_limit'})
@@ -217,7 +222,7 @@ class WorldEngine:
                                        payload={'player_id':pid,'life_index':player['life_index'],
                                                 'position':{'x':motion.position.x,'z':motion.position.z}})
                 plan.add_intents.append(intent)
-        if not (plan.players or plan.add_intents or plan.diagnostics):
+        if not (plan.players or plan.add_intents or plan.diagnostics or plan.facts):
             return None
         return plan
 

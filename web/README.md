@@ -1,5 +1,3 @@
 # 旁观与回放前端
 
-预留网页展示。当前没有前端应用或 Node.js 依赖。
-
-后续仅消费引擎/回放数据，不复制规则计算。先确定记录格式，再选择绘图库和构建工具；PixiJS 是调研候选之一。
+L1 的离线回放以 HTML/Canvas 实现，模板随 Python 包发布，代码在 `src/bedwars_arena/replay/viewer.html`。用 `bedwars-arena replay-l1 <记录目录> --html <新文件.html>` 导出可单独打开的回放；不需要 Node.js、服务部署或网络。详细记录格式、控制和版本限制见 [P7 说明](../docs/l1/p7-replay.md)。
