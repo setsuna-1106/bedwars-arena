@@ -55,6 +55,7 @@ def main():
     parser.add_argument('--resume', action='store_true', help='continue an existing matching matrix')
     parser.add_argument('--progress-every', type=int, default=200)
     parser.add_argument('--case', help='run one matrix case; used by the parallel coordinator')
+    parser.add_argument('--initialize-only', action='store_true', help='create the configuration without running a game')
     args = parser.parse_args()
     if args.limit < 1 or args.progress_every < 1:
         parser.error('limit and progress-every must be positive')
@@ -81,6 +82,10 @@ def main():
             raise FileNotFoundError(f'Cannot resume a missing matrix: {root}')
         root.mkdir(parents=True)
         write_json(root / 'matrix-config.json', config)
+    if args.initialize_only:
+        print(json.dumps({'expected_games': 40, 'completed_games': 0, 'output': str(root.resolve())},
+                         ensure_ascii=False, indent=2))
+        return
     rows = []
     case_names = {f'{seed}-{label}' for seed in config['seeds'] for label in SEATS}
     if args.case is not None and args.case not in case_names:

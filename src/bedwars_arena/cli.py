@@ -82,7 +82,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(json.dumps(metadata, ensure_ascii=False, indent=2))
         else:
             print(f"BedWars Arena {__version__}")
-            print("阶段：L1 P8 训练闭环；P9 端到端验收待完成。训练需要可选依赖。")
+            print("阶段：L1 对局、回放与 P8 训练闭环已实现；端到端验收进度见项目文档。训练需要可选依赖。")
         return 0
 
     if args.command == "validate-l1":
