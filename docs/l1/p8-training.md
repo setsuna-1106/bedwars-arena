@@ -54,6 +54,6 @@ bedwars-arena train-l1 --resume artifacts/ppo-first/checkpoints/update-000001 \
 
 冻结评估使用两个种子并交换训练队伍侧；初始模型和首次更新模型各为 1 胜 1 负、0 平、0 截断、0 无效请求，名义 Wilson 95% 区间约 0.095–0.905。两局极少且预置不对称，不能据此认定策略强度或更新有效提高胜率。另以标准新局运行 200 tick 的 PPO 采样，得到 340 条决策和 324 条实际请求，外部截断、无备用动作；这只验证标准开局接口，零终局奖励时的参数变化不证明任务学习。
 
-本机可检查的新版输出位于 `artifacts/l1-p8-training-v2/`、`artifacts/l1-p8-resume-v2/` 和 `artifacts/l1-p8-standard-smoke-v2/`；P8 基准测量保留在 `artifacts/l1-p8-benchmark-v2/`，它使用较早的代码哈希。P9 修正 CLI 状态文字后重新完成上述训练、恢复和标准开局烟测，以使新版检查点绑定当前代码；较早的 v1 输出仍保留，但不能在新版下直接恢复。按项目约定这些实验数据不提交 Git。P9 的标准 40 局矩阵须单独运行，不能用这些受控短局代替。
+本机可检查的新版输出位于 `artifacts/l1-p8-training-v2/`、`artifacts/l1-p8-resume-v2/` 和 `artifacts/l1-p8-standard-smoke-v2/`；P8 基准测量保留在 `artifacts/l1-p8-benchmark-v2/`，它使用较早的代码哈希。P9 修正 CLI 状态文字后重新完成上述训练、恢复和标准开局烟测，以使新版检查点绑定当前代码；较早的 v1 输出仍保留，但不能在新版下直接恢复。按项目约定这些实验数据不提交 Git。[P9 的标准 40 局矩阵](p9-delivery.md)已另行运行，不能用本节受控短局代替。
 
 构建的 wheel 在仓库外的 Python 3.12 隔离环境中完成训练检查点加载与继续更新；该环境将本机已有的 NumPy 2.3.5 安装内容复制进去后安装项目 wheel，未验证从 PyPI 在线下载依赖。另在不含 NumPy 的 Python 3.11 环境验证基础 CLI 可用，训练入口明确提示安装可选依赖。

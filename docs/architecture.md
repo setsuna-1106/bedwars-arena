@@ -1,6 +1,6 @@
 # 架构与目录职责
 
-当前进度：P1–P8 的世界、事务、二维运动、动作观测、经济、战斗、Runner、逐 tick 重放、离线回放和最小 PPO 训练已实现，见 [P1](l1/p1-world-foundation.md)、[P2](l1/p2-physics.md)、[P3](l1/p3-actions.md)、[P4](l1/p4-economy.md)、[P5](l1/p5-combat.md)、[P6](l1/p6-runner.md)、[P7](l1/p7-replay.md) 和 [P8](l1/p8-training.md)；P9 端到端验收仍待完成。下方较早设计条目的“未实现”状态以此更新为准。
+当前进度：P1–P8 的世界、事务、二维运动、动作观测、经济、战斗、Runner、逐 tick 重放、离线回放和最小 PPO 训练已实现，见 [P1](l1/p1-world-foundation.md)、[P2](l1/p2-physics.md)、[P3](l1/p3-actions.md)、[P4](l1/p4-economy.md)、[P5](l1/p5-combat.md)、[P6](l1/p6-runner.md)、[P7](l1/p7-replay.md) 和 [P8](l1/p8-training.md)；[P9](l1/p9-delivery.md) 已完成约定预算的集成验收，40 局标准开局均截断，真实浏览器视觉检查仍待补。下方较早设计条目的“未实现”状态以此更新为准。
 
 L1 P0 已将 profile/map/scenario 的唯一数据源与格式 Schema 放入 Python 包，提供独立版本、哈希及加载校验；此入口不构造世界。动作接收与观测后续已按 P3 接入。见 [P0 定义](l1/p0-definitions.md)。
 

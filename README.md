@@ -2,11 +2,11 @@
 
 分四个复杂层级建设的 BedWars 多智能体仿真平台，用于外部策略接入、训练与可重复实验：L1 二维核心版、L2 二维扩展版、L3 三维简化版、L4 Hypixel 仿真版。
 
-**当前范围：先完成 L1 二维 2v2。** 已采用单资源、三个商品类别、基地与中央资源点、桥面/墙体、基础近战、全局观测和最小训练闭环；对应工具拆除材料会返还。完整决定见 [0016](docs/decisions/0016-four-level-platform-and-l1.md)，[实验参数表 v0.1](docs/rules/l1-experiment-parameters-v0.1.md)已采用；[完整实现规划](docs/l1-implementation-plan.md)已编制，完整 L1 尚未实现。
+**当前范围：L1 二维 2v2。** 已实现单资源、三个商品类别、基地与中央资源点、桥面/墙体、基础近战、全局观测、二维回放和最小训练闭环；对应工具拆除材料会返还。完整决定见 [0016](docs/decisions/0016-four-level-platform-and-l1.md)，[实验参数表 v0.1](docs/rules/l1-experiment-parameters-v0.1.md)已采用；[L1 实现规划](docs/l1-implementation-plan.md)的 P0–P9 已完成并记录验收限制。
 
 现实规则参照已确定为 **Hypixel 的 Minecraft Bed Wars**。后续设计与实现查阅[Hypixel 规则参考](docs/rules/hypixel-bedwars.md)，证据与检索过程见[规则调研](reports/2026-10-25-hypixel-bedwars-rules.md)。L1 已选择自制二维 2v2 实验范围；L4 的目标模式、地图与规则版本仍待确定；第三方 BedWars 项目用于工程参考，其玩法不能直接作为本项目规则标准。
 
-**当前阶段：L1 P8 已完成（0.1.0.dev0）。** 已可运行、重放二维 2v2 对局，并使用共享参数 PPO 完成跨局采样、更新、冻结评估及检查点恢复。标准 40 局端到端验收仍待 P9。
+**当前阶段：L1 P9 集成验收已完成（0.1.0.dev0）。** 已可运行、重放二维 2v2 对局，并使用共享参数 PPO 完成跨局采样、更新、冻结评估及检查点恢复。[标准 40 局矩阵](docs/l1/p9-delivery.md)全部在 1100 tick 截断，没有自然胜负；真实浏览器视觉检查仍待完成，训练效果也尚未得到证明。L2–L4 不属于本次交付。
 
 ## 快速开始
 
@@ -24,7 +24,7 @@ python scripts/check.py
 
 `bedwars-arena --help` 查看入口，`bedwars-arena info --json` 输出实现状态；`bedwars-arena validate-l1 --json` 校验三份定义。`bedwars-arena run-l1 --seed 101 --output artifacts/run-101 --json` 启动标准对局并保存记录；受控预置、批量运行与结果说明见 [P6 Runner](docs/l1/p6-runner.md)。使用 `bedwars-arena replay-l1 artifacts/run-101 --html artifacts/run-101/replay.html` 可校验新版记录并导出离线回放；更多示例见 [P7 重放说明](docs/l1/p7-replay.md)。
 
-可选训练依赖通过 `python -m pip install -e '.[training]'` 安装；训练、恢复与实验边界见 [P8 说明](docs/l1/p8-training.md)。
+可选训练依赖通过 `python -m pip install -e '.[training]'` 安装；训练、恢复与实验边界见 [P8 说明](docs/l1/p8-training.md)，40 局、审计与性能结果见 [P9 交付说明](docs/l1/p9-delivery.md)。`info --json` 中的 `stage: l1_p8` 表示最新已实现的功能工作包；端到端验收结果以 P9 文档为准。
 
 本机现有开发环境使用 `source venv/bin/activate`；旧 `.venv` 的安装问题和修复经过见 [P0 定义说明](docs/l1/p0-definitions.md)。
 
@@ -46,7 +46,7 @@ artifacts/          本地实验与回放输出（默认忽略）
 ```
 
 - [开发指南](CONTRIBUTING.md)：安装、检查与构建。
-- [L1 P0 定义与校验](docs/l1/p0-definitions.md)、[P1 世界基础](docs/l1/p1-world-foundation.md)、[P2 二维运动](docs/l1/p2-physics.md)、[P3 动作与观测](docs/l1/p3-actions.md)、[P4 经济与拆建](docs/l1/p4-economy.md)、[P5 战斗与终局](docs/l1/p5-combat.md)、[P6 Runner](docs/l1/p6-runner.md)、[P7 重放](docs/l1/p7-replay.md)、[P8 训练](docs/l1/p8-training.md)、[协议规格](docs/l1/protocol-v1.md)和[分阶段验收场景](docs/l1/acceptance-scenarios.md)：L1 脚本对局、离线回放与最小训练闭环已实现，端到端验收仍待 P9。
+- [L1 P0 定义与校验](docs/l1/p0-definitions.md)、[P1 世界基础](docs/l1/p1-world-foundation.md)、[P2 二维运动](docs/l1/p2-physics.md)、[P3 动作与观测](docs/l1/p3-actions.md)、[P4 经济与拆建](docs/l1/p4-economy.md)、[P5 战斗与终局](docs/l1/p5-combat.md)、[P6 Runner](docs/l1/p6-runner.md)、[P7 重放](docs/l1/p7-replay.md)、[P8 训练](docs/l1/p8-training.md)、[P9 交付](docs/l1/p9-delivery.md)、[协议规格](docs/l1/protocol-v1.md)和[分阶段验收场景](docs/l1/acceptance-scenarios.md)：L1 功能和约定预算的集成验收已完成，已知限制见 P9。
 - [架构说明](docs/architecture.md)、[接口草案](docs/contracts.md)、[开发阶段](docs/roadmap.md)、[决策记录](docs/decisions/README.md)。
 - [世界引擎与训练衔接决策](docs/decisions/0015-world-schedule-replay-failures-and-training.md)：赛程、终局、快照/重放和训练方向已采用；L1 对应子集已实现，其余扩展与规则核验仍待完成。
 - [Hypixel 规则参考](docs/rules/hypixel-bedwars.md)：带规则编号的玩法、候选参数与待核对案例，供后续设计和测试引用。
